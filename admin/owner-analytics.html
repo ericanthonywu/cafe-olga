@@ -20,14 +20,15 @@
             }
         }
     </script>
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('adminSidebar');
-            const backdrop = document.getElementById('sidebarBackdrop');
-            sidebar.classList.toggle('-translate-x-full');
-            backdrop.classList.toggle('hidden');
-        }
-    </script>
+    <!-- amCharts 5 CDN (Latest) -->
+    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <style>
+        #revenueChartDiv { width: 100%; height: 320px; }
+        #branchDonutChartDiv { width: 100%; height: 200px; }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex min-h-screen">
 
@@ -147,106 +148,84 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
-                <!-- Revenue Trend Chart -->
-                <div class="lg:col-span-2 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
-                    <h3 class="text-lg font-bold text-gray-900 mb-4 sm:mb-6">Revenue Trend</h3>
-                    <div class="overflow-x-auto pb-2">
-                        <div class="min-w-[480px] flex items-end justify-between h-64 gap-2 mt-4 px-2">
-                            <!-- Mon -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">9.2M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[65%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Mon</span>
+                <!-- Revenue Trend Chart (amCharts 5) -->
+                <div class="lg:col-span-2 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-lg font-bold text-gray-900 font-serif">Revenue Trend</h3>
+                                <span class="px-2 py-0.5 bg-amber-50 text-amber-800 text-[10px] font-bold rounded-full border border-amber-200">amCharts 5</span>
                             </div>
-                            <!-- Tue -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">8.8M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[62%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Tue</span>
+                            <p class="text-xs text-gray-500 mt-0.5">Analisis kurva tren omzet harian jaringan Cafe Olga</p>
+                        </div>
+                        <!-- View Controls -->
+                        <div class="flex items-center gap-2">
+                            <div class="inline-flex bg-gray-100 p-1 rounded-xl text-xs font-semibold">
+                                <button id="btnViewTotal" onclick="setChartView('total')" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-gray-900 font-bold transition-all">
+                                    Total Omzet
+                                </button>
+                                <button id="btnViewBranch" onclick="setChartView('branch')" class="px-3 py-1.5 rounded-lg text-gray-500 hover:text-gray-900 transition-all">
+                                    Per Cabang
+                                </button>
                             </div>
-                            <!-- Wed -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">11.5M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[81%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Wed</span>
-                            </div>
-                            <!-- Thu -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">10.2M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[72%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Thu</span>
-                            </div>
-                            <!-- Fri -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">12.8M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[90%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Fri</span>
-                            </div>
-                            <!-- Sat -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">14.1M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[100%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Sat</span>
-                            </div>
-                            <!-- Sun -->
-                            <div class="flex flex-col items-center w-full gap-2 group">
-                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">12.7M</span>
-                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[89%] hover:opacity-80 transition-opacity"></div>
-                                <span class="text-xs font-medium text-gray-500 mt-1">Sun</span>
-                            </div>
+                        </div>
+                    </div>
+
+                    <!-- amCharts 5 Container -->
+                    <div id="revenueChartDiv" class="w-full h-72 sm:h-80"></div>
+
+                    <!-- Bottom Chart Key Insights -->
+                    <div class="pt-4 border-t border-gray-100 grid grid-cols-3 gap-2 text-center text-xs text-gray-600 mt-2">
+                        <div>
+                            <span class="text-[10px] text-gray-400 block">Total Pekan Ini</span>
+                            <span class="font-bold text-gray-900 text-sm sm:text-base">Rp 79.3M</span>
+                        </div>
+                        <div class="border-x border-gray-100">
+                            <span class="text-[10px] text-gray-400 block">Rata-rata Harian</span>
+                            <span class="font-bold text-brand-700 text-sm sm:text-base">Rp 11.3M</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-gray-400 block">Puncak Tertinggi</span>
+                            <span class="font-bold text-emerald-600 text-sm sm:text-base">Sabtu (Rp 14.1M)</span>
                         </div>
                     </div>
                 </div>
 
-            <!-- Branch Revenue Breakdown -->
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <h3 class="text-lg font-bold text-gray-900 mb-6">Revenue by Branch</h3>
-                
-                <div class="space-y-6">
-                    <!-- Kemang -->
+                <!-- Branch Revenue Breakdown (amCharts 5 Donut + Progress) -->
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
                     <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <p class="font-medium text-gray-900 flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-emerald-600"></span> Kemang
-                            </p>
-                            <p class="font-bold text-gray-900">46%</p>
+                        <div class="flex items-center justify-between mb-1">
+                            <h3 class="text-lg font-bold text-gray-900 font-serif">Revenue by Branch</h3>
+                            <span class="text-[11px] font-bold text-gray-400">Pekan Ini</span>
                         </div>
-                        <div class="w-full bg-gray-100 rounded-full h-3 mb-1">
-                            <div class="bg-emerald-600 h-3 rounded-full" style="width: 46%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500 text-right">Rp 41.2M weekly</p>
+                        <p class="text-xs text-gray-500 mb-3">Distribusi kontribusi omzet 3 cabang gerai</p>
+                        
+                        <!-- Donut Chart Container -->
+                        <div id="branchDonutChartDiv" class="w-full h-44 mb-2"></div>
                     </div>
 
-                    <!-- Sudirman -->
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <p class="font-medium text-gray-900 flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-amber-600"></span> Sudirman
-                            </p>
-                            <p class="font-bold text-gray-900">33%</p>
+                    <div class="space-y-3 pt-3 border-t border-gray-100 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2 font-medium text-gray-800">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Kemang
+                            </span>
+                            <span class="font-bold text-gray-900">46% <span class="text-gray-400 font-normal ml-1">(Rp 41.2M)</span></span>
                         </div>
-                        <div class="w-full bg-gray-100 rounded-full h-3 mb-1">
-                            <div class="bg-amber-600 h-3 rounded-full" style="width: 33%"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2 font-medium text-gray-800">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span> Sudirman
+                            </span>
+                            <span class="font-bold text-gray-900">33% <span class="text-gray-400 font-normal ml-1">(Rp 29.8M)</span></span>
                         </div>
-                        <p class="text-xs text-gray-500 text-right">Rp 29.8M weekly</p>
-                    </div>
-
-                    <!-- BSD City -->
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <p class="font-medium text-gray-900 flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-indigo-600"></span> BSD City
-                            </p>
-                            <p class="font-bold text-gray-900">21%</p>
+                        <div class="flex justify-between items-center">
+                            <span class="flex items-center gap-2 font-medium text-gray-800">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> BSD City
+                            </span>
+                            <span class="font-bold text-gray-900">21% <span class="text-gray-400 font-normal ml-1">(Rp 18.9M)</span></span>
                         </div>
-                        <div class="w-full bg-gray-100 rounded-full h-3 mb-1">
-                            <div class="bg-indigo-600 h-3 rounded-full" style="width: 21%"></div>
-                        </div>
-                        <p class="text-xs text-gray-500 text-right">Rp 18.9M weekly</p>
                     </div>
                 </div>
             </div>
-        </div>
 
         <!-- Top Items Table -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -357,33 +336,331 @@
 
     </main>
 
+    <!-- amCharts 5 Implementation -->
     <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('adminSidebar');
-            const backdrop = document.getElementById('sidebarBackdrop');
-            const isClosed = sidebar.classList.contains('-translate-x-full');
-            if (isClosed) {
-                sidebar.classList.remove('-translate-x-full');
-                backdrop.classList.remove('hidden');
-                document.body.classList.add('overflow-hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                backdrop.classList.add('hidden');
-                document.body.classList.remove('overflow-hidden');
-            }
-        }
+      let totalColSeries, totalLineSeries, kemangSeries, sudirmanSeries, bsdSeries, mainLegend;
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const sidebar = document.getElementById('adminSidebar');
-                const backdrop = document.getElementById('sidebarBackdrop');
-                if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
-                    sidebar.classList.add('-translate-x-full');
-                    backdrop.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }
-            }
+      am5.ready(function() {
+        // ── 1. REVENUE TREND CHART (XYChart) ──
+        const root = am5.Root.new("revenueChartDiv");
+        if (root._logo) root._logo.dispose();
+
+        root.setThemes([
+          am5themes_Animated.new(root)
+        ]);
+
+        const chart = root.container.children.push(
+          am5xy.XYChart.new(root, {
+            panX: false,
+            panY: false,
+            wheelX: "none",
+            wheelY: "none",
+            paddingLeft: 0,
+            paddingRight: 10,
+            layout: root.verticalLayout
+          })
+        );
+
+        // Interactive Cursor
+        const cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+          behavior: "none"
+        }));
+        cursor.lineY.set("visible", false);
+
+        // Daily Revenue Data (Network & per-branch)
+        const data = [
+          { day: "Sen (1 Sep)", date: "1 Sep 2026", total: 9200000, kemang: 4200000, sudirman: 3100000, bsd: 1900000 },
+          { day: "Sel (2 Sep)", date: "2 Sep 2026", total: 8800000, kemang: 4000000, sudirman: 3000000, bsd: 1800000 },
+          { day: "Rab (3 Sep)", date: "3 Sep 2026", total: 11500000, kemang: 5200000, sudirman: 3900000, bsd: 2400000 },
+          { day: "Kam (4 Sep)", date: "4 Sep 2026", total: 10200000, kemang: 4700000, sudirman: 3400000, bsd: 2100000 },
+          { day: "Jum (5 Sep)", date: "5 Sep 2026", total: 12800000, kemang: 5900000, sudirman: 4300000, bsd: 2600000 },
+          { day: "Sab (6 Sep)", date: "6 Sep 2026", total: 14100000, kemang: 6500000, sudirman: 4800000, bsd: 2800000 },
+          { day: "Min (7 Sep)", date: "7 Sep 2026", total: 12700000, kemang: 5800000, sudirman: 4200000, bsd: 2700000 }
+        ];
+
+        // X Axis
+        const xRenderer = am5xy.AxisRendererX.new(root, {
+          minGridDistance: 30,
+          minorGridEnabled: false
         });
+        xRenderer.grid.template.set("visible", false);
+        xRenderer.labels.template.setAll({
+          fontSize: 11,
+          fill: am5.color(0x6b7280)
+        });
+
+        const xAxis = chart.xAxes.push(
+          am5xy.CategoryAxis.new(root, {
+            categoryField: "day",
+            renderer: xRenderer,
+            tooltip: am5.Tooltip.new(root, {})
+          })
+        );
+        xAxis.data.setAll(data);
+
+        // Y Axis
+        const yRenderer = am5xy.AxisRendererY.new(root, {
+          strokeOpacity: 0.1
+        });
+        yRenderer.grid.template.setAll({
+          stroke: am5.color(0xf3f4f6),
+          strokeDasharray: [4, 4]
+        });
+        yRenderer.labels.template.setAll({
+          fontSize: 11,
+          fill: am5.color(0x9ca3af)
+        });
+        yRenderer.labels.template.adapters.add("text", function(text, target) {
+          if (target.dataItem) {
+            const val = target.dataItem.get("value");
+            if (val >= 1000000) return "Rp " + (val / 1000000).toFixed(0) + "M";
+            return text;
+          }
+          return text;
+        });
+
+        const yAxis = chart.yAxes.push(
+          am5xy.ValueAxis.new(root, {
+            min: 0,
+            renderer: yRenderer
+          })
+        );
+
+        // Series 1: Total Column Series
+        totalColSeries = chart.series.push(
+          am5xy.ColumnSeries.new(root, {
+            name: "Total Omzet",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "total",
+            categoryXField: "day",
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "{date}\nTotal: [bold]Rp {valueY.formatNumber('#,###')}[/]"
+            })
+          })
+        );
+        totalColSeries.columns.template.setAll({
+          cornerRadiusTL: 8,
+          cornerRadiusTR: 8,
+          fill: am5.color(0xd78833),
+          stroke: am5.color(0xc87028),
+          strokeWidth: 1,
+          fillOpacity: 0.88,
+          width: am5.percent(55)
+        });
+        totalColSeries.data.setAll(data);
+
+        // Series 2: Trendline (Smoothed Curve)
+        totalLineSeries = chart.series.push(
+          am5xy.SmoothedXLineSeries.new(root, {
+            name: "Tren Pertumbuhan",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "total",
+            categoryXField: "day",
+            stroke: am5.color(0x854522),
+            strokeWidth: 3
+          })
+        );
+        totalLineSeries.bullets.push(function() {
+          return am5.Bullet.new(root, {
+            sprite: am5.Circle.new(root, {
+              radius: 4.5,
+              fill: am5.color(0xffffff),
+              stroke: am5.color(0x854522),
+              strokeWidth: 2
+            })
+          });
+        });
+        totalLineSeries.data.setAll(data);
+
+        // Series 3: Kemang (Emerald)
+        kemangSeries = chart.series.push(
+          am5xy.SmoothedXLineSeries.new(root, {
+            name: "Cabang Kemang",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "kemang",
+            categoryXField: "day",
+            stroke: am5.color(0x059669),
+            strokeWidth: 2.5,
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "Kemang: [bold]Rp {valueY.formatNumber('#,###')}[/]"
+            })
+          })
+        );
+        kemangSeries.bullets.push(function() {
+          return am5.Bullet.new(root, {
+            sprite: am5.Circle.new(root, {
+              radius: 4,
+              fill: am5.color(0x059669)
+            })
+          });
+        });
+        kemangSeries.data.setAll(data);
+        kemangSeries.hide();
+
+        // Series 4: Sudirman (Amber)
+        sudirmanSeries = chart.series.push(
+          am5xy.SmoothedXLineSeries.new(root, {
+            name: "Cabang Sudirman",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "sudirman",
+            categoryXField: "day",
+            stroke: am5.color(0xd97706),
+            strokeWidth: 2.5,
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "Sudirman: [bold]Rp {valueY.formatNumber('#,###')}[/]"
+            })
+          })
+        );
+        sudirmanSeries.bullets.push(function() {
+          return am5.Bullet.new(root, {
+            sprite: am5.Circle.new(root, {
+              radius: 4,
+              fill: am5.color(0xd97706)
+            })
+          });
+        });
+        sudirmanSeries.data.setAll(data);
+        sudirmanSeries.hide();
+
+        // Series 5: BSD City (Indigo)
+        bsdSeries = chart.series.push(
+          am5xy.SmoothedXLineSeries.new(root, {
+            name: "Cabang BSD City",
+            xAxis: xAxis,
+            yAxis: yAxis,
+            valueYField: "bsd",
+            categoryXField: "day",
+            stroke: am5.color(0x6366f1),
+            strokeWidth: 2.5,
+            tooltip: am5.Tooltip.new(root, {
+              labelText: "BSD City: [bold]Rp {valueY.formatNumber('#,###')}[/]"
+            })
+          })
+        );
+        bsdSeries.bullets.push(function() {
+          return am5.Bullet.new(root, {
+            sprite: am5.Circle.new(root, {
+              radius: 4,
+              fill: am5.color(0x6366f1)
+            })
+          });
+        });
+        bsdSeries.data.setAll(data);
+        bsdSeries.hide();
+
+        // Legend
+        mainLegend = chart.children.push(
+          am5.Legend.new(root, {
+            centerX: am5.p50,
+            x: am5.p50,
+            marginTop: 12
+          })
+        );
+        mainLegend.labels.template.setAll({
+          fontSize: 11,
+          fill: am5.color(0x4b5563)
+        });
+        mainLegend.data.setAll([totalColSeries, totalLineSeries]);
+
+        // Appear animations
+        chart.appear(1000, 100);
+        totalColSeries.appear(1000);
+        totalLineSeries.appear(1000);
+
+        // ── 2. BRANCH DONUT CHART (PieChart) ──
+        const rootDonut = am5.Root.new("branchDonutChartDiv");
+        if (rootDonut._logo) rootDonut._logo.dispose();
+        rootDonut.setThemes([am5themes_Animated.new(rootDonut)]);
+
+        const donutChart = rootDonut.container.children.push(
+          am5percent.PieChart.new(rootDonut, {
+            innerRadius: am5.percent(65),
+            layout: rootDonut.verticalLayout
+          })
+        );
+
+        const donutSeries = donutChart.series.push(
+          am5percent.PieSeries.new(rootDonut, {
+            valueField: "value",
+            categoryField: "branch",
+            alignLabels: false
+          })
+        );
+        donutSeries.labels.template.set("visible", false);
+        donutSeries.ticks.template.set("visible", false);
+
+        donutSeries.slices.template.setAll({
+          templateField: "sliceSettings",
+          stroke: am5.color(0xffffff),
+          strokeWidth: 2,
+          tooltipText: "{category}: [bold]{value}%[/] (Rp {amount})"
+        });
+
+        donutSeries.data.setAll([
+          { branch: "Kemang", value: 46, amount: "41.2M", sliceSettings: { fill: am5.color(0x059669) } },
+          { branch: "Sudirman", value: 33, amount: "29.8M", sliceSettings: { fill: am5.color(0xd97706) } },
+          { branch: "BSD City", value: 21, amount: "18.9M", sliceSettings: { fill: am5.color(0x6366f1) } }
+        ]);
+
+        donutSeries.appear(1000, 100);
+      });
+
+      function setChartView(mode) {
+        const btnTotal = document.getElementById('btnViewTotal');
+        const btnBranch = document.getElementById('btnViewBranch');
+        if (!totalColSeries || !kemangSeries) return;
+
+        if (mode === 'total') {
+          btnTotal.className = 'px-3 py-1.5 rounded-lg bg-white shadow-sm text-gray-900 font-bold transition-all';
+          btnBranch.className = 'px-3 py-1.5 rounded-lg text-gray-500 hover:text-gray-900 transition-all';
+          totalColSeries.show();
+          totalLineSeries.show();
+          kemangSeries.hide();
+          sudirmanSeries.hide();
+          bsdSeries.hide();
+          if (mainLegend) mainLegend.data.setAll([totalColSeries, totalLineSeries]);
+        } else {
+          btnBranch.className = 'px-3 py-1.5 rounded-lg bg-white shadow-sm text-gray-900 font-bold transition-all';
+          btnTotal.className = 'px-3 py-1.5 rounded-lg text-gray-500 hover:text-gray-900 transition-all';
+          totalColSeries.hide();
+          totalLineSeries.hide();
+          kemangSeries.show();
+          sudirmanSeries.show();
+          bsdSeries.show();
+          if (mainLegend) mainLegend.data.setAll([kemangSeries, sudirmanSeries, bsdSeries]);
+        }
+      }
+
+      function toggleSidebar() {
+        const sidebar = document.getElementById('adminSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        const isClosed = sidebar.classList.contains('-translate-x-full');
+        if (isClosed) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const sidebar = document.getElementById('adminSidebar');
+          const backdrop = document.getElementById('sidebarBackdrop');
+          if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+            sidebar.classList.add('-translate-x-full');
+            backdrop.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+          }
+        }
+      });
     </script>
 </body>
 </html>
