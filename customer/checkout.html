@@ -137,87 +137,117 @@
         </div>
 
         <script>
-          // Order type radio interaction
-          (function() {
-            const radios = document.querySelectorAll('input[name="orderType"]');
+          // Order type radio interaction & state
+          let currentOrderType = 'delivery';
+          let currentFee = 8000;
+          let currentKm = null;
+          let currentEta = '';
+
+          function updateOrderType(val) {
+            currentOrderType = val;
             const labels = {
               delivery:  document.getElementById('lbl-delivery'),
               pickup:    document.getElementById('lbl-pickup'),
               scheduled: document.getElementById('lbl-scheduled'),
             };
             const panel = document.getElementById('scheduledPanel');
+            const deliverySection = document.getElementById('deliveryAddressSection');
+            const pickupSection = document.getElementById('pickupLocationSection');
+            const cardTitle = document.getElementById('detailsCardTitle');
+            const cardSubtitle = document.getElementById('detailsCardSubtitle');
+            const notesLabel = document.getElementById('notesLabel');
+            const distResult = document.getElementById('distanceResult');
 
-            // Set minimum date to tomorrow
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            document.getElementById('schedDate').min = tomorrow.toISOString().split('T')[0];
-            document.getElementById('schedDate').value = tomorrow.toISOString().split('T')[0];
+            Object.entries(labels).forEach(([key, el]) => {
+              el.classList.remove('border-brand-600','bg-brand-50','border-indigo-600','bg-indigo-50');
+              el.classList.add('border-stone-200');
+              const icon = el.querySelector('i');
+              icon.className = icon.className.replace(/text-(brand|indigo)-\d+/, 'text-stone-400');
+            });
 
-            const activeClass = {
-              delivery:  ['border-brand-600', 'bg-brand-50'],
-              pickup:    ['border-brand-600', 'bg-brand-50'],
-              scheduled: ['border-indigo-600', 'bg-indigo-50'],
-            };
+            const active = labels[val];
+            active.classList.remove('border-stone-200');
 
-            function updateUI(val) {
-              Object.entries(labels).forEach(([key, el]) => {
-                el.classList.remove('border-brand-600','bg-brand-50','border-indigo-600','bg-indigo-50');
-                el.classList.add('border-stone-200');
-                // restore icon color
-                const icon = el.querySelector('i');
-                icon.className = icon.className.replace(/text-(brand|indigo)-\d+/, 'text-stone-400');
-              });
-
-              const active = labels[val];
-              active.classList.remove('border-stone-200');
-              if (val === 'scheduled') {
-                active.classList.add('border-indigo-600', 'bg-indigo-50');
-                active.querySelector('i').classList.replace('text-stone-400','text-indigo-600');
-                active.querySelector('span').classList.replace('text-stone-700','text-indigo-900');
-                panel.classList.remove('hidden');
-              } else {
-                active.classList.add('border-brand-600', 'bg-brand-50');
-                active.querySelector('i').classList.replace('text-stone-400','text-brand-600');
-                active.querySelector('span').classList.replace('text-stone-700','text-brand-900');
-                panel.classList.add('hidden');
-              }
-              updateScheduledSidebar(val);
+            if (val === 'scheduled') {
+              active.classList.add('border-indigo-600', 'bg-indigo-50');
+              active.querySelector('i').classList.replace('text-stone-400','text-indigo-600');
+              active.querySelector('span').classList.replace('text-stone-700','text-indigo-900');
+              panel.classList.remove('hidden');
+            } else {
+              active.classList.add('border-brand-600', 'bg-brand-50');
+              active.querySelector('i').classList.replace('text-stone-400','text-brand-600');
+              active.querySelector('span').classList.replace('text-stone-700','text-brand-900');
+              panel.classList.add('hidden');
             }
 
-            function updateScheduledSidebar(val) {
-              const row = document.getElementById('scheduledSidebarRow');
-              if (!row) return;
-              if (val === 'scheduled') {
-                const d = document.getElementById('schedDate').value;
-                const t = document.getElementById('schedTime').value;
-                if (d && t) {
-                  const dt = new Date(d + 'T' + t);
-                  const opts = { weekday:'short', day:'numeric', month:'short' };
-                  row.querySelector('#scheduledLabel').textContent =
-                    dt.toLocaleDateString('id-ID', opts) + ' • ' + t + ' WIB';
-                }
-                row.classList.remove('hidden');
-              } else {
-                row.classList.add('hidden');
+            // Handle Pickup vs Delivery/Scheduled layout
+            if (val === 'pickup') {
+              if (deliverySection) deliverySection.classList.add('hidden');
+              if (pickupSection) pickupSection.classList.remove('hidden');
+              if (cardTitle) cardTitle.textContent = 'Detail Pengambilan (Pickup)';
+              if (cardSubtitle) cardSubtitle.textContent = 'Pesanan diambil langsung di gerai Cafe Olga — Bebas biaya pengiriman';
+              if (notesLabel) notesLabel.textContent = 'Catatan Pesanan';
+              if (distResult) distResult.classList.add('hidden');
+            } else {
+              if (deliverySection) deliverySection.classList.remove('hidden');
+              if (pickupSection) pickupSection.classList.add('hidden');
+              if (cardTitle) cardTitle.textContent = 'Detail Pengiriman';
+              if (cardSubtitle) cardSubtitle.textContent = 'Masukkan alamat atau gunakan lokasi GPS Anda';
+              if (notesLabel) notesLabel.textContent = 'Catatan Pengiriman';
+              if (distResult && currentKm) distResult.classList.remove('hidden');
+            }
+
+            if (typeof syncSidebarFee === 'function') {
+              syncSidebarFee();
+            }
+            updateScheduledSidebar(val);
+          }
+
+          function updateScheduledSidebar(val) {
+            const row = document.getElementById('scheduledSidebarRow');
+            if (!row) return;
+            if (val === 'scheduled') {
+              const d = document.getElementById('schedDate').value;
+              const t = document.getElementById('schedTime').value;
+              if (d && t) {
+                const dt = new Date(d + 'T' + t);
+                const opts = { weekday:'short', day:'numeric', month:'short' };
+                row.querySelector('#scheduledLabel').textContent =
+                  dt.toLocaleDateString('id-ID', opts) + ' • ' + t + ' WIB';
               }
+              row.classList.remove('hidden');
+            } else {
+              row.classList.add('hidden');
+            }
+          }
+
+          (function() {
+            const radios = document.querySelectorAll('input[name="orderType"]');
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const dateEl = document.getElementById('schedDate');
+            if (dateEl) {
+              dateEl.min = tomorrow.toISOString().split('T')[0];
+              dateEl.value = tomorrow.toISOString().split('T')[0];
             }
 
             radios.forEach(r => {
-              r.addEventListener('change', () => updateUI(r.value));
+              r.addEventListener('change', () => updateOrderType(r.value));
             });
             ['schedDate','schedTime'].forEach(id => {
-              document.getElementById(id).addEventListener('change', () => updateScheduledSidebar('scheduled'));
+              const el = document.getElementById(id);
+              if (el) el.addEventListener('change', () => updateScheduledSidebar('scheduled'));
             });
 
-            // init
-            updateUI('delivery');
+            // init delivery
+            updateOrderType('delivery');
           })();
         </script>
 
         <!-- Delivery Details -->
         <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
-          <h2 class="font-serif font-bold text-xl text-stone-800 mb-1">Detail Pengiriman</h2>
-          <p class="text-stone-400 text-sm mb-5">Masukkan alamat atau gunakan lokasi GPS Anda</p>
+          <h2 id="detailsCardTitle" class="font-serif font-bold text-xl text-stone-800 mb-1">Detail Pengiriman</h2>
+          <p id="detailsCardSubtitle" class="text-stone-400 text-sm mb-5">Masukkan alamat atau gunakan lokasi GPS Anda</p>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
             <div>
@@ -230,8 +260,32 @@
             </div>
           </div>
 
-          <!-- Location Picker -->
-          <div class="mb-4">
+          <!-- Pickup Location Box (shown only when orderType is pickup) -->
+          <div id="pickupLocationSection" class="hidden mb-4">
+            <div class="p-4 bg-amber-50 border border-brand-200 rounded-xl">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center shrink-0">
+                  <i class="fa-solid fa-store text-lg"></i>
+                </div>
+                <div>
+                  <div class="flex items-center gap-2 mb-1">
+                    <span class="text-xs font-bold text-brand-800 bg-brand-200/60 px-2 py-0.5 rounded-full">Ambil di Gerai (Pickup)</span>
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-1">
+                      <i class="fa-solid fa-check"></i> Bebas Ongkir (Rp 0)
+                    </span>
+                  </div>
+                  <h4 id="pickupStoreName" class="font-bold text-stone-900 text-sm">Cafe Olga Sudirman</h4>
+                  <p id="pickupStoreAddress" class="text-xs text-stone-600 mt-0.5">Jl. Jend. Sudirman No. 45, Jakarta Pusat</p>
+                  <p class="text-xs text-stone-500 mt-2 flex items-center gap-1.5">
+                    <i class="fa-regular fa-clock text-stone-400"></i> Estimasi pesanan siap: 15–20 menit setelah konfirmasi
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Location Picker (Delivery / Scheduled) -->
+          <div id="deliveryAddressSection" class="mb-4">
             <label class="block text-sm font-medium text-stone-700 mb-1.5">Alamat Pengiriman</label>
 
             <!-- GPS Button -->
@@ -288,7 +342,7 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-stone-700 mb-1">Catatan Pengiriman <span class="text-stone-400 font-normal">(Opsional)</span></label>
+            <label id="notesLabel" class="block text-sm font-medium text-stone-700 mb-1">Catatan Pengiriman <span class="text-stone-400 font-normal">(Opsional)</span></label>
             <input type="text" placeholder="Cth: Tolong pukul bel depan" class="w-full border border-stone-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-shadow">
           </div>
         </div>
@@ -302,6 +356,11 @@
           sudirman: { near: 8000,  mid: 12000, far: 18000 },
           kemang:   { near: 7000,  mid: 11000, far: 16000 },
           bsd:      { near: 9000,  mid: 14000, far: 20000 },
+        };
+        const BRANCH_STORES = {
+          sudirman: { name: 'Cafe Olga Sudirman', address: 'Jl. Jend. Sudirman No. 45, Jakarta Pusat' },
+          kemang:   { name: 'Cafe Olga Kemang',   address: 'Jl. Kemang Raya No. 12, Jakarta Selatan' },
+          bsd:      { name: 'Cafe Olga BSD City', address: 'Jl. Pahlawan Seribu, BSD City, Tangerang Selatan' },
         };
         const SUBTOTAL = 134000;
 
@@ -327,27 +386,47 @@
         ];
 
         function getBranchKey() {
-          return new URLSearchParams(window.location.search).get('branch') || 'sudirman';
+          return new URLSearchParams(window.location.search).get('branch') || localStorage.getItem('userBranch') || 'sudirman';
         }
         function fmtRp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+        function syncSidebarFee() {
+          const el = document.getElementById('checkoutDeliveryFee');
+          const tot = document.getElementById('checkoutTotal');
+          const lbl = document.getElementById('zoneLabel');
+          const distResult = document.getElementById('distanceResult');
+
+          if (currentOrderType === 'pickup') {
+            // No delivery fee and no distance result for pickup
+            if (el) el.innerHTML = '<span class="text-emerald-600 font-bold">Gratis</span> <span class="text-stone-400 font-normal text-xs">(Rp 0)</span>';
+            if (tot) tot.textContent = fmtRp(SUBTOTAL);
+            if (lbl) lbl.textContent = '(Ambil di Toko)';
+            if (distResult) distResult.classList.add('hidden');
+          } else {
+            // Delivery or Scheduled order
+            const fee = currentFee || (BRANCH_FEES[getBranchKey()] || BRANCH_FEES.sudirman).near;
+            if (el) el.textContent = fmtRp(fee);
+            if (tot) tot.textContent = fmtRp(SUBTOTAL + fee);
+            if (lbl) lbl.textContent = currentKm ? '(' + currentKm.toFixed(1) + ' km)' : '';
+            if (distResult && currentKm) distResult.classList.remove('hidden');
+          }
+        }
 
         function applyFee(km, zone, eta) {
           const key   = getBranchKey();
           const fees  = BRANCH_FEES[key] || BRANCH_FEES.sudirman;
-          const fee   = fees[zone] || fees.near;
+          currentFee  = fees[zone] || fees.near;
+          currentKm   = km;
+          currentEta  = eta;
 
-          document.getElementById('distanceKm').textContent      = km.toFixed(1) + ' km';
-          document.getElementById('distanceFeeDisplay').textContent = fmtRp(fee);
-          document.getElementById('distanceETA').textContent     = eta;
-          document.getElementById('distanceResult').classList.remove('hidden');
+          const kmEl = document.getElementById('distanceKm');
+          const feeEl = document.getElementById('distanceFeeDisplay');
+          const etaEl = document.getElementById('distanceETA');
+          if (kmEl) kmEl.textContent = km.toFixed(1) + ' km';
+          if (feeEl) feeEl.textContent = fmtRp(currentFee);
+          if (etaEl) etaEl.textContent = eta;
 
-          // Update summary sidebar
-          const el = document.getElementById('checkoutDeliveryFee');
-          const tot = document.getElementById('checkoutTotal');
-          const lbl = document.getElementById('zoneLabel');
-          if (el)  el.textContent  = fmtRp(fee);
-          if (tot) tot.textContent = fmtRp(SUBTOTAL + fee);
-          if (lbl) lbl.textContent = '(' + km.toFixed(1) + ' km)';
+          syncSidebarFee();
         }
 
         function lookupAddress(addr) {
@@ -357,7 +436,6 @@
               return entry;
             }
           }
-          // Default fallback: mid zone
           return { km: 4.0, zone: 'mid', eta: '20–28 menit' };
         }
 
@@ -392,10 +470,6 @@
 
           navigator.geolocation.getCurrentPosition(
             (pos) => {
-              // Pick a GPS zone based on rough lat/lon (static simulation)
-              const lat = pos.coords.latitude;
-              const lon = pos.coords.longitude;
-              // Just pick a static "realistic" result for demo
               const zone = GPS_ZONES[Math.floor(Math.random() * GPS_ZONES.length)];
               document.getElementById('addressInput').value = zone.addr;
               icon.className = 'fas fa-check text-emerald-500';
@@ -423,8 +497,15 @@
           document.getElementById('locationError').classList.remove('hidden');
         }
 
-        // Auto-run on page load with prefilled or saved address
+        // Auto-run on page load with prefilled or saved address and branch info
         window.addEventListener('DOMContentLoaded', () => {
+          const key = getBranchKey();
+          const store = BRANCH_STORES[key] || BRANCH_STORES.sudirman;
+          const storeNameEl = document.getElementById('pickupStoreName');
+          const storeAddrEl = document.getElementById('pickupStoreAddress');
+          if (storeNameEl) storeNameEl.textContent = store.name;
+          if (storeAddrEl) storeAddrEl.textContent = store.address;
+
           try {
             const saved = localStorage.getItem('userAddress');
             if (saved) document.getElementById('addressInput').value = saved;
@@ -545,17 +626,15 @@
                 kemang:   { name: 'Cafe Olga Kemang',   color: '#059669', fees: { near: 7000, mid: 11000, far: 16000 } },
                 bsd:      { name: 'Cafe Olga BSD City', color: '#4f46e5', fees: { near: 9000, mid: 14000, far: 20000 } },
               };
-              const subtotal = 134000;
               const params = new URLSearchParams(window.location.search);
               const key = params.get('branch') || localStorage.getItem('userBranch') || 'sudirman';
               const b = branchData[key] || branchData.sudirman;
-              const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
 
               document.getElementById('branchNameCheckout').textContent = b.name;
               document.getElementById('branchIcon').style.background = b.color;
-              document.getElementById('checkoutDeliveryFee').textContent = fmt(b.fees.near);
-              document.getElementById('checkoutTotal').textContent = fmt(subtotal + b.fees.near);
-              document.getElementById('zoneLabel').textContent = '';
+              if (typeof syncSidebarFee === 'function') {
+                syncSidebarFee();
+              }
             })();
           </script>
 
