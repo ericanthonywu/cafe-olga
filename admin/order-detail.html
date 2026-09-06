@@ -100,16 +100,19 @@
                 <div class="mb-4 md:mb-0">
                     <div class="flex items-center">
                         <h2 class="text-2xl font-bold text-gray-900 font-serif mr-4">Order #OLG-0042</h2>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800 border border-amber-200">
-                            <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span> Menyiapkan
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            <i class="fab fa-whatsapp mr-1.5 text-[#25D366]"></i> Terhubung WhatsApp
                         </span>
                     </div>
-                    <p class="text-gray-500 mt-1">Placed on 5 Sep 2026 at 10:33 AM</p>
+                    <p class="text-gray-500 mt-1">Dipesan pada 5 Sep 2026 pukul 10:33 WIB</p>
                 </div>
-                <div class="flex space-x-3">
-                    <button class="px-5 py-2.5 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-xl font-bold transition-colors">Mark as Siap</button>
-                    <button class="px-5 py-2.5 bg-gray-100 text-gray-400 cursor-not-allowed rounded-xl font-bold" disabled>Tugaskan Kurir</button>
-                    <button class="px-5 py-2.5 bg-gray-100 text-gray-400 cursor-not-allowed rounded-xl font-bold" disabled>Mark Terkirim</button>
+                <div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%20Santoso%2C%20terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga.%20Pesanan%20Anda%20%23OLG-0042%20(Caf%C3%A9%20Latte%20x2%2C%20Butter%20Croissant)%20sedang%20kami%20proses.%20Ada%20yang%20bisa%20kami%20bantu%20lagi%3F"
+                       target="_blank"
+                       class="inline-flex items-center gap-2.5 px-6 py-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white rounded-xl font-bold shadow-md transition-all hover:shadow-lg hover:scale-[1.02]">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span>Chat Pelanggan di WhatsApp (0812-3456-7890)</span>
+                    </a>
                 </div>
             </div>
 
@@ -198,10 +201,17 @@
                                 </p>
                             </div>
                             <div>
-                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Telepon</p>
-                                <p class="font-medium text-gray-900 flex items-center">
-                                    <i class="fa-solid fa-phone text-gray-400 mr-2"></i> 0812-3456-7890
-                                </p>
+                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Telepon / WhatsApp</p>
+                                <div class="flex items-center justify-between">
+                                    <p class="font-medium text-gray-900 flex items-center">
+                                        <i class="fa-solid fa-phone text-gray-400 mr-2"></i> 0812-3456-7890
+                                    </p>
+                                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20kami%20dari%20Cafe%20Olga%20mengenai%20pesanan%20%23OLG-0042%20Anda."
+                                       target="_blank"
+                                       class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#25D366] text-white rounded-lg text-xs font-bold hover:bg-[#1ebe5d] transition-colors">
+                                        <i class="fab fa-whatsapp"></i> Chat WA
+                                    </a>
+                                </div>
                             </div>
                             <div>
                                 <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Tipe Pesanan</p>
@@ -223,41 +233,50 @@
                         </div>
                     </div>
 
-                    <!-- Waktuline -->
+                    <!-- Direct WhatsApp Communication Card -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="text-lg font-bold text-gray-900 mb-4">Status Pesanan</h3>
+                        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-[#25D366] text-xl">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-bold text-gray-900">Koordinasi via WhatsApp</h3>
+                                <p class="text-xs text-gray-500">Komunikasi langsung tanpa perantara status</p>
+                            </div>
+                        </div>
                         
-                        <div class="relative pl-6 border-l-2 border-gray-100 space-y-6">
-                            <!-- Step 1 -->
-                            <div class="relative">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-500 ring-4 ring-white"></div>
-                                <p class="font-bold text-gray-900 text-sm">Pesanan Dibuat</p>
-                                <p class="text-xs text-gray-500 mt-1">10:33 AM</p>
-                            </div>
-                            <!-- Step 2 -->
-                            <div class="relative">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-amber-500 ring-4 ring-white shadow-[0_0_0_4px_rgba(245,158,11,0.2)]"></div>
-                                <p class="font-bold text-gray-900 text-sm">Menyiapkan</p>
-                                <p class="text-xs text-gray-500 mt-1">10:35 AM</p>
-                            </div>
-                            <!-- Step 3 -->
-                            <div class="relative opacity-40">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
-                                <p class="font-bold text-gray-500 text-sm">Siap untuk Diambil</p>
-                                <p class="text-xs text-gray-400 mt-1">Tertunda</p>
-                            </div>
-                            <!-- Step 4 -->
-                            <div class="relative opacity-40">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
-                                <p class="font-bold text-gray-500 text-sm">Dalam Perjalanan</p>
-                                <p class="text-xs text-gray-400 mt-1">Tertunda</p>
-                            </div>
-                            <!-- Step 5 -->
-                            <div class="relative opacity-40">
-                                <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-gray-300 ring-4 ring-white"></div>
-                                <p class="font-bold text-gray-500 text-sm">Terkirim</p>
-                                <p class="text-xs text-gray-400 mt-1">Tertunda</p>
-                            </div>
+                        <div class="space-y-2.5 text-sm">
+                            <p class="text-xs text-gray-500 mb-2">Pilih template pesan cepat untuk dikirim ke pelanggan:</p>
+                            
+                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20Anda%20sedang%20kami%20siapkan.%20Estimasi%2015-20%20menit.%20Terima%20kasih!%20%F0%9F%8D%B5"
+                               target="_blank"
+                               class="block p-3 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/60 transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-semibold text-emerald-900 text-xs">1. Konfirmasi Pesanan</span>
+                                    <i class="fas fa-paper-plane text-emerald-600 text-xs"></i>
+                                </div>
+                                <p class="text-xs text-emerald-700 mt-1">"Halo Budi, pesanan #OLG-0042 Anda sedang kami siapkan..."</p>
+                            </a>
+
+                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20Anda%20sudah%20selesai%20dan%20siap%20dikirim%20ke%20Jl.%20Gatot%20Subroto.%20Kurir%20kami%20segera%20meluncur!%20%F0%9F%9B%B5"
+                               target="_blank"
+                               class="block p-3 rounded-xl border border-blue-200 bg-blue-50/60 hover:bg-blue-100/60 transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-semibold text-blue-900 text-xs">2. Update Pengantaran</span>
+                                    <i class="fas fa-paper-plane text-blue-600 text-xs"></i>
+                                </div>
+                                <p class="text-xs text-blue-700 mt-1">"Halo Budi, pesanan #OLG-0042 sudah selesai dan siap dikirim..."</p>
+                            </a>
+
+                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20apakah%20pesanan%20Cafe%20Olga%20sudah%20diterima%20dengan%20baik%3F%20Selamat%20menikmati!%20%E2%98%95"
+                               target="_blank"
+                               class="block p-3 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 transition-colors">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-semibold text-stone-800 text-xs">3. Cek Kepuasan</span>
+                                    <i class="fas fa-paper-plane text-stone-600 text-xs"></i>
+                                </div>
+                                <p class="text-xs text-stone-600 mt-1">"Halo Budi, apakah pesanan sudah diterima dengan baik?..."</p>
+                            </a>
                         </div>
                     </div>
                     

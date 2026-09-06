@@ -306,14 +306,18 @@
           document.getElementById('locationError').classList.remove('hidden');
         }
 
-        // Auto-run on page load with prefilled address
+        // Auto-run on page load with prefilled or saved address
         window.addEventListener('DOMContentLoaded', () => {
+          try {
+            const saved = localStorage.getItem('userAddress');
+            if (saved) document.getElementById('addressInput').value = saved;
+          } catch(e) {}
           const addr = document.getElementById('addressInput').value;
           if (addr.length > 4) {
             setTimeout(() => {
               const result = lookupAddress(addr);
               applyFee(result.km, result.zone, result.eta);
-            }, 400);
+            }, 300);
           }
         });
         </script>
@@ -410,23 +414,21 @@
           <script>
             (function() {
               const branchData = {
-                sudirman: { name: 'Cafe Olga Sudirman', color: '#c87028', fees: { near: 8000, mid: 12000, far: 18000 }, zones: { near: '< 3 km', mid: '3–6 km', far: '6–10 km' } },
-                kemang:   { name: 'Cafe Olga Kemang',   color: '#059669', fees: { near: 7000, mid: 11000, far: 16000 }, zones: { near: '< 3 km', mid: '3–6 km', far: '6–10 km' } },
-                bsd:      { name: 'Cafe Olga BSD City', color: '#4f46e5', fees: { near: 9000, mid: 14000, far: 20000 }, zones: { near: '< 3 km', mid: '3–6 km', far: '6–10 km' } },
+                sudirman: { name: 'Cafe Olga Sudirman', color: '#c87028', fees: { near: 8000, mid: 12000, far: 18000 } },
+                kemang:   { name: 'Cafe Olga Kemang',   color: '#059669', fees: { near: 7000, mid: 11000, far: 16000 } },
+                bsd:      { name: 'Cafe Olga BSD City', color: '#4f46e5', fees: { near: 9000, mid: 14000, far: 20000 } },
               };
               const subtotal = 134000;
               const params = new URLSearchParams(window.location.search);
-              const key = params.get('branch') || 'sudirman';
-              const zone = params.get('zone') || 'near';
+              const key = params.get('branch') || localStorage.getItem('userBranch') || 'sudirman';
               const b = branchData[key] || branchData.sudirman;
-              const fee = b.fees[zone] || b.fees.near;
               const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
 
               document.getElementById('branchNameCheckout').textContent = b.name;
               document.getElementById('branchIcon').style.background = b.color;
-              document.getElementById('checkoutDeliveryFee').textContent = fmt(fee);
-              document.getElementById('checkoutTotal').textContent = fmt(subtotal + fee);
-              document.getElementById('zoneLabel').textContent = '(' + (b.zones[zone] || b.zones.near) + ')';
+              document.getElementById('checkoutDeliveryFee').textContent = fmt(b.fees.near);
+              document.getElementById('checkoutTotal').textContent = fmt(subtotal + b.fees.near);
+              document.getElementById('zoneLabel').textContent = '';
             })();
           </script>
 

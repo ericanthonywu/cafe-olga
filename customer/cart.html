@@ -190,45 +190,20 @@
               <span>Subtotal</span>
               <span class="font-medium text-stone-800">Rp 134.000</span>
             </div>
-            <!-- Dynamic delivery fee based on branch + distance zone -->
-            <div>
-              <div class="flex justify-between mb-2">
-                <span>Delivery Fee</span>
-                <span id="deliveryFeeLabel" class="font-medium text-stone-800">Rp 12.000</span>
+            <!-- Delivery fee based on calculated location -->
+            <div class="flex justify-between items-center py-2 border-t border-stone-100">
+              <div>
+                <span class="text-stone-700 font-medium">Delivery Fee</span>
+                <p class="text-xs text-stone-400 mt-0.5" id="deliveryFeeDistance">Dihitung otomatis dari lokasi Anda</p>
               </div>
-              <div class="bg-stone-50 rounded-xl border border-stone-100 p-3">
-                <p class="text-xs text-stone-500 mb-2 font-medium">Pilih zona jarak pengiriman:</p>
-                <div class="space-y-1.5" id="deliveryZones">
-                  <label class="flex items-center justify-between cursor-pointer group">
-                    <div class="flex items-center gap-2">
-                      <input type="radio" name="zone" value="near" class="text-brand-600" checked>
-                      <span class="text-xs text-stone-700 group-hover:text-stone-900">&lt; 3 km</span>
-                    </div>
-                    <span class="text-xs font-medium" id="fee-near"></span>
-                  </label>
-                  <label class="flex items-center justify-between cursor-pointer group">
-                    <div class="flex items-center gap-2">
-                      <input type="radio" name="zone" value="mid" class="text-brand-600">
-                      <span class="text-xs text-stone-700 group-hover:text-stone-900">3–6 km</span>
-                    </div>
-                    <span class="text-xs font-medium" id="fee-mid"></span>
-                  </label>
-                  <label class="flex items-center justify-between cursor-pointer group">
-                    <div class="flex items-center gap-2">
-                      <input type="radio" name="zone" value="far" class="text-brand-600">
-                      <span class="text-xs text-stone-700 group-hover:text-stone-900">6–10 km</span>
-                    </div>
-                    <span class="text-xs font-medium" id="fee-far"></span>
-                  </label>
-                </div>
-              </div>
+              <span id="deliveryFeeLabel" class="font-bold text-stone-800">Rp 8.000</span>
             </div>
           </div>
           
           <div class="border-t border-stone-200 pt-4 mb-6">
             <div class="flex justify-between items-center">
               <span class="font-bold text-lg text-stone-800">Total</span>
-              <span class="font-bold text-2xl text-brand-600" id="grandTotal">Rp 146.000</span>
+              <span class="font-bold text-2xl text-brand-600" id="grandTotal">Rp 142.000</span>
             </div>
           </div>
 
@@ -241,27 +216,34 @@
               };
               const subtotal = 134000;
               const params = new URLSearchParams(window.location.search);
-              const key = params.get('branch') || 'sudirman';
+              const key = params.get('branch') || localStorage.getItem('userBranch') || 'sudirman';
               const fees = branchFees[key] || branchFees.sudirman;
-              const fmt = n => 'Rp ' + n.toLocaleString('id-ID').replace(/\./g, '.') + '';
+              const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
 
-              function setFeeDisplay(zone) {
-                const fee = fees[zone];
-                document.getElementById('deliveryFeeLabel').textContent = fmt(fee);
-                document.getElementById('grandTotal').textContent = fmt(subtotal + fee);
+              // Check if we have calculated distance/fee from select-branch or localStorage
+              let fee = fees.near;
+              let distText = 'Dihitung otomatis dari lokasi Anda';
+              try {
+                const infoStr = localStorage.getItem('branchDeliveryInfo');
+                if (infoStr) {
+                  const info = JSON.parse(infoStr);
+                  if (info && info[key]) {
+                    fee = info[key].fee;
+                    distText = info[key].km.toFixed(1) + ' km dari lokasi Anda';
+                  }
+                }
+              } catch(e) {}
+
+              document.getElementById('deliveryFeeLabel').textContent = fmt(fee);
+              document.getElementById('deliveryFeeDistance').textContent = distText;
+              document.getElementById('grandTotal').textContent = fmt(subtotal + fee);
+
+              const checkoutBtn = document.getElementById('checkoutBtn');
+              if (checkoutBtn) {
+                checkoutBtn.href = 'checkout.html?branch=' + key;
               }
-
-              document.getElementById('fee-near').textContent = fmt(fees.near);
-              document.getElementById('fee-mid').textContent  = fmt(fees.mid);
-              document.getElementById('fee-far').textContent  = fmt(fees.far);
-              setFeeDisplay('near');
-
-              document.getElementById('deliveryZones').addEventListener('change', function(e) {
-                setFeeDisplay(e.target.value);
-              });
             })();
           </script>
-
 
           <div class="mb-6">
             <label class="block text-sm font-medium text-stone-700 mb-2">Promo Code</label>
@@ -271,7 +253,7 @@
             </div>
           </div>
 
-          <a href="checkout.html" class="block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-sm">Proceed to Checkout</a>
+          <a href="checkout.html" id="checkoutBtn" class="block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-sm">Proceed to Checkout</a>
         </div>
       </div>
     </div>

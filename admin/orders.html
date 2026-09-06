@@ -104,17 +104,18 @@
             
             <!-- Filters -->
             <div class="flex space-x-2 mb-8 overflow-x-auto pb-2">
-                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">Semua (47)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Baru <span class="ml-1 bg-red-100 text-red-600 py-0.5 px-2 rounded-full text-xs">3</span></button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Menyiapkan (5)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Ready (2)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Dalam Perjalanan (4)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Terkirim (33)</button>
+                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">Semua Pesanan (47)</button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Pesanan Masuk <span class="bg-red-100 text-red-700 py-0.5 px-2 rounded-full text-xs font-bold">3</span>
+                </button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
+                    <i class="fab fa-whatsapp text-[#25D366]"></i> Sudah Dihubungi (44)
+                </button>
             </div>
 
-            <!-- Action Item (Baru Orders) -->
+            <!-- Action Item (Pesanan Masuk) -->
             <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span> Perlu Tindakan
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span> Pesanan Masuk Terbaru — Siap Dihubungi via WhatsApp
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
                 <!-- Baru Order 1 -->
@@ -126,15 +127,20 @@
                         </div>
                         <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Americano x2, Club Sandwich, Cheesecake Slice</p>
-                    <div class="flex justify-between items-center mb-6 text-sm">
-                        <span class="font-medium text-gray-900">Rp 130.000</span>
-                        <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 2 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Americano x2, Club Sandwich, Cheesecake Slice</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0821-4567-8901</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>2 menit lalu</span>
                     </div>
-                    <div class="flex space-x-3">
-                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Terima</button>
-                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tolak</button>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 130.000</span>
                     </div>
+                    <a href="https://wa.me/6282145678901?text=Halo%20Anton%2C%20pesanan%20%23OLG-0045%20Anda%20(Americano%20x2%2C%20Club%20Sandwich%2C%20Cheesecake%20Slice)%20sedang%20kami%20proses.%20Terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
 
                 <!-- Baru Order 2 -->
@@ -146,17 +152,22 @@
                         </div>
                         <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Matcha Latte, Banana Bread</p>
-                    <div class="flex justify-between items-center mb-6 text-sm">
-                        <span class="font-medium text-gray-900">Rp 53.000</span>
-                        <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 5 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Matcha Latte, Banana Bread</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0857-9012-3456</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>5 menit lalu</span>
                     </div>
-                    <div class="flex space-x-3">
-                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Terima</button>
-                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tolak</button>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 53.000</span>
                     </div>
+                    <a href="https://wa.me/6285790123456?text=Halo%20Maya%2C%20pesanan%20%23OLG-0044%20Anda%20(Matcha%20Latte%2C%20Banana%20Bread)%20sedang%20kami%20proses.%20Terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
-                
+
                 <!-- Baru Order 3 -->
                 <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
@@ -166,15 +177,20 @@
                         </div>
                         <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Cappuccino x4</p>
-                    <div class="flex justify-between items-center mb-6 text-sm">
-                        <span class="font-medium text-gray-900">Rp 120.000</span>
-                        <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 8 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Cappuccino x4</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0813-2109-8765</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>8 menit lalu</span>
                     </div>
-                    <div class="flex space-x-3">
-                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Terima</button>
-                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tolak</button>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 120.000</span>
                     </div>
+                    <a href="https://wa.me/6281321098765?text=Halo%20Doni%2C%20pesanan%20%23OLG-0043%20Anda%20(Cappuccino%20x4)%20sedang%20kami%20proses.%20Terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
             </div>
 
@@ -192,12 +208,20 @@
                             <span class="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></span> Menyiapkan
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Café Latte x2, Butter Croissant</p>
-                    <div class="flex justify-between items-center mb-6 text-sm">
-                        <span class="font-medium text-gray-900">Rp 86.000</span>
-                        <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 15 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Café Latte x2, Butter Croissant</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0812-3456-7890</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>15 menit lalu</span>
                     </div>
-                    <button class="w-full bg-blue-50 text-blue-700 hover:bg-blue-100 py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Mark Siap</button>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 86.000</span>
+                    </div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20Anda%20(Caf%C3%A9%20Latte%20x2%2C%20Butter%20Croissant)%20sedang%20kami%20siapkan.%20Estimasi%2015-20%20menit.%20Terima%20kasih!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
 
                 <!-- Siap Order -->
@@ -211,12 +235,20 @@
                             <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></span> Siap
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Beef Burger, Thai Tea</p>
-                    <div class="flex justify-between items-center mb-6 text-sm">
-                        <span class="font-medium text-gray-900">Rp 77.000</span>
-                        <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 20 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Beef Burger, Thai Tea</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0878-5678-9012</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>20 menit lalu</span>
                     </div>
-                    <button class="w-full bg-blue-600 text-white hover:bg-blue-700 py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tugaskan Kurir</button>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 77.000</span>
+                    </div>
+                    <a href="https://wa.me/6287856789012?text=Halo%20Siti%2C%20pesanan%20%23OLG-0041%20Anda%20(Beef%20Burger%2C%20Thai%20Tea)%20sudah%20siap%20dan%20sedang%20kami%20kirimkan!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
 
                 <!-- Dalam Perjalanan Order -->
@@ -230,13 +262,22 @@
                             <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></span> Dalam Perjalanan
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Chicken Pasta, Mocha</p>
-                    <div class="flex justify-between items-center mt-auto text-sm">
-                        <span class="font-medium text-gray-900">Rp 83.000</span>
-                        <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 33 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Chicken Pasta, Mocha</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0819-3456-7890</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>33 menit lalu</span>
                     </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 83.000</span>
+                    </div>
+                    <a href="https://wa.me/6281934567890?text=Halo%20Ahmad%2C%20pesanan%20%23OLG-0040%20Anda%20(Chicken%20Pasta%2C%20Mocha)%20sedang%20dalam%20perjalanan%20ke%20lokasi%20Anda!%20%F0%9F%9B%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
-                
+
                 <!-- Terkirim Order -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow opacity-75" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
@@ -248,11 +289,20 @@
                             <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Terkirim
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Caesar Salad, Fresh Orange Juice</p>
-                    <div class="flex justify-between items-center mt-auto text-sm">
-                        <span class="font-medium text-gray-500">Rp 65.000</span>
-                        <span class="text-gray-400"><i class="fa-regular fa-clock mr-1"></i> 46 mins ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Caesar Salad, Fresh Orange Juice</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0856-7890-1234</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>46 menit lalu</span>
                     </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-500">Rp 65.000</span>
+                    </div>
+                    <a href="https://wa.me/6285678901234?text=Halo%20Diana%2C%20pesanan%20%23OLG-0039%20Anda%20sudah%20terkirim.%20Semoga%20menikmati!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-stone-100 hover:bg-stone-200 text-stone-600 py-2.5 rounded-xl text-sm font-medium transition-colors">
+                        <i class="fab fa-whatsapp text-base text-[#25D366]"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
 
                 <!-- Terkirim Order -->
@@ -266,11 +316,20 @@
                             <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Terkirim
                         </span>
                     </div>
-                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">Tiramisu, Café Latte x2</p>
-                    <div class="flex justify-between items-center mt-auto text-sm">
-                        <span class="font-medium text-gray-500">Rp 104.000</span>
-                        <span class="text-gray-400"><i class="fa-regular fa-clock mr-1"></i> 1 hr ago</span>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Tiramisu, Café Latte x2</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0822-3456-7890</span>
+                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>1 jam lalu</span>
                     </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-500">Rp 104.000</span>
+                    </div>
+                    <a href="https://wa.me/6282234567890?text=Halo%20Reza%2C%20pesanan%20%23OLG-0038%20Anda%20sudah%20terkirim.%20Semoga%20menikmati!%20%F0%9F%8D%B5"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-stone-100 hover:bg-stone-200 text-stone-600 py-2.5 rounded-xl text-sm font-medium transition-colors">
+                        <i class="fab fa-whatsapp text-base text-[#25D366]"></i> Hubungi via WhatsApp
+                    </a>
                 </div>
             </div>
 
