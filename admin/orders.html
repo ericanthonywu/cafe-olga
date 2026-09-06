@@ -104,9 +104,12 @@
             
             <!-- Filters -->
             <div class="flex space-x-2 mb-8 overflow-x-auto pb-2">
-                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">Semua Pesanan (47)</button>
+                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">Semua Pesanan (49)</button>
                 <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
                     <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Pesanan Masuk <span class="bg-red-100 text-red-700 py-0.5 px-2 rounded-full text-xs font-bold">3</span>
+                </button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
+                    <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal (Upcoming) <span class="bg-indigo-100 text-indigo-700 py-0.5 px-2 rounded-full text-xs font-bold">2</span>
                 </button>
                 <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
                     <i class="fab fa-whatsapp text-[#25D366]"></i> Sudah Dihubungi (44)
@@ -190,6 +193,80 @@
                        target="_blank" onclick="event.stopPropagation();"
                        class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
                         <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
+                    </a>
+                </div>
+            </div>
+
+            <!-- Pesanan Terjadwal / Upcoming -->
+            <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif flex items-center">
+                <i class="fa-solid fa-calendar-clock text-indigo-600 mr-2"></i> Pesanan Terjadwal (Upcoming) — Jadwal Pengiriman Mendatang
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
+                <!-- Scheduled Order 1 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-indigo-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-sm font-bold text-brand-700">#OLG-0046</span>
+                            <h4 class="text-lg font-bold text-gray-900 mt-0.5">Rina Wulandari</h4>
+                        </div>
+                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal
+                        </span>
+                    </div>
+                    <div class="bg-indigo-50 rounded-xl p-3 mb-3 border border-indigo-100">
+                        <div class="text-xs text-indigo-600 font-medium">Jadwal Kirim:</div>
+                        <div class="text-sm font-bold text-indigo-950 flex items-center gap-1.5 mt-0.5">
+                            <i class="fa-regular fa-calendar text-indigo-600"></i> Besok, 7 Sep 2026 • 10:00 WIB
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Caramel Macchiato x3, Almond Croissant x2</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0812-9876-5432</span>
+                        <span class="text-gray-400 ml-auto">Dipesan via Web</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 165.000</span>
+                        <span class="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">Delivery Terjadwal</span>
+                    </div>
+                    <a href="https://wa.me/6281298765432?text=Halo%20Rina%2C%20pesanan%20terjadwal%20%23OLG-0046%20Anda%20untuk%20Besok%2C%207%20Sep%202026%20pukul%2010%3A00%20WIB%20sudah%20kami%20catat.%20Pesanan%20akan%20kami%20siapkan%20tepat%20waktu.%20Terima%20kasih%20telah%20memesan%20di%20Cafe%20Olga!%20%E2%98%95"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Konfirmasi Jadwal via WhatsApp
+                    </a>
+                </div>
+
+                <!-- Scheduled Order 2 -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-indigo-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                    <div class="flex justify-between items-start mb-3">
+                        <div>
+                            <span class="text-sm font-bold text-brand-700">#OLG-0047</span>
+                            <h4 class="text-lg font-bold text-gray-900 mt-0.5">Farhan Hidayat</h4>
+                        </div>
+                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                            <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal
+                        </span>
+                    </div>
+                    <div class="bg-indigo-50 rounded-xl p-3 mb-3 border border-indigo-100">
+                        <div class="text-xs text-indigo-600 font-medium">Jadwal Kirim:</div>
+                        <div class="text-sm font-bold text-indigo-950 flex items-center gap-1.5 mt-0.5">
+                            <i class="fa-regular fa-calendar text-indigo-600"></i> Besok, 7 Sep 2026 • 14:30 WIB
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Cold Brew x2, Cinnamon Roll x3</p>
+                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
+                        <i class="fas fa-phone text-gray-400"></i>
+                        <span class="font-mono">0878-1122-3344</span>
+                        <span class="text-gray-400 ml-auto">Dipesan via Web</span>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="font-bold text-gray-900">Rp 142.000</span>
+                        <span class="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">Delivery Terjadwal</span>
+                    </div>
+                    <a href="https://wa.me/6287811223344?text=Halo%20Farhan%2C%20pesanan%20terjadwal%20%23OLG-0047%20Anda%20untuk%20Besok%2C%207%20Sep%202026%20pukul%2014%3A30%20WIB%20sudah%20kami%20catat.%20Pesanan%20akan%20kami%20siapkan%20tepat%20waktu.%20Terima%20kasih%20telah%20memesan%20di%20Cafe%20Olga!%20%E2%98%95"
+                       target="_blank" onclick="event.stopPropagation();"
+                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
+                        <i class="fab fa-whatsapp text-base"></i> Konfirmasi Jadwal via WhatsApp
                     </a>
                 </div>
             </div>
