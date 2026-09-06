@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Olga - Order Success</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fdf8f0',
+              100: '#f9eddc',
+              200: '#f2d8b4',
+              300: '#e9be84',
+              400: '#dfa053',
+              500: '#d78833',
+              600: '#c87028',
+              700: '#a65523',
+              800: '#854522',
+              900: '#6d3a1e',
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { background-color: #fafaf9; } /* stone-50 */
+    .bounce-in {
+      animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body class="text-stone-800 antialiased font-sans flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-md w-full text-center">
+    <!-- Success Icon -->
+    <div class="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6 bounce-in">
+      <i class="fa-solid fa-check text-5xl text-green-500"></i>
+    </div>
+    
+    <h1 class="text-3xl font-serif font-bold text-stone-800 mb-2">Order Placed Successfully!</h1>
+    <p class="text-stone-500 mb-8">Thank you for your order, Budi. We're preparing it now.</p>
+    
+    <!-- Order Summary Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 mb-8 text-left">
+      <div class="flex justify-between items-center mb-4 pb-4 border-b border-stone-100">
+        <div>
+          <p class="text-xs text-stone-400 font-bold uppercase tracking-wider mb-1">Order ID</p>
+          <p class="font-bold text-stone-800">#OLG-20260905-0042</p>
+        </div>
+        <div class="text-right">
+          <p class="text-xs text-stone-400 font-bold uppercase tracking-wider mb-1">Est. Delivery</p>
+          <p class="font-bold text-brand-600">25-35 mins</p>
+        </div>
+      </div>
+      
+      <div class="space-y-3 mb-4 text-sm">
+        <div class="flex justify-between">
+          <span class="text-stone-600">2x Café Latte</span>
+          <span class="font-medium text-stone-800">Rp 64.000</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-stone-600">1x Butter Croissant</span>
+          <span class="font-medium text-stone-800">Rp 22.000</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-stone-600">1x Chicken Pasta</span>
+          <span class="font-medium text-stone-800">Rp 48.000</span>
+        </div>
+      </div>
+      
+      <div class="pt-4 border-t border-stone-100 flex justify-between items-center">
+        <span class="font-bold text-stone-800">Total Paid</span>
+        <span class="font-bold text-lg text-brand-600">Rp 144.000</span>
+      </div>
+    </div>
+    
+    <div class="space-y-4">
+      <a href="tracking.html" class="block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-sm">Track My Order</a>
+      <a href="menu.html" class="block w-full bg-white text-stone-600 border border-stone-200 text-center py-3 rounded-xl font-bold hover:bg-stone-50 transition-colors shadow-sm">Back to Menu</a>
+    </div>
+  </div>
+</body>
+</html>

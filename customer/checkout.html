@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Olga - Checkout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          },
+          colors: {
+            brand: {
+              50: '#fdf8f0',
+              100: '#f9eddc',
+              200: '#f2d8b4',
+              300: '#e9be84',
+              400: '#dfa053',
+              500: '#d78833',
+              600: '#c87028',
+              700: '#a65523',
+              800: '#854522',
+              900: '#6d3a1e',
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    body { background-color: #fafaf9; } /* stone-50 */
+  </style>
+</head>
+<body class="text-stone-800 antialiased font-sans flex flex-col min-h-screen">
+  <!-- Simplified Navbar -->
+  <nav class="bg-white border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-center h-16 items-center">
+        <a href="menu.html" class="flex items-center space-x-2 shrink-0">
+          <i class="fa-solid fa-mug-hot text-brand-600 text-2xl"></i>
+          <span class="font-serif font-bold text-xl text-brand-900 tracking-tight">Cafe Olga</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
+    
+    <!-- Stepper -->
+    <div class="flex justify-center items-center mb-10 text-sm font-medium">
+      <div class="flex items-center text-brand-600">
+        <span class="h-6 w-6 rounded-full bg-brand-100 flex items-center justify-center mr-2"><i class="fa-solid fa-check text-xs"></i></span>
+        Cart
+      </div>
+      <div class="w-12 h-px bg-stone-300 mx-4"></div>
+      <div class="flex items-center text-brand-600 font-bold">
+        <span class="h-6 w-6 rounded-full bg-brand-600 text-white flex items-center justify-center mr-2">2</span>
+        Checkout
+      </div>
+      <div class="w-12 h-px bg-stone-300 mx-4"></div>
+      <div class="flex items-center text-stone-400">
+        <span class="h-6 w-6 rounded-full bg-stone-200 text-stone-500 flex items-center justify-center mr-2">3</span>
+        Confirmation
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Checkout Form -->
+      <div class="flex-grow space-y-6">
+        
+        <!-- Order Type -->
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
+          <h2 class="font-serif font-bold text-xl text-stone-800 mb-4">Order Type</h2>
+          <div class="flex gap-4">
+            <label class="flex-1 border-2 border-brand-600 bg-brand-50 rounded-xl p-4 flex items-center cursor-pointer">
+              <input type="radio" name="orderType" class="text-brand-600 focus:ring-brand-500 h-4 w-4" checked>
+              <div class="ml-3">
+                <span class="block text-sm font-bold text-brand-900">Delivery</span>
+              </div>
+              <i class="fa-solid fa-motorcycle ml-auto text-brand-600 text-xl"></i>
+            </label>
+            <label class="flex-1 border-2 border-stone-200 hover:border-stone-300 rounded-xl p-4 flex items-center cursor-pointer transition-colors">
+              <input type="radio" name="orderType" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+              <div class="ml-3">
+                <span class="block text-sm font-bold text-stone-700">Pickup</span>
+              </div>
+              <i class="fa-solid fa-store ml-auto text-stone-400 text-xl"></i>
+            </label>
+          </div>
+        </div>
+
+        <!-- Delivery Details -->
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
+          <h2 class="font-serif font-bold text-xl text-stone-800 mb-1">Detail Pengiriman</h2>
+          <p class="text-stone-400 text-sm mb-5">Masukkan alamat atau gunakan lokasi GPS Anda</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-sm font-medium text-stone-700 mb-1">Nama Lengkap</label>
+              <input type="text" value="Budi Santoso" class="w-full border border-stone-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-shadow">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-stone-700 mb-1">Nomor Telepon</label>
+              <input type="tel" value="0812-3456-7890" class="w-full border border-stone-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-shadow">
+            </div>
+          </div>
+
+          <!-- Location Picker -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-stone-700 mb-1.5">Alamat Pengiriman</label>
+
+            <!-- GPS Button -->
+            <button id="gpsBtn" onclick="detectLocation()" type="button"
+              class="w-full mb-2 flex items-center justify-center gap-2 py-2.5 px-4 border-2 border-dashed border-brand-300 rounded-xl text-brand-700 bg-brand-50 hover:bg-brand-100 hover:border-brand-400 transition-all text-sm font-medium">
+              <i id="gpsIcon" class="fas fa-location-crosshairs text-brand-500"></i>
+              <span id="gpsBtnText">Gunakan Lokasi Saya (GPS)</span>
+            </button>
+
+            <!-- Address Input with autocomplete-feel -->
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <i class="fas fa-map-marker-alt text-stone-400 text-sm"></i>
+              </div>
+              <input id="addressInput" type="text"
+                value="Jl. Gatot Subroto No. 12, RT 05/RW 03, Setiabudi, Jakarta Selatan"
+                placeholder="Ketik alamat lengkap Anda..."
+                class="w-full pl-9 pr-4 py-2.5 border border-stone-300 rounded-xl text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-shadow"
+                oninput="onAddressInput(this.value)" />
+              <!-- Spinner -->
+              <div id="addrSpinner" class="absolute inset-y-0 right-3 flex items-center hidden">
+                <svg class="animate-spin h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Distance Estimate Result -->
+            <div id="distanceResult" class="mt-3 hidden">
+              <div class="flex items-start gap-3 p-3 bg-emerald-50 border border-emerald-200 rounded-xl">
+                <i class="fas fa-route text-emerald-500 mt-0.5 shrink-0"></i>
+                <div class="flex-1">
+                  <p class="text-xs font-semibold text-emerald-800">Estimasi Jarak & Ongkir</p>
+                  <div class="flex items-center gap-3 mt-1">
+                    <span class="text-sm font-bold text-emerald-700" id="distanceKm">—</span>
+                    <span class="text-stone-400 text-xs">•</span>
+                    <span class="text-sm font-bold text-brand-700" id="distanceFeeDisplay">—</span>
+                    <span class="text-stone-400 text-xs">•</span>
+                    <span class="text-xs text-stone-500" id="distanceETA">—</span>
+                  </div>
+                </div>
+                <i class="fas fa-check-circle text-emerald-500 text-lg"></i>
+              </div>
+            </div>
+
+            <!-- Error state -->
+            <div id="locationError" class="mt-2 hidden">
+              <p class="text-xs text-red-500 flex items-center gap-1.5">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="locationErrorMsg">Lokasi tidak dapat dideteksi. Silakan ketik alamat manual.</span>
+              </p>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-stone-700 mb-1">Catatan Pengiriman <span class="text-stone-400 font-normal">(Opsional)</span></label>
+            <input type="text" placeholder="Cth: Tolong pukul bel depan" class="w-full border border-stone-300 rounded-xl px-3 py-2.5 text-sm focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-shadow">
+          </div>
+        </div>
+
+        <script>
+        // ──────────────────────────────────────────────────────────
+        // Static location → distance → delivery fee estimator
+        // In production this would call a backend/Maps API
+        // ──────────────────────────────────────────────────────────
+        const BRANCH_FEES = {
+          sudirman: { near: 8000,  mid: 12000, far: 18000 },
+          kemang:   { near: 7000,  mid: 11000, far: 16000 },
+          bsd:      { near: 9000,  mid: 14000, far: 20000 },
+        };
+        const SUBTOTAL = 134000;
+
+        // Static address → distance mapping (simulates backend lookup)
+        const ADDRESS_DB = [
+          { keywords: ['sudirman','scbd','senayan','gelora'],           km: 1.2, zone: 'near', eta: '10–15 menit' },
+          { keywords: ['gatot subroto','semanggi','setiabudi'],          km: 2.8, zone: 'near', eta: '12–18 menit' },
+          { keywords: ['kuningan','rasuna','mega kuningan'],             km: 3.5, zone: 'mid',  eta: '18–25 menit' },
+          { keywords: ['kemang','cilandak','lebak bulus'],               km: 4.9, zone: 'mid',  eta: '22–30 menit' },
+          { keywords: ['fatmawati','tb simatupang','pasar minggu'],      km: 6.2, zone: 'far',  eta: '28–38 menit' },
+          { keywords: ['pondok indah','bintaro'],                        km: 7.4, zone: 'far',  eta: '32–42 menit' },
+          { keywords: ['bsd','serpong','tangerang'],                     km: 9.1, zone: 'far',  eta: '38–50 menit' },
+          { keywords: ['menteng','cikini','thamrin'],                    km: 2.1, zone: 'near', eta: '14–20 menit' },
+          { keywords: ['kelapa gading','sunter','tanjung priok'],        km: 8.3, zone: 'far',  eta: '35–48 menit' },
+          { keywords: ['depok','bogor'],                                 km: 12,  zone: 'far',  eta: '50–70 menit' },
+        ];
+        // GPS coords → simulated distance by rough zone
+        const GPS_ZONES = [
+          { lat: [-6.21, -6.22], lon: [106.81, 106.82], km: 1.5, zone: 'near', addr: 'Jl. Sudirman, Jakarta Pusat',       eta: '10–15 menit' },
+          { lat: [-6.23, -6.25], lon: [106.82, 106.84], km: 2.9, zone: 'near', addr: 'Jl. Gatot Subroto, Jakarta Selatan', eta: '15–20 menit' },
+          { lat: [-6.25, -6.28], lon: [106.80, 106.82], km: 4.5, zone: 'mid',  addr: 'Kemang, Jakarta Selatan',            eta: '20–28 menit' },
+          { lat: [-6.28, -6.32], lon: [106.78, 106.82], km: 7.2, zone: 'far',  addr: 'Pondok Indah, Jakarta Selatan',      eta: '30–40 menit' },
+        ];
+
+        function getBranchKey() {
+          return new URLSearchParams(window.location.search).get('branch') || 'sudirman';
+        }
+        function fmtRp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+        function applyFee(km, zone, eta) {
+          const key   = getBranchKey();
+          const fees  = BRANCH_FEES[key] || BRANCH_FEES.sudirman;
+          const fee   = fees[zone] || fees.near;
+
+          document.getElementById('distanceKm').textContent      = km.toFixed(1) + ' km';
+          document.getElementById('distanceFeeDisplay').textContent = fmtRp(fee);
+          document.getElementById('distanceETA').textContent     = eta;
+          document.getElementById('distanceResult').classList.remove('hidden');
+
+          // Update summary sidebar
+          const el = document.getElementById('checkoutDeliveryFee');
+          const tot = document.getElementById('checkoutTotal');
+          const lbl = document.getElementById('zoneLabel');
+          if (el)  el.textContent  = fmtRp(fee);
+          if (tot) tot.textContent = fmtRp(SUBTOTAL + fee);
+          if (lbl) lbl.textContent = '(' + km.toFixed(1) + ' km)';
+        }
+
+        function lookupAddress(addr) {
+          const lower = addr.toLowerCase();
+          for (const entry of ADDRESS_DB) {
+            if (entry.keywords.some(k => lower.includes(k))) {
+              return entry;
+            }
+          }
+          // Default fallback: mid zone
+          return { km: 4.0, zone: 'mid', eta: '20–28 menit' };
+        }
+
+        let debounceTimer;
+        function onAddressInput(val) {
+          clearTimeout(debounceTimer);
+          if (val.length < 5) return;
+          document.getElementById('addrSpinner').classList.remove('hidden');
+          document.getElementById('distanceResult').classList.add('hidden');
+          debounceTimer = setTimeout(() => {
+            const result = lookupAddress(val);
+            document.getElementById('addrSpinner').classList.add('hidden');
+            applyFee(result.km, result.zone, result.eta);
+          }, 800);
+        }
+
+        function detectLocation() {
+          const btn  = document.getElementById('gpsBtn');
+          const icon = document.getElementById('gpsIcon');
+          const txt  = document.getElementById('gpsBtnText');
+          const err  = document.getElementById('locationError');
+
+          err.classList.add('hidden');
+          icon.className = 'fas fa-spinner fa-spin text-brand-500';
+          txt.textContent = 'Mendeteksi lokasi...';
+          btn.disabled = true;
+
+          if (!navigator.geolocation) {
+            showGpsError('Browser tidak mendukung GPS.');
+            return;
+          }
+
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              // Pick a GPS zone based on rough lat/lon (static simulation)
+              const lat = pos.coords.latitude;
+              const lon = pos.coords.longitude;
+              // Just pick a static "realistic" result for demo
+              const zone = GPS_ZONES[Math.floor(Math.random() * GPS_ZONES.length)];
+              document.getElementById('addressInput').value = zone.addr;
+              icon.className = 'fas fa-check text-emerald-500';
+              txt.textContent = 'Lokasi terdeteksi!';
+              btn.classList.replace('border-brand-300','border-emerald-300');
+              btn.classList.replace('bg-brand-50','bg-emerald-50');
+              setTimeout(() => {
+                icon.className = 'fas fa-location-crosshairs text-brand-500';
+                txt.textContent = 'Gunakan Lokasi Saya (GPS)';
+                btn.classList.replace('border-emerald-300','border-brand-300');
+                btn.classList.replace('bg-emerald-50','bg-brand-50');
+                btn.disabled = false;
+              }, 2500);
+              applyFee(zone.km, zone.zone, zone.eta);
+            },
+            (err) => { showGpsError('Akses lokasi ditolak. Ketik alamat secara manual.'); }
+          );
+        }
+
+        function showGpsError(msg) {
+          document.getElementById('gpsIcon').className = 'fas fa-location-crosshairs text-brand-500';
+          document.getElementById('gpsBtnText').textContent = 'Gunakan Lokasi Saya (GPS)';
+          document.getElementById('gpsBtn').disabled = false;
+          document.getElementById('locationErrorMsg').textContent = msg;
+          document.getElementById('locationError').classList.remove('hidden');
+        }
+
+        // Auto-run on page load with prefilled address
+        window.addEventListener('DOMContentLoaded', () => {
+          const addr = document.getElementById('addressInput').value;
+          if (addr.length > 4) {
+            setTimeout(() => {
+              const result = lookupAddress(addr);
+              applyFee(result.km, result.zone, result.eta);
+            }, 400);
+          }
+        });
+        </script>
+
+        <!-- Payment Method -->
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
+          <h2 class="font-serif font-bold text-xl text-stone-800 mb-4">Payment Method</h2>
+          <div class="space-y-3">
+            <label class="border-2 border-brand-600 bg-brand-50 rounded-xl p-4 flex items-center cursor-pointer">
+              <input type="radio" name="paymentMethod" class="text-brand-600 focus:ring-brand-500 h-4 w-4" checked>
+              <div class="ml-3 font-semibold text-brand-900 flex-grow">GoPay</div>
+              <div class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-bold">GoPay</div>
+            </label>
+            <label class="border-2 border-stone-200 hover:border-stone-300 rounded-xl p-4 flex items-center cursor-pointer transition-colors">
+              <input type="radio" name="paymentMethod" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+              <div class="ml-3 font-semibold text-stone-700 flex-grow">OVO</div>
+              <div class="bg-purple-100 text-purple-600 px-2 py-1 rounded text-xs font-bold">OVO</div>
+            </label>
+            <label class="border-2 border-stone-200 hover:border-stone-300 rounded-xl p-4 flex items-center cursor-pointer transition-colors">
+              <input type="radio" name="paymentMethod" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+              <div class="ml-3 font-semibold text-stone-700 flex-grow">Bank Transfer (BCA)</div>
+              <i class="fa-solid fa-building-columns text-stone-400"></i>
+            </label>
+            <label class="border-2 border-stone-200 hover:border-stone-300 rounded-xl p-4 flex items-center cursor-pointer transition-colors">
+              <input type="radio" name="paymentMethod" class="text-brand-600 focus:ring-brand-500 h-4 w-4">
+              <div class="ml-3 font-semibold text-stone-700 flex-grow">Cash on Delivery (COD)</div>
+              <i class="fa-solid fa-money-bill-wave text-stone-400"></i>
+            </label>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Order Summary -->
+      <div class="w-full lg:w-96 shrink-0">
+        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 sticky top-8">
+          
+          <!-- Branch Info Card -->
+          <div id="branchInfoCard" class="rounded-xl p-3 mb-4 flex items-center gap-3 bg-stone-50 border border-stone-100">
+            <div id="branchIcon" class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0">
+              <i class="fas fa-store text-white text-sm"></i>
+            </div>
+            <div>
+              <p class="text-xs text-stone-500">Memesan dari</p>
+              <p id="branchNameCheckout" class="text-sm font-semibold text-stone-800"></p>
+            </div>
+            <a href="select-branch.html" class="ml-auto text-xs text-brand-600 hover:underline shrink-0">Ganti</a>
+          </div>
+
+          <h2 class="font-serif font-bold text-xl text-stone-800 mb-4">Your Order</h2>
+          
+          <div class="space-y-4 mb-6 text-sm">
+            <div class="flex justify-between items-start">
+              <div class="flex">
+                <span class="font-semibold text-stone-800 mr-2">2x</span>
+                <span class="text-stone-600">Café Latte</span>
+              </div>
+              <span class="font-medium text-stone-800">Rp 64.000</span>
+            </div>
+            <div class="flex justify-between items-start">
+              <div class="flex">
+                <span class="font-semibold text-stone-800 mr-2">1x</span>
+                <span class="text-stone-600">Butter Croissant</span>
+              </div>
+              <span class="font-medium text-stone-800">Rp 22.000</span>
+            </div>
+            <div class="flex justify-between items-start">
+              <div class="flex">
+                <span class="font-semibold text-stone-800 mr-2">1x</span>
+                <span class="text-stone-600">Chicken Pasta</span>
+              </div>
+              <span class="font-medium text-stone-800">Rp 48.000</span>
+            </div>
+          </div>
+
+          <div class="border-t border-stone-200 pt-4 space-y-3 mb-4 text-sm">
+            <div class="flex justify-between">
+              <span class="text-stone-500">Subtotal</span>
+              <span class="font-medium text-stone-800">Rp 134.000</span>
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-stone-500">Delivery Fee <span id="zoneLabel" class="text-xs text-stone-400"></span></span>
+              <span id="checkoutDeliveryFee" class="font-medium text-stone-800">Rp 8.000</span>
+            </div>
+          </div>
+          
+          <div class="border-t border-stone-200 pt-4 mb-6">
+            <div class="flex justify-between items-center">
+              <span class="font-bold text-lg text-stone-800">Total</span>
+              <span class="font-bold text-2xl text-brand-600" id="checkoutTotal">Rp 142.000</span>
+            </div>
+          </div>
+
+          <script>
+            (function() {
+              const branchData = {
+                sudirman: { name: 'Cafe Olga Sudirman', color: '#c87028', fees: { near: 8000, mid: 12000, far: 18000 }, zones: { near: '< 3 km', mid: '3–6 km', far: '6–10 km' } },
+                kemang:   { name: 'Cafe Olga Kemang',   color: '#059669', fees: { near: 7000, mid: 11000, far: 16000 }, zones: { near: '< 3 km', mid: '3–6 km', far: '6–10 km' } },
+                bsd:      { name: 'Cafe Olga BSD City', color: '#4f46e5', fees: { near: 9000, mid: 14000, far: 20000 }, zones: { near: '< 3 km', mid: '3–6 km', far: '6–10 km' } },
+              };
+              const subtotal = 134000;
+              const params = new URLSearchParams(window.location.search);
+              const key = params.get('branch') || 'sudirman';
+              const zone = params.get('zone') || 'near';
+              const b = branchData[key] || branchData.sudirman;
+              const fee = b.fees[zone] || b.fees.near;
+              const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
+
+              document.getElementById('branchNameCheckout').textContent = b.name;
+              document.getElementById('branchIcon').style.background = b.color;
+              document.getElementById('checkoutDeliveryFee').textContent = fmt(fee);
+              document.getElementById('checkoutTotal').textContent = fmt(subtotal + fee);
+              document.getElementById('zoneLabel').textContent = '(' + (b.zones[zone] || b.zones.near) + ')';
+            })();
+          </script>
+
+          <a href="order-success.html" class="block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-sm mb-3">Place Order</a>
+          <a href="cart.html" class="block w-full text-center py-2 text-stone-500 hover:text-stone-700 font-medium">Back to Cart</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+

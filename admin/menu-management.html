@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management - Cafe Olga Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              brand: {
+                50: '#fdf8f0',
+                100: '#f9eddc',
+                200: '#f2d8b4',
+                300: '#e9be84',
+                400: '#dfa053',
+                500: '#d78833',
+                600: '#c87028',
+                700: '#a65523',
+                800: '#854522',
+                900: '#6d3a1e',
+              },
+            },
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 antialiased flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-stone-900 text-stone-300 flex flex-col hidden md:flex h-full flex-shrink-0 z-20">
+        <div class="h-16 flex items-center px-6 border-b border-stone-800 flex-shrink-0">
+            <i class="fa-solid fa-mug-hot text-brand-500 text-xl mr-3"></i>
+            <span class="font-serif text-xl text-white font-bold tracking-wide">Cafe Olga</span>
+        </div>
+        
+        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                <i class="fa-solid fa-chart-pie w-6"></i>
+                <span class="font-medium">Dashboard</span>
+            </a>
+            
+            <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                <i class="fa-solid fa-clipboard-list w-6"></i>
+                <span class="font-medium flex-1">Orders</span>
+                <span class="bg-brand-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">5</span>
+            </a>
+            
+            <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 transition-colors">
+                <i class="fa-solid fa-utensils w-6"></i>
+                <span class="font-medium">Menu Management</span>
+            </a>
+            
+            <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                <i class="fa-solid fa-gear w-6"></i>
+                <span class="font-medium">Settings</span>
+            </a>
+            
+            <div class="pt-4 mt-4 border-t border-stone-800">
+                <a href="../customer/menu.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                    <i class="fa-solid fa-arrow-up-right-from-square w-6"></i>
+                    <span class="font-medium">View Store</span>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="p-4 border-t border-stone-800 flex-shrink-0">
+            <a href="login.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors">
+                <i class="fa-solid fa-right-from-bracket w-6"></i>
+                <span class="font-medium">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <!-- Header -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0 z-10">
+            <div>
+                <h1 class="text-xl font-bold text-gray-900 font-serif">Menu Management</h1>
+            </div>
+            <button onclick="document.getElementById('add-modal').classList.remove('hidden')" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold rounded-lg shadow-sm transition-colors flex items-center">
+                <i class="fa-solid fa-plus mr-2"></i> Add New Item
+            </button>
+        </header>
+
+        <!-- Scrollable Content Area -->
+        <div class="flex-1 overflow-auto p-8">
+            
+            <!-- Category Tabs -->
+            <div class="flex space-x-2 mb-6 overflow-x-auto pb-2 border-b border-gray-200">
+                <button class="px-4 py-2 text-brand-600 border-b-2 border-brand-600 text-sm font-bold whitespace-nowrap">All Items</button>
+                <button class="px-4 py-2 text-gray-500 hover:text-gray-900 text-sm font-medium whitespace-nowrap">Coffee & Espresso</button>
+                <button class="px-4 py-2 text-gray-500 hover:text-gray-900 text-sm font-medium whitespace-nowrap">Non-Coffee Drinks</button>
+                <button class="px-4 py-2 text-gray-500 hover:text-gray-900 text-sm font-medium whitespace-nowrap">Pastry & Snacks</button>
+                <button class="px-4 py-2 text-gray-500 hover:text-gray-900 text-sm font-medium whitespace-nowrap">Main Course</button>
+                <button class="px-4 py-2 text-gray-500 hover:text-gray-900 text-sm font-medium whitespace-nowrap">Desserts</button>
+            </div>
+
+            <!-- Menu Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                                <th class="px-6 py-4 font-medium w-2/5">Item Name</th>
+                                <th class="px-6 py-4 font-medium">Category</th>
+                                <th class="px-6 py-4 font-medium">Price</th>
+                                <th class="px-6 py-4 font-medium text-center">Status</th>
+                                <th class="px-6 py-4 font-medium text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100 text-sm">
+                            
+                            <!-- Item 1 -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">☕</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Americano</p>
+                                            <p class="text-xs text-gray-500 line-clamp-1">Classic black coffee</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">Coffee & Espresso</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Rp 25.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-emerald-500 relative transition-colors focus:outline-none">
+                                        <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+                            
+                            <!-- Item 2 -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">☕</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Café Latte</p>
+                                            <p class="text-xs text-gray-500 line-clamp-1">Smooth espresso with steamed milk</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">Coffee & Espresso</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Rp 32.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-emerald-500 relative transition-colors focus:outline-none">
+                                        <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <!-- Item 3 (Out of stock) -->
+                            <tr class="bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center opacity-60">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">🧊</div>
+                                        <div>
+                                            <p class="font-bold text-gray-500 text-base">Matcha Latte <span class="ml-2 text-[10px] uppercase font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded">Out of Stock</span></p>
+                                            <p class="text-xs text-gray-400 line-clamp-1">Premium Japanese matcha</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-400">Non-Coffee Drinks</td>
+                                <td class="px-6 py-4 font-medium text-gray-400">Rp 33.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-gray-300 relative transition-colors focus:outline-none">
+                                        <span class="absolute left-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <!-- Item 4 -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">🥐</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Butter Croissant</p>
+                                            <p class="text-xs text-gray-500 line-clamp-1">Flaky & golden</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">Pastry & Snacks</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Rp 22.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-emerald-500 relative transition-colors focus:outline-none">
+                                        <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <!-- Item 5 -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">🍝</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Club Sandwich</p>
+                                            <p class="text-xs text-gray-500 line-clamp-1">Triple-decker classic</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">Main Course</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Rp 45.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-emerald-500 relative transition-colors focus:outline-none">
+                                        <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <!-- Item 6 (Out of stock) -->
+                            <tr class="bg-gray-50/50 hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center opacity-60">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">🍰</div>
+                                        <div>
+                                            <p class="font-bold text-gray-500 text-base">Cheesecake Slice <span class="ml-2 text-[10px] uppercase font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded">Out of Stock</span></p>
+                                            <p class="text-xs text-gray-400 line-clamp-1">New York style</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-400">Pastry & Snacks</td>
+                                <td class="px-6 py-4 font-medium text-gray-400">Rp 35.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-gray-300 relative transition-colors focus:outline-none">
+                                        <span class="absolute left-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                            <!-- Item 7 -->
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center">
+                                        <div class="w-12 h-12 bg-gradient-to-br from-stone-100 to-stone-200 rounded-lg flex items-center justify-center text-xl shadow-inner mr-4 flex-shrink-0">🍰</div>
+                                        <div>
+                                            <p class="font-bold text-gray-900 text-base">Tiramisu</p>
+                                            <p class="text-xs text-gray-500 line-clamp-1">Classic Italian dessert</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-gray-600">Desserts</td>
+                                <td class="px-6 py-4 font-medium text-gray-900">Rp 40.000</td>
+                                <td class="px-6 py-4 text-center">
+                                    <button class="w-12 h-6 rounded-full bg-emerald-500 relative transition-colors focus:outline-none">
+                                        <span class="absolute right-1 top-1 w-4 h-4 rounded-full bg-white transition-transform"></span>
+                                    </button>
+                                </td>
+                                <td class="px-6 py-4 text-right">
+                                    <button class="text-gray-400 hover:text-brand-600 mr-3"><i class="fa-solid fa-pen"></i></button>
+                                    <button class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-trash"></i></button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Add Item Modal Overlay -->
+    <div id="add-modal" class="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden mx-4">
+            <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+                <h3 class="text-lg font-bold text-gray-900 font-serif">Add New Menu Item</h3>
+                <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="text-gray-400 hover:text-gray-600">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <!-- Image Upload -->
+                <div class="mb-6 flex justify-center">
+                    <div class="w-32 h-32 rounded-xl border-2 border-dashed border-gray-300 bg-gray-50 flex flex-col items-center justify-center text-gray-400 hover:bg-gray-100 hover:border-brand-500 transition-colors cursor-pointer">
+                        <i class="fa-solid fa-camera text-2xl mb-2"></i>
+                        <span class="text-xs font-medium">Upload Image</span>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Item Name</label>
+                        <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="e.g. Vanilla Latte">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                            <select class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 bg-white">
+                                <option>Coffee & Espresso</option>
+                                <option>Non-Coffee Drinks</option>
+                                <option>Pastry & Snacks</option>
+                                <option>Main Course</option>
+                                <option>Desserts</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Price (Rp)</label>
+                            <input type="number" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="0">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                        <textarea rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-none" placeholder="Brief description of the item..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="px-6 py-4 bg-gray-50 border-t border-gray-100 flex justify-end space-x-3">
+                <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="px-4 py-2 text-gray-600 font-medium hover:bg-gray-200 rounded-lg transition-colors">Cancel</button>
+                <button onclick="document.getElementById('add-modal').classList.add('hidden')" class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-lg transition-colors">Save Item</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

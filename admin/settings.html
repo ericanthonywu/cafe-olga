@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Cafe Olga Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              brand: {
+                50: '#fdf8f0',
+                100: '#f9eddc',
+                200: '#f2d8b4',
+                300: '#e9be84',
+                400: '#dfa053',
+                500: '#d78833',
+                600: '#c87028',
+                700: '#a65523',
+                800: '#854522',
+                900: '#6d3a1e',
+              },
+            },
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 antialiased flex h-screen overflow-hidden">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-stone-900 text-stone-300 flex flex-col hidden md:flex h-full flex-shrink-0 z-20">
+        <div class="h-16 flex items-center px-6 border-b border-stone-800 flex-shrink-0">
+            <i class="fa-solid fa-mug-hot text-brand-500 text-xl mr-3"></i>
+            <span class="font-serif text-xl text-white font-bold tracking-wide">Cafe Olga</span>
+        </div>
+        
+        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                <i class="fa-solid fa-chart-pie w-6"></i>
+                <span class="font-medium">Dashboard</span>
+            </a>
+            
+            <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                <i class="fa-solid fa-clipboard-list w-6"></i>
+                <span class="font-medium flex-1">Orders</span>
+                <span class="bg-brand-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">5</span>
+            </a>
+            
+            <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                <i class="fa-solid fa-utensils w-6"></i>
+                <span class="font-medium">Menu Management</span>
+            </a>
+            
+            <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 transition-colors">
+                <i class="fa-solid fa-gear w-6"></i>
+                <span class="font-medium">Settings</span>
+            </a>
+            
+            <div class="pt-4 mt-4 border-t border-stone-800">
+                <a href="../customer/menu.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+                    <i class="fa-solid fa-arrow-up-right-from-square w-6"></i>
+                    <span class="font-medium">View Store</span>
+                </a>
+            </div>
+        </nav>
+        
+        <div class="p-4 border-t border-stone-800 flex-shrink-0">
+            <a href="login.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors">
+                <i class="fa-solid fa-right-from-bracket w-6"></i>
+                <span class="font-medium">Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        <!-- Header -->
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0 z-10">
+            <div>
+                <h1 class="text-xl font-bold text-gray-900 font-serif">Store Settings</h1>
+            </div>
+        </header>
+
+        <!-- Scrollable Content Area -->
+        <div class="flex-1 overflow-auto p-8">
+            
+            <div class="max-w-4xl space-y-8 pb-12">
+                
+                <!-- Store Status -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900">Store Status</h2>
+                        <p class="text-sm text-gray-500 mt-1">Temporarily close your store from receiving new orders.</p>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="mr-3 text-sm font-medium text-emerald-600 flex items-center">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2"></span> Currently Open
+                        </span>
+                        <button class="w-14 h-7 rounded-full bg-emerald-500 relative transition-colors focus:outline-none">
+                            <span class="absolute right-1 top-1 w-5 h-5 rounded-full bg-white transition-transform"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Store Information -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100">
+                        <h2 class="text-lg font-bold text-gray-900 font-serif">Store Information</h2>
+                    </div>
+                    <div class="p-6 space-y-5">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Store Name</label>
+                                <input type="text" value="Cafe Olga" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                <input type="text" value="021-5555-1234" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-none">Freshly Brewed, Warmly Served. Specializing in artisan coffee and fresh pastries.</textarea>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                            <textarea rows="2" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-none">Jl. Sudirman No. 45, Jakarta Selatan 12190</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Operating Hours -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100">
+                        <h2 class="text-lg font-bold text-gray-900 font-serif">Operating Hours</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <!-- Mon-Sat -->
+                            <div class="flex items-center justify-between py-2 border-b border-gray-50">
+                                <span class="font-medium text-gray-700 w-1/3">Monday - Saturday</span>
+                                <div class="flex items-center w-2/3 max-w-sm gap-2">
+                                    <input type="time" value="08:00" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm text-center">
+                                    <span class="text-gray-400">-</span>
+                                    <input type="time" value="22:00" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm text-center">
+                                </div>
+                            </div>
+                            <!-- Sunday -->
+                            <div class="flex items-center justify-between py-2">
+                                <span class="font-medium text-gray-700 w-1/3">Sunday</span>
+                                <div class="flex items-center w-2/3 max-w-sm gap-2">
+                                    <input type="time" value="09:00" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm text-center">
+                                    <span class="text-gray-400">-</span>
+                                    <input type="time" value="21:00" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm text-center">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Delivery Settings -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100">
+                        <h2 class="text-lg font-bold text-gray-900 font-serif">Delivery Settings</h2>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Max Delivery Radius (km)</label>
+                                <input type="number" value="5" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Standard Delivery Fee (Rp)</label>
+                                <input type="number" value="10000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Minimum Order Amount (Rp)</label>
+                                <input type="number" value="30000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Free Delivery Above (Rp)</label>
+                                <input type="number" value="100000" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4">
+                    <button class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-sm transition-colors">
+                        Save Changes
+                    </button>
+                </div>
+
+            </div>
+            
+        </div>
+    </main>
+
+</body>
+</html>
