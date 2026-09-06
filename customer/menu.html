@@ -84,11 +84,23 @@
             <input type="text" class="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-full bg-stone-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent sm:text-sm transition-shadow" placeholder="Search for coffee, meals, snacks...">
           </div>
         </div>
-        <!-- Cart -->
-        <a href="cart.html" class="relative p-2 text-stone-600 hover:text-brand-600 transition-colors">
-          <i class="fa-solid fa-shopping-cart text-xl"></i>
-          <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-600 rounded-full">3</span>
-        </a>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <!-- Active Order Pill -->
+          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold transition-all shadow-sm group">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+            </span>
+            <span class="hidden sm:inline">Pesanan Aktif:</span>
+            <span class="font-mono text-amber-800">#0042</span>
+          </a>
+
+          <!-- Cart -->
+          <a href="cart.html" class="relative p-2 text-stone-600 hover:text-brand-600 transition-colors">
+            <i class="fa-solid fa-shopping-cart text-xl"></i>
+            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-600 rounded-full">3</span>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -121,6 +133,41 @@
       document.getElementById('branchAddress').textContent = b.address;
     })();
   </script>
+
+  <!-- Active Order Card Banner -->
+  <div id="activeOrderBanner" class="bg-gradient-to-r from-amber-600 via-brand-600 to-amber-700 text-white shadow-md border-b border-amber-500/30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center shrink-0 border border-white/20">
+          <i class="fa-solid fa-motorcycle text-white text-lg animate-pulse"></i>
+        </div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-white text-sm">Pesanan Aktif: #OLG-20260905-0042</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[11px] font-extrabold tracking-wide uppercase shadow-sm">
+              <i class="fa-solid fa-truck-fast mr-1"></i> Dalam Perjalanan
+            </span>
+          </div>
+          <p class="text-amber-100 text-xs mt-0.5">
+            Driver <strong>Andi Pratama</strong> sedang mengantar pesanan Anda (Est. tiba ~10 menit)
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="tracking.html" class="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-amber-50 text-brand-700 font-bold rounded-xl text-xs transition-all shadow-sm hover:shadow">
+          <i class="fa-solid fa-location-dot text-brand-600"></i>
+          <span>Pantau Pesanan</span>
+          <i class="fa-solid fa-arrow-right text-[10px] ml-0.5"></i>
+        </a>
+        <a href="https://wa.me/6281234567890?text=Halo%20Andi%2C%20saya%20pemesan%20%23OLG-20260905-0042%20di%20Cafe%20Olga.%20Bisa%20infokan%20posisinya%3F"
+           target="_blank"
+           class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold rounded-xl text-xs transition-all shadow-sm">
+          <i class="fab fa-whatsapp text-sm"></i>
+          <span>Chat Driver</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- Hero Banner -->
   <div class="bg-gradient-to-r from-brand-600 to-brand-400">

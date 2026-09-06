@@ -105,12 +105,24 @@
           <i class="fas fa-mug-hot text-amber-300 text-xl"></i>
           <span class="font-serif font-bold text-xl text-white tracking-tight">Cafe Olga</span>
         </a>
-        <div id="navLocBadge" class="hidden items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5">
-          <i class="fas fa-location-dot text-emerald-400 text-xs"></i>
-          <span id="navLocText" class="text-white text-xs font-medium"></span>
-          <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="text-white/50 hover:text-white ml-1">
-            <i class="fas fa-refresh text-xs"></i>
-          </button>
+        <div class="flex items-center gap-3">
+          <!-- Active Order Pill -->
+          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-amber-300/40 text-amber-200 text-xs font-bold transition-all shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
+            </span>
+            <span class="hidden sm:inline">Pesanan Aktif:</span>
+            <span class="font-mono text-white">#0042</span>
+          </a>
+
+          <div id="navLocBadge" class="hidden items-center gap-2 bg-white/10 border border-white/20 rounded-full px-3 py-1.5">
+            <i class="fas fa-location-dot text-emerald-400 text-xs"></i>
+            <span id="navLocText" class="text-white text-xs font-medium"></span>
+            <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="text-white/50 hover:text-white ml-1">
+              <i class="fas fa-refresh text-xs"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -129,6 +141,27 @@
 
   <!-- Branch Cards -->
   <main class="flex-grow max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 w-full">
+
+    <!-- Active Order Alert Banner -->
+    <div class="mb-6 bg-gradient-to-r from-amber-500 via-brand-600 to-amber-600 text-white rounded-2xl p-4 shadow-md flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0 border border-white/20">
+          <i class="fa-solid fa-motorcycle text-white text-lg animate-pulse"></i>
+        </div>
+        <div>
+          <p class="font-bold text-white text-sm flex items-center gap-2 flex-wrap">
+            Pesanan Aktif: #OLG-20260905-0042
+            <span class="px-2 py-0.5 rounded-full bg-white text-brand-700 text-[10px] font-extrabold uppercase">Dalam Perjalanan</span>
+          </p>
+          <p class="text-amber-100 text-xs mt-0.5">Driver Andi Pratama sedang menuju lokasi Anda (Est. tiba ~10 menit)</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="tracking.html" class="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-white hover:bg-amber-50 text-brand-700 font-bold rounded-xl text-xs transition-colors shadow-sm">
+          <span>Pantau Pesanan</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+        </a>
+      </div>
+    </div>
 
     <!-- Location banner (shown after detection) -->
     <div id="locBanner" class="hidden mb-6 bg-emerald-50 border border-emerald-200 rounded-2xl px-5 py-4 flex items-center gap-4">
