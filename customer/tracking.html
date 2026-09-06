@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cafe Olga - Order Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cafe Olga — Pantau Pesanan</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -18,16 +18,9 @@
           },
           colors: {
             brand: {
-              50: '#fdf8f0',
-              100: '#f9eddc',
-              200: '#f2d8b4',
-              300: '#e9be84',
-              400: '#dfa053',
-              500: '#d78833',
-              600: '#c87028',
-              700: '#a65523',
-              800: '#854522',
-              900: '#6d3a1e',
+              50: '#fdf8f0', 100: '#f9eddc', 200: '#f2d8b4', 300: '#e9be84',
+              400: '#dfa053', 500: '#d78833', 600: '#c87028', 700: '#a65523',
+              800: '#854522', 900: '#6d3a1e'
             },
           },
         },
@@ -35,159 +28,235 @@
     }
   </script>
   <style>
-    body { background-color: #fafaf9; } /* stone-50 */
-    .pulse-animation {
-      animation: pulse 2s infinite;
+    body { background-color: #1c1917; }
+    .hero-bg { background: linear-gradient(135deg,#3b1f0b 0%,#5c3317 50%,#8b5e3c 100%); }
+    @keyframes drive {
+      0% { transform: translateX(0px); }
+      50% { transform: translateX(35px); }
+      100% { transform: translateX(0px); }
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(215, 136, 51, 0.4); }
-      70% { box-shadow: 0 0 0 10px rgba(215, 136, 51, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(215, 136, 51, 0); }
+    .drive-anim {
+      animation: drive 4s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="text-stone-800 antialiased font-sans flex flex-col min-h-screen">
-  <!-- Navbar -->
-  <nav class="bg-white border-b border-stone-200">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center">
-        <a href="menu.html" class="flex items-center space-x-2 shrink-0">
-          <i class="fa-solid fa-arrow-left text-stone-400 hover:text-stone-600 mr-2"></i>
-          <i class="fa-solid fa-mug-hot text-brand-600 text-2xl"></i>
-          <span class="font-serif font-bold text-xl text-brand-900 tracking-tight hidden sm:inline-block">Cafe Olga</span>
+<body class="font-sans text-stone-800 antialiased min-h-screen sm:py-6 flex justify-center selection:bg-brand-500 selection:text-white">
+
+  <!-- Mobile App Frame Container -->
+  <div class="w-full max-w-md bg-stone-50 min-h-screen sm:min-h-[844px] sm:max-h-[95vh] sm:overflow-y-auto sm:rounded-[36px] sm:shadow-2xl sm:border sm:border-stone-700/40 relative flex flex-col pb-20">
+
+    <!-- ══════════════════════════════════════════
+         MOBILE APP HEADER
+    ══════════════════════════════════════════ -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="menu.html" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 hover:text-stone-900 active:scale-95 transition-all">
+          <i class="fa-solid fa-arrow-left text-xs"></i>
         </a>
-        <div class="text-sm font-bold text-stone-800">
-          Order #OLG-20260905-0042
+        <div>
+          <h1 class="font-serif font-bold text-base text-stone-900 leading-tight">Pantau Pesanan</h1>
+          <p class="text-[11px] text-stone-400 font-mono leading-none mt-0.5">#OLG-20260905-0042</p>
         </div>
       </div>
-    </div>
-  </nav>
+      <span class="text-[11px] font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full flex items-center gap-1.5 border border-amber-200">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span>Diantar</span>
+      </span>
+    </header>
 
-  <!-- Main Content -->
-  <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      
-      <!-- Left Column: Driver Info & Order Details -->
-      <div class="space-y-6">
-        <!-- Driver Info -->
-        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 flex items-center justify-between">
-          <div class="flex items-center space-x-4">
-            <div class="h-12 w-12 rounded-full bg-stone-200 flex items-center justify-center overflow-hidden border border-stone-300 shrink-0">
-              <i class="fa-solid fa-user text-stone-400 text-xl"></i>
+    <!-- ══════════════════════════════════════════
+         MAIN CONTENT
+    ══════════════════════════════════════════ -->
+    <main class="flex-grow p-4 space-y-4">
+
+      <!-- Simulated Live Delivery Route Graphic -->
+      <div class="bg-stone-900 text-white rounded-3xl p-4 shadow-md overflow-hidden relative border border-stone-800">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+            <span class="text-xs font-bold uppercase tracking-wider text-emerald-300">Live Delivery</span>
+          </div>
+          <span class="text-xs font-bold text-amber-300 bg-white/10 px-2 py-0.5 rounded-full border border-white/10">
+            Est. tiba ~10 mnt
+          </span>
+        </div>
+
+        <!-- Simulated Map Highway Path -->
+        <div class="py-4 px-2 relative">
+          <div class="h-2 bg-stone-800 rounded-full w-full relative overflow-hidden border border-stone-700">
+            <div class="h-full bg-gradient-to-r from-emerald-500 via-amber-400 to-brand-500 rounded-full w-3/4"></div>
+          </div>
+
+          <div class="flex justify-between items-center mt-3 text-[11px]">
+            <div class="flex items-center gap-1 text-stone-400">
+              <i class="fa-solid fa-store text-amber-400"></i>
+              <span>Outlet Sudirman</span>
+            </div>
+
+            <!-- Moving Motorcycle Icon -->
+            <div class="drive-anim text-amber-300 flex items-center gap-1 font-bold text-xs bg-brand-600/60 px-2 py-0.5 rounded-full border border-amber-400/40">
+              <i class="fa-solid fa-motorcycle"></i> Andi
+            </div>
+
+            <div class="flex items-center gap-1 text-emerald-400 font-bold">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Lokasimu</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-[11px] text-stone-400 text-center mt-2">
+          Driver sedang melalui Jl. Jend. Sudirman menuju Gedung Menara Sudirman.
+        </p>
+      </div>
+
+      <!-- Driver Contact Card -->
+      <div class="bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-stone-100 flex items-center justify-center text-xl text-stone-500 border border-stone-200">
+              <i class="fa-solid fa-user-shield text-brand-600"></i>
             </div>
             <div>
-              <h3 class="font-bold text-stone-800">Andi Pratama</h3>
-              <p class="text-sm text-stone-500">Honda Vario • B 1234 ABC</p>
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-bold text-sm text-stone-900">Andi Pratama</h3>
+                <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.2 rounded border border-emerald-200">Driver</span>
+              </div>
+              <p class="text-xs text-stone-500 mt-0.5">Honda Vario • B 1234 ABC</p>
             </div>
-          </div>
-          <div class="flex items-center gap-2">
-            <a href="https://wa.me/6281234567890?text=Halo%20Andi%2C%20saya%20pemesan%20%23OLG-20260905-0042." target="_blank"
-               class="h-10 px-3 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white flex items-center justify-center gap-1.5 transition-colors text-xs font-bold shadow-sm">
-              <i class="fab fa-whatsapp text-sm"></i> Chat Driver
-            </a>
-            <a href="tel:081234567890" class="h-10 w-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center hover:bg-brand-100 transition-colors border border-brand-200" title="Telepon Driver">
-              <i class="fa-solid fa-phone"></i>
-            </a>
           </div>
         </div>
 
-        <!-- Order Details Card -->
-        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
-          <h3 class="font-bold text-stone-800 mb-4">Order Details</h3>
-          <div class="space-y-3 text-sm mb-4">
-            <div class="flex justify-between">
-              <span class="text-stone-600">2x Café Latte</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-stone-600">1x Butter Croissant</span>
-            </div>
-            <div class="flex justify-between">
-              <span class="text-stone-600">1x Chicken Pasta</span>
-            </div>
-          </div>
-          <div class="border-t border-stone-100 pt-3 flex justify-between">
-            <span class="font-medium text-stone-500">Total</span>
-            <span class="font-bold text-stone-800">Rp 144.000</span>
-          </div>
-        </div>
-        
-        <div class="text-center pt-2">
-          <a href="menu.html" class="text-stone-500 hover:text-stone-800 font-medium transition-colors text-sm"><i class="fa-solid fa-arrow-left mr-1"></i> Back to Menu</a>
+        <div class="grid grid-cols-2 gap-2 pt-1">
+          <a href="https://wa.me/6281234567890?text=Halo%20Andi%2C%20saya%20pemesan%20%23OLG-20260905-0042%20di%20Cafe%20Olga.%20Bisa%20infokan%20posisinya%3F"
+             target="_blank"
+             class="flex items-center justify-center gap-2 py-2.5 px-3 bg-[#25D366] hover:bg-[#1ebe5d] active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all">
+            <i class="fab fa-whatsapp text-sm"></i> Chat Driver
+          </a>
+          <a href="tel:081234567890"
+             class="flex items-center justify-center gap-2 py-2.5 px-3 bg-stone-100 hover:bg-stone-200 active:scale-95 text-stone-800 rounded-xl text-xs font-bold border border-stone-200 transition-all">
+            <i class="fa-solid fa-phone text-xs text-brand-600"></i> Telepon
+          </a>
         </div>
       </div>
 
-      <!-- Right Column: Timeline -->
-      <div class="space-y-6">
-        <!-- Status Timeline -->
-        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6">
-          <h2 class="font-serif font-bold text-xl text-stone-800 mb-6">Order Status</h2>
-          
-          <div class="relative border-l-2 border-stone-200 ml-3 space-y-8 py-2">
-            <!-- Step 1 -->
-            <div class="relative flex items-center">
-              <div class="absolute -left-[9px] h-4 w-4 rounded-full bg-green-500 ring-4 ring-white"></div>
-              <div class="ml-6 flex-grow flex justify-between">
-                <div>
-                  <h4 class="font-bold text-stone-800">Order Placed</h4>
-                  <p class="text-sm text-stone-500">We have received your order</p>
-                </div>
-                <span class="text-xs font-bold text-stone-400">10:30 AM</span>
-              </div>
-            </div>
-            
-            <!-- Step 2 -->
-            <div class="relative flex items-center">
-              <div class="absolute -left-[9px] h-4 w-4 rounded-full bg-green-500 ring-4 ring-white"></div>
-              <div class="ml-6 flex-grow flex justify-between">
-                <div>
-                  <h4 class="font-bold text-stone-800">Order Confirmed</h4>
-                  <p class="text-sm text-stone-500">Restaurant confirmed your order</p>
-                </div>
-                <span class="text-xs font-bold text-stone-400">10:31 AM</span>
-              </div>
-            </div>
+      <!-- Live Status Timeline -->
+      <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm space-y-4">
+        <h3 class="font-bold text-xs text-stone-700 uppercase tracking-wider">Status Perjalanan</h3>
 
-            <!-- Step 3 -->
-            <div class="relative flex items-center">
-              <div class="absolute -left-[9px] h-4 w-4 rounded-full bg-green-500 ring-4 ring-white"></div>
-              <div class="ml-6 flex-grow flex justify-between">
-                <div>
-                  <h4 class="font-bold text-stone-800">Preparing</h4>
-                  <p class="text-sm text-stone-500">Your food is being prepared</p>
-                </div>
-                <span class="text-xs font-bold text-stone-400">10:33 AM</span>
-              </div>
+        <div class="relative pl-6 space-y-5 border-l-2 border-stone-200 ml-2">
+          <!-- Step 1 -->
+          <div class="relative">
+            <div class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-[8px]">
+              <i class="fa-solid fa-check"></i>
             </div>
-
-            <!-- Step 4 (Current) -->
-            <div class="relative flex items-center">
-              <div class="absolute -left-[11px] h-5 w-5 rounded-full bg-brand-500 ring-4 ring-white flex items-center justify-center pulse-animation">
-                <i class="fa-solid fa-motorcycle text-[10px] text-white"></i>
+            <div>
+              <div class="flex justify-between items-center">
+                <h4 class="font-bold text-xs text-stone-900">Pesanan Diterima</h4>
+                <span class="text-[10px] text-stone-400">10:30 WIB</span>
               </div>
-              <div class="ml-6 flex-grow flex justify-between">
-                <div>
-                  <h4 class="font-bold text-brand-600">On the Way</h4>
-                  <p class="text-sm text-stone-500">Driver is heading to you</p>
-                </div>
-                <span class="text-xs font-bold text-brand-600">10:50 AM</span>
-              </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">Outlet Cafe Olga Sudirman telah mengonfirmasi pesanan.</p>
             </div>
+          </div>
 
-            <!-- Step 5 -->
-            <div class="relative flex items-center opacity-50">
-              <div class="absolute -left-[9px] h-4 w-4 rounded-full bg-stone-300 ring-4 ring-white"></div>
-              <div class="ml-6 flex-grow flex justify-between">
-                <div>
-                  <h4 class="font-bold text-stone-500">Delivered</h4>
-                  <p class="text-sm text-stone-400">Enjoy your meal!</p>
-                </div>
+          <!-- Step 2 -->
+          <div class="relative">
+            <div class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-[8px]">
+              <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+              <div class="flex justify-between items-center">
+                <h4 class="font-bold text-xs text-stone-900">Sedang Disiapkan Barista</h4>
+                <span class="text-[10px] text-stone-400">10:33 WIB</span>
               </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">Kopi & makanan disiapkan segar dari dapur.</p>
+            </div>
+          </div>
+
+          <!-- Step 3 (Active) -->
+          <div class="relative">
+            <div class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-brand-600 border-2 border-white ring-4 ring-brand-100 flex items-center justify-center text-white text-[8px]">
+              <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+            </div>
+            <div>
+              <div class="flex justify-between items-center">
+                <h4 class="font-bold text-xs text-brand-700">Driver Sedang Mengantar</h4>
+                <span class="text-[10px] font-bold text-brand-700">10:45 WIB</span>
+              </div>
+              <p class="text-[11px] text-stone-600 mt-0.5">Andi Pratama membawa pesanan dengan tas thermal pengaman.</p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="relative opacity-50">
+            <div class="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-stone-300 border-2 border-white"></div>
+            <div>
+              <h4 class="font-bold text-xs text-stone-600">Pesanan Tiba</h4>
+              <p class="text-[11px] text-stone-400 mt-0.5">Nikmati pesanan Cafe Olga selagi hangat.</p>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+
+      <!-- Collapsible Order Summary -->
+      <details class="bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm text-xs group">
+        <summary class="font-bold text-stone-800 cursor-pointer flex justify-between items-center list-none">
+          <span>Rincian Pesanan (3 Item)</span>
+          <i class="fa-solid fa-chevron-down text-[10px] text-stone-400 group-open:rotate-180 transition-transform"></i>
+        </summary>
+        <div class="mt-3 pt-3 border-t border-stone-100 space-y-2 text-stone-600">
+          <div class="flex justify-between">
+            <span>2x Café Latte (Hot, Less sugar)</span>
+            <span class="font-bold text-stone-800">Rp 64.000</span>
+          </div>
+          <div class="flex justify-between">
+            <span>1x Butter Croissant</span>
+            <span class="font-bold text-stone-800">Rp 22.000</span>
+          </div>
+          <div class="flex justify-between">
+            <span>1x Chicken Pasta</span>
+            <span class="font-bold text-stone-800">Rp 48.000</span>
+          </div>
+          <div class="pt-2 border-t border-stone-100 flex justify-between font-bold text-stone-900">
+            <span>Total Dibayar (Lunas)</span>
+            <span class="text-brand-700">Rp 144.000</span>
+          </div>
+        </div>
+      </details>
+
+    </main>
+
+    <!-- ══════════════════════════════════════════
+         MOBILE APP BOTTOM NAVIGATION BAR
+    ══════════════════════════════════════════ -->
+    <nav class="fixed sm:absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 z-40 max-w-md mx-auto">
+      <div class="grid grid-cols-4 py-2 text-center text-[10px] font-medium">
+        <a href="select-branch.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
+          <i class="fa-solid fa-store text-base"></i>
+          <span>Cabang</span>
+        </a>
+        <a href="menu.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
+          <i class="fa-solid fa-mug-hot text-base"></i>
+          <span>Menu</span>
+        </a>
+        <a href="cart.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+          <div class="relative">
+            <i class="fa-solid fa-cart-shopping text-base"></i>
+            <span class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
+          </div>
+          <span>Keranjang</span>
+        </a>
+        <a href="tracking.html" class="flex flex-col items-center gap-1 text-brand-600 font-bold relative">
+          <div class="relative">
+            <i class="fa-solid fa-location-crosshairs text-base"></i>
+            <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+          </div>
+          <span>Lacak</span>
+        </a>
+      </div>
+    </nav>
+
+  </div>
+
 </body>
 </html>

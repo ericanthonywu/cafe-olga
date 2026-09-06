@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cafe Olga - Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cafe Olga — Menu</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -18,16 +18,9 @@
           },
           colors: {
             brand: {
-              50: '#fdf8f0',
-              100: '#f9eddc',
-              200: '#f2d8b4',
-              300: '#e9be84',
-              400: '#dfa053',
-              500: '#d78833',
-              600: '#c87028',
-              700: '#a65523',
-              800: '#854522',
-              900: '#6d3a1e',
+              50: '#fdf8f0', 100: '#f9eddc', 200: '#f2d8b4', 300: '#e9be84',
+              400: '#dfa053', 500: '#d78833', 600: '#c87028', 700: '#a65523',
+              800: '#854522', 900: '#6d3a1e'
             },
           },
         },
@@ -35,551 +28,619 @@
     }
   </script>
   <style>
-    body { background-color: #fafaf9; } /* stone-50 */
+    body { background-color: #1c1917; }
+    .hero-bg { background: linear-gradient(135deg,#3b1f0b 0%,#5c3317 50%,#8b5e3c 100%); }
+    .scrollbar-none::-webkit-scrollbar { display: none; }
+    .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
     .toast {
       visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #333;
+      min-width: 200px;
+      background-color: rgba(28, 25, 23, 0.95);
       color: #fff;
       text-align: center;
-      border-radius: 8px;
-      padding: 16px;
+      border-radius: 9999px;
+      padding: 10px 18px;
       position: fixed;
-      z-index: 50;
+      z-index: 60;
       left: 50%;
-      bottom: 30px;
-      font-size: 14px;
+      bottom: 84px;
+      transform: translateX(-50%);
+      font-size: 12px;
+      font-weight: 600;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.4);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     .toast.show {
       visibility: visible;
-      animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    }
-    @keyframes fadein {
-      from {bottom: 0; opacity: 0;}
-      to {bottom: 30px; opacity: 1;}
-    }
-    @keyframes fadeout {
-      from {bottom: 30px; opacity: 1;}
-      to {bottom: 0; opacity: 0;}
+      opacity: 1;
+      bottom: 96px;
     }
   </style>
 </head>
-<body class="text-stone-800 antialiased font-sans">
-  <!-- Navbar -->
-  <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center">
-        <!-- Logo -->
-        <a href="../index.html" class="flex items-center space-x-2 shrink-0">
-          <i class="fa-solid fa-mug-hot text-brand-600 text-2xl"></i>
-          <span class="font-serif font-bold text-xl text-brand-900 tracking-tight">Cafe Olga</span>
-        </a>
-        <!-- Search -->
-        <div class="hidden md:flex flex-1 max-w-md mx-8">
-          <div class="relative w-full">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <i class="fa-solid fa-search text-stone-400"></i>
-            </div>
-            <input type="text" class="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-full bg-stone-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent sm:text-sm transition-shadow" placeholder="Search for coffee, meals, snacks...">
+<body class="font-sans text-stone-800 antialiased min-h-screen sm:py-6 flex justify-center selection:bg-brand-500 selection:text-white">
+
+  <!-- Mobile App Frame Container (100% on mobile, phone-framed on desktop) -->
+  <div class="w-full max-w-md bg-stone-50 min-h-screen sm:min-h-[844px] sm:max-h-[95vh] sm:overflow-y-auto sm:rounded-[36px] sm:shadow-2xl sm:border sm:border-stone-700/40 relative flex flex-col pb-36">
+
+    <!-- ══════════════════════════════════════════
+         STICKY MOBILE HEADER
+    ══════════════════════════════════════════ -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm">
+      <!-- Top Row: Location & Actions -->
+      <div class="px-4 py-2.5 flex items-center justify-between gap-2">
+        <!-- Store Selector Pill -->
+        <a href="select-branch.html" class="flex items-center gap-2 bg-stone-100 hover:bg-stone-200/80 active:scale-95 py-1.5 px-3 rounded-full transition-all min-w-0">
+          <i class="fa-solid fa-store text-brand-600 text-xs shrink-0"></i>
+          <div class="min-w-0 text-left">
+            <p class="text-[9px] text-stone-400 font-bold uppercase tracking-wider leading-none">Outlet</p>
+            <p id="branchName" class="text-xs font-bold text-stone-900 truncate leading-tight mt-0.5">Cafe Olga Sudirman</p>
           </div>
-        </div>
-        <div class="flex items-center gap-2 sm:gap-3">
+          <i class="fa-solid fa-chevron-down text-[10px] text-stone-400 shrink-0 ml-0.5"></i>
+        </a>
+
+        <!-- Right: Active Order Pill & Cart -->
+        <div class="flex items-center gap-1.5 shrink-0">
           <!-- Active Order Pill -->
-          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold transition-all shadow-sm group">
+          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300/80 text-amber-900 text-[11px] font-bold shadow-sm transition-all">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
             </span>
-            <span class="hidden sm:inline">Pesanan Aktif:</span>
-            <span class="font-mono text-amber-800">#0042</span>
+            <span>#0042</span>
           </a>
 
-          <!-- Cart -->
-          <a href="cart.html" class="relative p-2 text-stone-600 hover:text-brand-600 transition-colors">
-            <i class="fa-solid fa-shopping-cart text-xl"></i>
-            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-600 rounded-full">3</span>
+          <!-- Cart Icon -->
+          <a id="topCartLink" href="cart.html" class="relative p-2 text-stone-700 hover:text-brand-600 transition-colors">
+            <i class="fa-solid fa-cart-shopping text-lg"></i>
+            <span id="topCartBadge" class="absolute top-0.5 right-0.5 inline-flex items-center justify-center w-4 h-4 text-[10px] font-extrabold text-white bg-brand-600 rounded-full shadow">3</span>
           </a>
         </div>
       </div>
-    </div>
-  </nav>
 
-  <!-- Branch Indicator Bar -->
-  <div id="branchBar" class="bg-stone-800 text-white text-sm py-2 px-4">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <i class="fas fa-store text-brand-400 text-xs"></i>
-        <span class="text-stone-400 text-xs">Memesan dari:</span>
-        <span id="branchName" class="font-semibold text-white text-xs"></span>
-        <span id="branchAddress" class="text-stone-400 text-xs hidden sm:inline"></span>
+      <!-- Live Search Input (Always Visible on Mobile!) -->
+      <div class="px-4 pb-2.5">
+        <div class="relative w-full">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+            <i class="fa-solid fa-search text-xs"></i>
+          </div>
+          <input type="text" id="menuSearchInput" oninput="filterMenu(this.value)"
+            class="block w-full pl-8 pr-8 py-2 text-xs border border-stone-200 rounded-xl bg-stone-100/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all placeholder:text-stone-400"
+            placeholder="Cari kopi, pastry, makanan..." />
+          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-600">
+            <i class="fa-solid fa-circle-xmark text-xs"></i>
+          </button>
+        </div>
       </div>
-      <a href="select-branch.html" class="text-xs text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1">
-        <i class="fas fa-exchange-alt text-xs"></i> Ganti cabang
+
+      <!-- Horizontal Swipeable Category Chips -->
+      <div class="px-4 pb-2 flex gap-1.5 overflow-x-auto scrollbar-none text-xs">
+        <button onclick="setCategory('all', this)" class="cat-pill active px-3.5 py-1.5 rounded-full bg-brand-600 text-white font-bold whitespace-nowrap shadow-sm transition-all">
+          Semua
+        </button>
+        <button onclick="setCategory('coffee', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          ☕ Kopi
+        </button>
+        <button onclick="setCategory('non-coffee', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🧊 Non-Kopi
+        </button>
+        <button onclick="setCategory('pastry', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🥐 Pastry
+        </button>
+        <button onclick="setCategory('meals', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🍝 Makanan
+        </button>
+        <button onclick="setCategory('dessert', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🍰 Dessert
+        </button>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+         ACTIVE ORDER COMPACT BANNER
+    ══════════════════════════════════════════ -->
+    <div class="mx-4 mt-3 bg-gradient-to-r from-amber-600 to-brand-600 text-white rounded-2xl p-3 shadow-sm flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
+          <i class="fa-solid fa-motorcycle text-white text-sm animate-pulse"></i>
+        </div>
+        <div class="min-w-0">
+          <p class="text-[11px] font-bold truncate">Pesanan #0042 dalam perjalanan</p>
+          <p class="text-[10px] text-amber-100 truncate">Driver Andi Pratama (~10 menit)</p>
+        </div>
+      </div>
+      <a href="tracking.html" class="shrink-0 px-2.5 py-1 bg-white text-brand-700 font-bold rounded-lg text-[10px] shadow active:scale-95 transition-transform">
+        Pantau
       </a>
     </div>
-  </div>
-  <script>
-    (function() {
-      const branches = {
-        sudirman: { name: 'Cafe Olga Sudirman', address: '— Jl. Jend. Sudirman No. 45, Jakarta Pusat', color: '#c87028' },
-        kemang:   { name: 'Cafe Olga Kemang',   address: '— Jl. Kemang Raya No. 12, Jakarta Selatan', color: '#059669' },
-        bsd:      { name: 'Cafe Olga BSD City', address: '— Jl. Pahlawan Seribu, BSD City, Tangerang Selatan', color: '#4f46e5' },
-      };
-      const params = new URLSearchParams(window.location.search);
-      const key = params.get('branch') || 'sudirman';
-      const b = branches[key] || branches.sudirman;
-      document.getElementById('branchName').textContent = b.name;
-      document.getElementById('branchAddress').textContent = b.address;
-    })();
-  </script>
 
-  <!-- Active Order Card Banner -->
-  <div id="activeOrderBanner" class="bg-gradient-to-r from-amber-600 via-brand-600 to-amber-700 text-white shadow-md border-b border-amber-500/30">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur flex items-center justify-center shrink-0 border border-white/20">
-          <i class="fa-solid fa-motorcycle text-white text-lg animate-pulse"></i>
+    <!-- ══════════════════════════════════════════
+         MOBILE MENU LIST
+    ══════════════════════════════════════════ -->
+    <main class="p-4 space-y-6">
+
+      <!-- Section: Coffee & Espresso -->
+      <div class="menu-section" data-cat="coffee">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+            <span>☕ Coffee & Espresso</span>
+          </h2>
+          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
         </div>
-        <div>
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-bold text-white text-sm">Pesanan Aktif: #OLG-20260905-0042</span>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-500 text-white text-[11px] font-extrabold tracking-wide uppercase shadow-sm">
-              <i class="fa-solid fa-truck-fast mr-1"></i> Dalam Perjalanan
-            </span>
+
+        <div class="space-y-3">
+          <!-- Item: Americano -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="americano classic black coffee">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Americano</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Classic black espresso roast</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 25.000</p>
+            </div>
+            <button onclick="addToCart('Americano', 25000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
           </div>
-          <p class="text-amber-100 text-xs mt-0.5">
-            Driver <strong>Andi Pratama</strong> sedang mengantar pesanan Anda (Est. tiba ~10 menit)
-          </p>
+
+          <!-- Item: Cafe Latte -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="cafe latte smooth espresso steamed milk">
+            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
+              <i class="fa-solid fa-mug-saucer"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Café Latte</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Smooth espresso with steamed milk</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 32.000</p>
+            </div>
+            <button onclick="addToCart('Café Latte', 32000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Cappuccino -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="cappuccino rich espresso foamy milk">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-800 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-coffee"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Cappuccino</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Rich espresso with thick foamy milk</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 30.000</p>
+            </div>
+            <button onclick="addToCart('Cappuccino', 30000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Caramel Macchiato -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="caramel macchiato vanilla caramel espresso">
+            <div class="w-16 h-16 rounded-xl bg-amber-100/60 flex items-center justify-center text-2xl text-brand-700 shrink-0 border border-amber-200">
+              <i class="fa-solid fa-cup-togo"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h3 class="font-bold text-sm text-stone-900 truncate">Caramel Macchiato</h3>
+                <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1 rounded">Favorit</span>
+              </div>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Vanilla, caramel & rich espresso</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 38.000</p>
+            </div>
+            <button onclick="addToCart('Caramel Macchiato', 38000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Mocha -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="mocha chocolate espresso milk">
+            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-700 shrink-0 border border-stone-200">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Mocha</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Espresso blend with dark chocolate & milk</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 35.000</p>
+            </div>
+            <button onclick="addToCart('Mocha', 35000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Espresso -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="espresso bold single shot">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-900 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-mug-saucer"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Espresso Single</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Bold & aromatic single shot</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 20.000</p>
+            </div>
+            <button onclick="addToCart('Espresso', 20000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
         </div>
       </div>
-      <div class="flex items-center gap-2 shrink-0">
-        <a href="tracking.html" class="inline-flex items-center gap-1.5 px-4 py-2 bg-white hover:bg-amber-50 text-brand-700 font-bold rounded-xl text-xs transition-all shadow-sm hover:shadow">
-          <i class="fa-solid fa-location-dot text-brand-600"></i>
-          <span>Pantau Pesanan</span>
-          <i class="fa-solid fa-arrow-right text-[10px] ml-0.5"></i>
+
+      <!-- Section: Non-Coffee Drinks -->
+      <div class="menu-section" data-cat="non-coffee">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+            <span>🧊 Non-Coffee Drinks</span>
+          </h2>
+          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Item: Matcha Latte -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="matcha latte japanese green tea">
+            <div class="w-16 h-16 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl text-emerald-600 shrink-0 border border-emerald-100">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Matcha Latte</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Uji Kyoto matcha with fresh milk</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 33.000</p>
+            </div>
+            <button onclick="addToCart('Matcha Latte', 33000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Chocolate Deluxe -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="chocolate deluxe belgian dark cocoa">
+            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-700 shrink-0 border border-stone-200">
+              <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Chocolate Deluxe</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Belgian dark chocolate blend</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 30.000</p>
+            </div>
+            <button onclick="addToCart('Chocolate Deluxe', 30000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Lychee Tea -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="lychee tea iced fresh fruit">
+            <div class="w-16 h-16 rounded-xl bg-pink-50 flex items-center justify-center text-2xl text-pink-500 shrink-0 border border-pink-100">
+              <i class="fa-solid fa-glass-water"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Iced Lychee Tea</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Black tea with real sweet lychees</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 24.000</p>
+            </div>
+            <button onclick="addToCart('Iced Lychee Tea', 24000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Taro Latte -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="taro latte sweet purple creamy">
+            <div class="w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center text-2xl text-purple-500 shrink-0 border border-purple-100">
+              <i class="fa-solid fa-mug-hot"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Taro Latte</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Creamy purple taro with fresh milk</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 28.000</p>
+            </div>
+            <button onclick="addToCart('Taro Latte', 28000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Pastry & Snacks -->
+      <div class="menu-section" data-cat="pastry">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+            <span>🥐 Pastry & Snacks</span>
+          </h2>
+          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Item: Butter Croissant -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="butter croissant flaky french pastry">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-600 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-bread-slice"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Butter Croissant</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Flaky, golden French butter pastry</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 22.000</p>
+            </div>
+            <button onclick="addToCart('Butter Croissant', 22000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Almond Croissant -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="almond croissant frangipane sliced almonds">
+            <div class="w-16 h-16 rounded-xl bg-amber-100/50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-200">
+              <i class="fa-solid fa-bread-slice"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Almond Croissant</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Filled with almond frangipane cream</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 26.000</p>
+            </div>
+            <button onclick="addToCart('Almond Croissant', 26000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: French Fries -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="french fries truffle parmesan crispy potato">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-600 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-bowl-food"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Truffle Fries</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Crispy shoestring with truffle oil & dip</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 24.000</p>
+            </div>
+            <button onclick="addToCart('Truffle Fries', 24000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Main Course -->
+      <div class="menu-section" data-cat="meals">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+            <span>🍝 Main Course</span>
+          </h2>
+          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Item: Chicken Pasta -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="chicken pasta creamy fettuccine mushroom">
+            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
+              <i class="fa-solid fa-bowl-food"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Chicken Pasta</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Creamy alfredo pasta with grilled chicken</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 48.000</p>
+            </div>
+            <button onclick="addToCart('Chicken Pasta', 48000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Beef Burger -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="beef burger patty cheese brioche bun">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-800 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-burger"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Olga Beef Burger</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Juicy beef patty with cheese on brioche</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 52.000</p>
+            </div>
+            <button onclick="addToCart('Olga Beef Burger', 52000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section: Desserts -->
+      <div class="menu-section" data-cat="dessert">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+            <span>🍰 Desserts</span>
+          </h2>
+          <span class="text-[10px] text-stone-400 font-medium uppercase">5 item</span>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Item: Tiramisu -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="tiramisu slice italian mascarpone espresso">
+            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-100">
+              <i class="fa-solid fa-cake-candles"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Tiramisu Slice</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Italian mascarpone with espresso-soaked sponge</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 35.000</p>
+            </div>
+            <button onclick="addToCart('Tiramisu Slice', 35000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+
+          <!-- Item: Affogato -->
+          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="affogato espresso gelato vanilla ice cream">
+            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
+              <i class="fa-solid fa-ice-cream"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <h3 class="font-bold text-sm text-stone-900 truncate">Classic Affogato</h3>
+              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Hot double espresso over cold vanilla gelato</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 30.000</p>
+            </div>
+            <button onclick="addToCart('Affogato', 30000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
+              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Ditambahkan ke keranjang!</div>
+
+    <!-- ══════════════════════════════════════════
+         STICKY FLOATING CART BAR (GoFood / ShopeeFood style)
+    ══════════════════════════════════════════ -->
+    <div class="fixed sm:absolute bottom-14 inset-x-0 px-4 z-40 max-w-md mx-auto pointer-events-none">
+      <a id="floatingCartBar" href="cart.html"
+         class="pointer-events-auto w-full bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white px-4 py-3 rounded-2xl shadow-xl border border-white/20 flex items-center justify-between transition-all duration-200">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-bold text-xs relative">
+            <i class="fa-solid fa-cart-shopping text-sm"></i>
+            <span id="fabCartBadge" class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-white text-brand-700 text-[10px] font-extrabold rounded-full flex items-center justify-center shadow">3</span>
+          </div>
+          <div>
+            <span id="cartCountLabel" class="text-[10px] text-amber-200 block uppercase font-bold tracking-wider leading-none">3 Item di Keranjang</span>
+            <span id="cartTotalLabel" class="text-sm font-extrabold text-white leading-tight mt-0.5">Rp 134.000</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs font-bold text-amber-200">
+          <span>Lihat Keranjang</span>
+          <i class="fa-solid fa-arrow-right text-[11px]"></i>
+        </div>
+      </a>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         MOBILE APP BOTTOM NAVIGATION BAR
+    ══════════════════════════════════════════ -->
+    <nav class="fixed sm:absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 z-40 max-w-md mx-auto">
+      <div class="grid grid-cols-4 py-2 text-center text-[10px] font-medium">
+        <a href="select-branch.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
+          <i class="fa-solid fa-store text-base"></i>
+          <span>Cabang</span>
         </a>
-        <a href="https://wa.me/6281234567890?text=Halo%20Andi%2C%20saya%20pemesan%20%23OLG-20260905-0042%20di%20Cafe%20Olga.%20Bisa%20infokan%20posisinya%3F"
-           target="_blank"
-           class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold rounded-xl text-xs transition-all shadow-sm">
-          <i class="fab fa-whatsapp text-sm"></i>
-          <span>Chat Driver</span>
+        <a href="menu.html" class="flex flex-col items-center gap-1 text-brand-600 font-bold">
+          <i class="fa-solid fa-mug-hot text-base"></i>
+          <span>Menu</span>
+        </a>
+        <a href="cart.html" id="navCartLink" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+          <div class="relative">
+            <i class="fa-solid fa-cart-shopping text-base"></i>
+            <span id="navCartBadge" class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
+          </div>
+          <span>Keranjang</span>
+        </a>
+        <a href="tracking.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+          <div class="relative">
+            <i class="fa-solid fa-location-crosshairs text-base"></i>
+            <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+          </div>
+          <span>Lacak</span>
         </a>
       </div>
-    </div>
+    </nav>
+
   </div>
-
-  <!-- Hero Banner -->
-  <div class="bg-gradient-to-r from-brand-600 to-brand-400">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-      <h1 class="text-4xl md:text-5xl font-serif font-bold text-white mb-4 shadow-sm">Welcome to Cafe Olga</h1>
-      <p class="text-brand-50 text-lg md:text-xl font-medium">Freshly Brewed, Warmly Served</p>
-    </div>
-  </div>
-
-
-  <!-- Categories -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-    <div class="flex space-x-4 overflow-x-auto pb-4 scrollbar-hide">
-      <button class="px-6 py-2 rounded-full bg-brand-600 text-white font-medium whitespace-nowrap shadow-sm">All</button>
-      <button class="px-6 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 hover:text-brand-600 font-medium whitespace-nowrap transition-colors">☕ Coffee & Espresso</button>
-      <button class="px-6 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 hover:text-brand-600 font-medium whitespace-nowrap transition-colors">🧊 Non-Coffee</button>
-      <button class="px-6 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 hover:text-brand-600 font-medium whitespace-nowrap transition-colors">🥐 Pastry & Snacks</button>
-      <button class="px-6 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 hover:text-brand-600 font-medium whitespace-nowrap transition-colors">🍝 Main Course</button>
-      <button class="px-6 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 hover:text-brand-600 font-medium whitespace-nowrap transition-colors">🍰 Desserts</button>
-    </div>
-  </div>
-
-  <!-- Menu Grid -->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 mb-16">
-    
-    <!-- Category: Coffee & Espresso -->
-    <h2 class="text-2xl font-serif font-bold text-stone-800 mb-6">Coffee & Espresso</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-mug-hot"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Americano</h3>
-            <span class="font-semibold text-brand-600">Rp 25.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Classic black coffee</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-mug-saucer"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Café Latte</h3>
-            <span class="font-semibold text-brand-600">Rp 32.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Smooth espresso with steamed milk</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-coffee"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Cappuccino</h3>
-            <span class="font-semibold text-brand-600">Rp 30.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Rich espresso with foamy milk</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-mug-hot"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Mocha</h3>
-            <span class="font-semibold text-brand-600">Rp 35.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Espresso with chocolate & milk</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-mug-saucer"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Espresso</h3>
-            <span class="font-semibold text-brand-600">Rp 20.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Bold single shot</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-cup-togo"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Caramel Macchiato</h3>
-            <span class="font-semibold text-brand-600">Rp 38.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Vanilla, caramel & espresso</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category: Non-Coffee Drinks -->
-    <h2 class="text-2xl font-serif font-bold text-stone-800 mb-6 mt-12">Non-Coffee Drinks</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-emerald-50 flex items-center justify-center text-4xl text-emerald-300">
-          <i class="fa-solid fa-leaf"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Matcha Latte</h3>
-            <span class="font-semibold text-brand-600">Rp 33.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Premium Japanese matcha</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-mug-hot"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Hot Chocolate</h3>
-            <span class="font-semibold text-brand-600">Rp 28.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Rich Belgian chocolate</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-orange-50 flex items-center justify-center text-4xl text-orange-300">
-          <i class="fa-solid fa-glass-water"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Thai Tea</h3>
-            <span class="font-semibold text-brand-600">Rp 25.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Classic Thai iced tea</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-orange-100 flex items-center justify-center text-4xl text-orange-400">
-          <i class="fa-solid fa-lemon"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Fresh Orange Juice</h3>
-            <span class="font-semibold text-brand-600">Rp 27.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Freshly squeezed</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category: Pastry & Snacks -->
-    <h2 class="text-2xl font-serif font-bold text-stone-800 mb-6 mt-12">Pastry & Snacks</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-amber-50 flex items-center justify-center text-4xl text-amber-300">
-          <i class="fa-solid fa-bread-slice"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Butter Croissant</h3>
-            <span class="font-semibold text-brand-600">Rp 22.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Flaky & golden</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-cookie"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Chocolate Muffin</h3>
-            <span class="font-semibold text-brand-600">Rp 18.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Moist chocolate chip</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-yellow-50 flex items-center justify-center text-4xl text-yellow-300">
-          <i class="fa-solid fa-cheese"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Cheesecake Slice</h3>
-            <span class="font-semibold text-brand-600">Rp 35.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">New York style</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-300">
-          <i class="fa-solid fa-bread-slice"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Banana Bread</h3>
-            <span class="font-semibold text-brand-600">Rp 20.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Homemade with walnuts</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category: Main Course -->
-    <h2 class="text-2xl font-serif font-bold text-stone-800 mb-6 mt-12">Main Course</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-sandwich"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Club Sandwich</h3>
-            <span class="font-semibold text-brand-600">Rp 45.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Triple-decker classic</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-bowl-food"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Chicken Pasta</h3>
-            <span class="font-semibold text-brand-600">Rp 48.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Creamy fettuccine alfredo</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-burger"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Beef Burger</h3>
-            <span class="font-semibold text-brand-600">Rp 52.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Wagyu patty with cheese</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-green-50 flex items-center justify-center text-4xl text-green-300">
-          <i class="fa-solid fa-leaf"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Caesar Salad</h3>
-            <span class="font-semibold text-brand-600">Rp 38.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Fresh romaine & croutons</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Category: Desserts -->
-    <h2 class="text-2xl font-serif font-bold text-stone-800 mb-6 mt-12">Desserts</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-cake-candles"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Tiramisu</h3>
-            <span class="font-semibold text-brand-600">Rp 40.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Classic Italian dessert</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-cookie-bite"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Brownies</h3>
-            <span class="font-semibold text-brand-600">Rp 25.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Fudgy dark chocolate</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-      <!-- Item -->
-      <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col border border-stone-100">
-        <div class="h-48 bg-stone-100 flex items-center justify-center text-4xl text-stone-400">
-          <i class="fa-solid fa-ice-cream"></i>
-        </div>
-        <div class="p-5 flex-1 flex flex-col">
-          <div class="flex justify-between items-start mb-2">
-            <h3 class="font-bold text-lg text-stone-800">Affogato</h3>
-            <span class="font-semibold text-brand-600">Rp 30.000</span>
-          </div>
-          <p class="text-stone-500 text-sm mb-4 flex-1">Espresso over vanilla gelato</p>
-          <button onclick="addToCart()" class="w-full py-2.5 rounded-xl border-2 border-brand-600 text-brand-600 font-semibold hover:bg-brand-600 hover:text-white transition-colors">Add to Cart</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="toast" class="toast">Added to cart successfully!</div>
-
-  <!-- Floating Action Button (FAB) directing to Cart at bottom -->
-  <aside aria-label="Keranjang Belanja" class="fixed bottom-6 right-6 z-50">
-    <a id="fabCartLink" href="cart.html"
-       class="group flex items-center gap-3 bg-brand-600 hover:bg-brand-700 text-white px-5 py-3.5 rounded-full shadow-2xl hover:shadow-brand-500/50 hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/30 backdrop-blur-md">
-      <div class="relative flex items-center justify-center">
-        <i class="fa-solid fa-cart-shopping text-xl transition-transform group-hover:scale-110"></i>
-        <span id="fabCartBadge" class="absolute -top-2.5 -right-3 inline-flex items-center justify-center w-5 h-5 text-xs font-extrabold text-brand-700 bg-white rounded-full shadow">3</span>
-      </div>
-      <div class="flex flex-col text-left">
-        <span class="text-[11px] font-semibold text-amber-200 uppercase tracking-wider">Lihat Keranjang</span>
-        <span class="text-sm font-bold leading-tight">Rp 134.000</span>
-      </div>
-      <i class="fa-solid fa-arrow-right text-xs text-amber-200 group-hover:translate-x-1 transition-transform ml-1"></i>
-    </a>
-  </aside>
-
-  <!-- Footer -->
-  <footer class="bg-stone-900 text-stone-300 py-12 mt-12 pb-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div>
-        <div class="flex items-center space-x-2 mb-4">
-          <i class="fa-solid fa-mug-hot text-brand-400 text-2xl"></i>
-          <span class="font-serif font-bold text-xl text-white tracking-tight">Cafe Olga</span>
-        </div>
-        <p class="text-sm">Freshly Brewed, Warmly Served.</p>
-      </div>
-      <div>
-        <h4 class="text-white font-bold mb-4 font-serif">Operating Hours</h4>
-        <ul class="text-sm space-y-2">
-          <li>Mon - Sat: 8:00 AM - 10:00 PM</li>
-          <li>Sun: 9:00 AM - 9:00 PM</li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="text-white font-bold mb-4 font-serif">Visit Us</h4>
-        <p class="text-sm">Jl. Sudirman No. 45<br>Jakarta</p>
-      </div>
-    </div>
-  </footer>
 
   <script>
-    function addToCart() {
-      var toast = document.getElementById("toast");
-      toast.className = "toast show";
-      setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+    // Cart state
+    let cartCount = 3;
+    let cartTotal = 134000;
 
-      // Animate FAB button
-      var fab = document.getElementById("fabCartLink");
+    const branches = {
+      sudirman: { name: 'Cafe Olga Sudirman' },
+      kemang:   { name: 'Cafe Olga Kemang' },
+      bsd:      { name: 'Cafe Olga BSD City' },
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const currentBranch = params.get('branch') || localStorage.getItem('userNearestBranch') || 'sudirman';
+    const b = branches[currentBranch] || branches.sudirman;
+    document.getElementById('branchName').textContent = b.name;
+
+    // Update links with branch parameter
+    ['topCartLink', 'floatingCartBar', 'navCartLink'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.href = 'cart.html?branch=' + currentBranch;
+    });
+
+    function addToCart(name, price) {
+      cartCount++;
+      cartTotal += price;
+
+      // Update badge elements
+      document.getElementById('topCartBadge').textContent = cartCount;
+      document.getElementById('fabCartBadge').textContent = cartCount;
+      document.getElementById('navCartBadge').textContent = cartCount;
+
+      document.getElementById('cartCountLabel').textContent = cartCount + ' Item di Keranjang';
+      document.getElementById('cartTotalLabel').textContent = 'Rp ' + cartTotal.toLocaleString('id-ID');
+
+      // Toast feedback
+      const toast = document.getElementById("toast");
+      toast.textContent = name + ' ditambahkan!';
+      toast.classList.add("show");
+      setTimeout(() => { toast.classList.remove("show"); }, 2000);
+
+      // Bounce FAB
+      const fab = document.getElementById("floatingCartBar");
       if (fab) {
-        fab.classList.add("scale-110");
-        setTimeout(function(){ fab.classList.remove("scale-110"); }, 250);
+        fab.classList.add("scale-[1.02]");
+        setTimeout(() => { fab.classList.remove("scale-[1.02]"); }, 200);
       }
     }
 
-    // Preserve branch in FAB link and top cart link
-    (function() {
-      const params = new URLSearchParams(window.location.search);
-      const branch = params.get('branch') || localStorage.getItem('userBranch') || 'sudirman';
-      if (branch) {
-        const fab = document.getElementById('fabCartLink');
-        if (fab) fab.href = 'cart.html?branch=' + branch;
-        const topCart = document.querySelector('nav a[href="cart.html"]');
-        if (topCart) topCart.href = 'cart.html?branch=' + branch;
+    // Category Filter
+    function setCategory(cat, btn) {
+      document.querySelectorAll('.cat-pill').forEach(el => {
+        el.classList.remove('bg-brand-600','text-white','font-bold','shadow-sm');
+        el.classList.add('bg-white','text-stone-600','border','border-stone-200','font-medium');
+      });
+      btn.classList.add('bg-brand-600','text-white','font-bold','shadow-sm');
+      btn.classList.remove('bg-white','text-stone-600','border-stone-200');
+
+      document.querySelectorAll('.menu-section').forEach(sec => {
+        if (cat === 'all' || sec.getAttribute('data-cat') === cat) {
+          sec.classList.remove('hidden');
+        } else {
+          sec.classList.add('hidden');
+        }
+      });
+    }
+
+    // Live Search
+    function filterMenu(query) {
+      const q = query.toLowerCase().trim();
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (q.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
       }
-    })();
+
+      document.querySelectorAll('.menu-item').forEach(item => {
+        const text = item.getAttribute('data-name') || '';
+        if (!q || text.includes(q)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      // Hide empty category headers
+      document.querySelectorAll('.menu-section').forEach(sec => {
+        const visibleItems = sec.querySelectorAll('.menu-item:not(.hidden)').length;
+        if (visibleItems === 0) {
+          sec.classList.add('hidden');
+        } else {
+          sec.classList.remove('hidden');
+        }
+      });
+    }
+
+    function clearSearch() {
+      const inp = document.getElementById('menuSearchInput');
+      inp.value = '';
+      filterMenu('');
+      inp.focus();
+    }
   </script>
 </body>
 </html>

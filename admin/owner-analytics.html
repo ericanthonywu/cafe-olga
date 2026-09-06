@@ -20,145 +20,183 @@
             }
         }
     </script>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('adminSidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            sidebar.classList.toggle('-translate-x-full');
+            backdrop.classList.toggle('hidden');
+        }
+    </script>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex min-h-screen">
 
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300"></div>
+
     <!-- Sidebar -->
-    <aside class="w-64 bg-stone-900 text-stone-100 flex flex-col fixed h-full shadow-xl">
-        <div class="p-6">
-            <h1 class="text-2xl font-serif font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-crown text-brand-500"></i> Cafe Olga HQ
-            </h1>
-            <p class="text-brand-400 text-sm mt-1 font-medium">Owner Dashboard</p>
+    <aside id="adminSidebar" class="fixed inset-y-0 left-0 z-50 w-72 md:w-64 bg-stone-900 text-stone-100 flex flex-col h-full shadow-2xl md:shadow-xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="p-5 flex items-center justify-between border-b border-stone-800">
+            <div>
+                <h1 class="text-xl font-serif font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-amber-500"></i> Cafe Olga HQ
+                </h1>
+                <p class="text-amber-400 text-xs font-semibold mt-0.5">Owner Dashboard</p>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-stone-400 hover:text-white p-1 rounded-lg focus:outline-none" aria-label="Tutup Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
         </div>
         
-        <nav class="flex-1 px-4 mt-2 space-y-2">
-            <a href="owner-dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+        <nav class="flex-1 px-4 mt-3 space-y-1.5 overflow-y-auto">
+            <a href="owner-dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
                 <i class="fa-solid fa-chart-pie w-5"></i> Overview
             </a>
-            <a href="owner-orders.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+            <a href="owner-orders.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
                 <i class="fa-solid fa-clipboard-list w-5"></i> All Orders
             </a>
-            <a href="owner-branches.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+            <a href="owner-branches.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
                 <i class="fa-solid fa-store w-5"></i> Branches
             </a>
-            <a href="owner-analytics.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-stone-800 text-white border-l-4 border-brand-500 font-medium">
-                <i class="fa-solid fa-chart-line w-5"></i> Analytics
+            <a href="owner-analytics.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-amber-500 font-bold">
+                <i class="fa-solid fa-chart-line w-5 text-amber-400"></i> Analytics
             </a>
             
-            <div class="border-t border-stone-800 my-4"></div>
-            
-            <a href="../customer/select-branch.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+            <div class="border-t border-stone-800 my-3"></div>
+
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs font-semibold">
+                <i class="fa-solid fa-store w-5 text-brand-400"></i>
+                <span>Masuk ke Admin Sudirman</span>
+            </a>
+            <a href="../customer/select-branch.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs">
                 <i class="fa-solid fa-house w-5"></i> View Store
             </a>
-            <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors border-l-4 border-transparent hover:border-red-900">
+            <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors border-l-4 border-transparent text-xs">
                 <i class="fa-solid fa-arrow-right-from-bracket w-5"></i> Logout
             </a>
         </nav>
         
-        <div class="p-4 mt-auto">
-            <div class="bg-stone-800 p-4 rounded-xl flex items-center gap-3 border border-stone-700">
-                <div class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center text-white">
-                    <i class="fa-solid fa-user-tie"></i>
+        <div class="p-4 mt-auto border-t border-stone-800">
+            <div class="bg-stone-800/80 p-3 rounded-xl flex items-center gap-3 border border-stone-700">
+                <div class="w-9 h-9 rounded-full bg-amber-500 text-stone-900 flex items-center justify-center font-bold text-sm shadow">
+                    <i class="fa-solid fa-crown"></i>
                 </div>
                 <div>
-                    <p class="font-medium text-white">Owner</p>
-                    <p class="text-xs text-brand-400 flex items-center gap-1"><i class="fa-solid fa-crown text-[10px]"></i> HQ Admin</p>
+                    <p class="font-bold text-white text-xs">Owner</p>
+                    <p class="text-[10px] text-amber-400 flex items-center gap-1"><i class="fa-solid fa-crown text-[10px]"></i> HQ Admin</p>
                 </div>
             </div>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="ml-64 flex-1 p-8">
-        <header class="mb-8 flex justify-between items-end">
-            <div>
-                <h2 class="text-3xl font-serif font-bold text-gray-900">Analytics & Reports</h2>
-                <p class="text-gray-500 mt-1">Network performance across all branches.</p>
-            </div>
-            <div>
-                <div class="bg-white px-4 py-2 rounded-lg shadow-sm border border-gray-200 flex items-center gap-3 text-sm font-medium cursor-pointer hover:bg-gray-50">
-                    <i class="fa-regular fa-calendar text-gray-500"></i>
-                    Last 7 days
-                    <i class="fa-solid fa-chevron-down text-gray-400 text-xs ml-2"></i>
+    <main class="flex-1 md:ml-64 min-w-0 flex flex-col min-h-screen">
+        <!-- Mobile Header with Hamburger -->
+        <div class="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-20">
+            <div class="flex items-center gap-3">
+                <button id="mobileMenuBtn" onclick="toggleSidebar()" class="p-2 -ml-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Buka Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-crown text-amber-500 text-sm"></i>
+                    <span class="font-serif font-bold text-gray-900 text-sm">Cafe Olga HQ</span>
                 </div>
             </div>
-        </header>
-
-        <!-- Summary Cards Row -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p class="text-sm font-medium text-gray-500 mb-1">Total Weekly Revenue</p>
-                <h3 class="text-3xl font-bold text-gray-900">Rp 79.3M</h3>
-                <p class="text-xs text-green-600 mt-2 flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up"></i> +12.5% vs last week</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p class="text-sm font-medium text-gray-500 mb-1">Total Orders</p>
-                <h3 class="text-3xl font-bold text-gray-900">847</h3>
-                <p class="text-xs text-green-600 mt-2 flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up"></i> +8.2% vs last week</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p class="text-sm font-medium text-gray-500 mb-1">New Customers</p>
-                <h3 class="text-3xl font-bold text-gray-900">142</h3>
-                <p class="text-xs text-gray-500 mt-2">16.7% of total customers</p>
-            </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p class="text-sm font-medium text-gray-500 mb-1">Returning Customers</p>
-                <h3 class="text-3xl font-bold text-gray-900">705</h3>
-                <p class="text-xs text-gray-500 mt-2">83.3% of total customers</p>
-            </div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full border border-amber-200">Owner</span>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-            <!-- Revenue Trend Chart -->
-            <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <h3 class="text-lg font-bold text-gray-900 mb-6">Revenue Trend</h3>
-                
-                <div class="flex items-end justify-between h-64 gap-2 mt-4 px-2">
-                    <!-- Mon -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">9.2M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[65%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Mon</span>
-                    </div>
-                    <!-- Tue -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">8.8M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[62%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Tue</span>
-                    </div>
-                    <!-- Wed -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">11.5M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[81%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Wed</span>
-                    </div>
-                    <!-- Thu -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">10.2M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[72%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Thu</span>
-                    </div>
-                    <!-- Fri -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">12.8M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[90%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Fri</span>
-                    </div>
-                    <!-- Sat -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">14.1M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[100%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Sat</span>
-                    </div>
-                    <!-- Sun -->
-                    <div class="flex flex-col items-center w-full gap-2 group">
-                        <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">12.7M</span>
-                        <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[89%] hover:opacity-80 transition-opacity"></div>
-                        <span class="text-xs font-medium text-gray-500 mt-1">Sun</span>
+        <div class="p-4 sm:p-6 lg:p-8 flex-1">
+            <header class="mb-6 sm:mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-serif font-bold text-gray-900">Analytics & Reports</h2>
+                    <p class="text-gray-500 text-sm mt-1">Network performance across all branches.</p>
+                </div>
+                <div>
+                    <div class="bg-white px-4 py-2 rounded-xl shadow-sm border border-gray-200 flex items-center justify-between sm:justify-start gap-3 text-sm font-medium cursor-pointer hover:bg-gray-50">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-regular fa-calendar text-gray-500"></i>
+                            Last 7 days
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-gray-400 text-xs ml-2"></i>
                     </div>
                 </div>
+            </header>
+
+            <!-- Summary Cards Row -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-xs sm:text-sm font-medium text-gray-500 mb-1">Total Weekly Revenue</p>
+                    <h3 class="text-xl sm:text-3xl font-bold text-gray-900">Rp 79.3M</h3>
+                    <p class="text-[11px] sm:text-xs text-green-600 mt-2 flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up"></i> +12.5% vs last week</p>
+                </div>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-xs sm:text-sm font-medium text-gray-500 mb-1">Total Orders</p>
+                    <h3 class="text-xl sm:text-3xl font-bold text-gray-900">847</h3>
+                    <p class="text-[11px] sm:text-xs text-green-600 mt-2 flex items-center gap-1"><i class="fa-solid fa-arrow-trend-up"></i> +8.2% vs last week</p>
+                </div>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-xs sm:text-sm font-medium text-gray-500 mb-1">New Customers</p>
+                    <h3 class="text-xl sm:text-3xl font-bold text-gray-900">142</h3>
+                    <p class="text-[11px] sm:text-xs text-gray-500 mt-2">16.7% of total</p>
+                </div>
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <p class="text-xs sm:text-sm font-medium text-gray-500 mb-1">Returning</p>
+                    <h3 class="text-xl sm:text-3xl font-bold text-gray-900">705</h3>
+                    <p class="text-[11px] sm:text-xs text-gray-500 mt-2">83.3% of total</p>
+                </div>
             </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-6 sm:mb-8">
+                <!-- Revenue Trend Chart -->
+                <div class="lg:col-span-2 bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-bold text-gray-900 mb-4 sm:mb-6">Revenue Trend</h3>
+                    <div class="overflow-x-auto pb-2">
+                        <div class="min-w-[480px] flex items-end justify-between h-64 gap-2 mt-4 px-2">
+                            <!-- Mon -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">9.2M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[65%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Mon</span>
+                            </div>
+                            <!-- Tue -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">8.8M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[62%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Tue</span>
+                            </div>
+                            <!-- Wed -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">11.5M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[81%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Wed</span>
+                            </div>
+                            <!-- Thu -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">10.2M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[72%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Thu</span>
+                            </div>
+                            <!-- Fri -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">12.8M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[90%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Fri</span>
+                            </div>
+                            <!-- Sat -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">14.1M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[100%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Sat</span>
+                            </div>
+                            <!-- Sun -->
+                            <div class="flex flex-col items-center w-full gap-2 group">
+                                <span class="text-xs font-semibold text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity">12.7M</span>
+                                <div class="w-full bg-gradient-to-t from-brand-700 to-brand-400 rounded-t-sm h-[89%] hover:opacity-80 transition-opacity"></div>
+                                <span class="text-xs font-medium text-gray-500 mt-1">Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             <!-- Branch Revenue Breakdown -->
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
@@ -212,106 +250,140 @@
 
         <!-- Top Items Table -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <div class="px-6 py-5 border-b border-gray-100">
-                <h3 class="text-lg font-bold text-gray-900">Top 10 Items Performance</h3>
+            <div class="px-5 py-4 sm:px-6 sm:py-5 border-b border-gray-100 flex items-center justify-between">
+                <div>
+                    <h3 class="text-base sm:text-lg font-bold text-gray-900">Top 10 Items Performance</h3>
+                    <p class="text-xs text-gray-400 mt-0.5 sm:hidden">Geser ke kanan untuk melihat detail omzet</p>
+                </div>
             </div>
-            <table class="w-full text-left border-collapse">
-                <thead>
-                    <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
-                        <th class="px-6 py-4 font-medium">Rank</th>
-                        <th class="px-6 py-4 font-medium">Item</th>
-                        <th class="px-6 py-4 font-medium">Category</th>
-                        <th class="px-6 py-4 font-medium">Total Orders</th>
-                        <th class="px-6 py-4 font-medium">Revenue</th>
-                        <th class="px-6 py-4 font-medium">Top Branch</th>
-                    </tr>
-                </thead>
-                <tbody class="text-sm divide-y divide-gray-100">
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#1</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Café Latte</td>
-                        <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">342</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 10.944.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#2</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Cappuccino</td>
-                        <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">289</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 8.670.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#3</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Chicken Pasta</td>
-                        <td class="px-6 py-4 text-gray-500">Main Course</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">245</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 11.760.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#4</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Butter Croissant</td>
-                        <td class="px-6 py-4 text-gray-500">Pastry & Snacks</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">218</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 4.796.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#5</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Americano</td>
-                        <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">194</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 4.850.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-indigo-50 text-indigo-700 rounded text-xs font-medium">BSD City</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#6</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Beef Burger</td>
-                        <td class="px-6 py-4 text-gray-500">Main Course</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">187</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 9.724.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#7</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Matcha Latte</td>
-                        <td class="px-6 py-4 text-gray-500">Non-Coffee Drinks</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">156</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 5.148.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#8</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Club Sandwich</td>
-                        <td class="px-6 py-4 text-gray-500">Main Course</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">142</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 6.390.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-indigo-50 text-indigo-700 rounded text-xs font-medium">BSD City</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#9</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Tiramisu</td>
-                        <td class="px-6 py-4 text-gray-500">Desserts</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">128</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 5.120.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 font-bold text-gray-400">#10</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Caramel Macchiato</td>
-                        <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">119</td>
-                        <td class="px-6 py-4 font-medium text-gray-900">Rp 4.522.000</td>
-                        <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse min-w-[640px]">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                            <th class="px-6 py-4 font-medium">Rank</th>
+                            <th class="px-6 py-4 font-medium">Item</th>
+                            <th class="px-6 py-4 font-medium">Category</th>
+                            <th class="px-6 py-4 font-medium">Total Orders</th>
+                            <th class="px-6 py-4 font-medium">Revenue</th>
+                            <th class="px-6 py-4 font-medium">Top Branch</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm divide-y divide-gray-100">
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#1</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Café Latte</td>
+                            <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">342</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 10.944.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#2</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Cappuccino</td>
+                            <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">289</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 8.670.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#3</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Chicken Pasta</td>
+                            <td class="px-6 py-4 text-gray-500">Main Course</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">245</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 11.760.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#4</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Butter Croissant</td>
+                            <td class="px-6 py-4 text-gray-500">Pastry & Snacks</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">218</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 4.796.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#5</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Americano</td>
+                            <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">194</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 4.850.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-indigo-50 text-indigo-700 rounded text-xs font-medium">BSD City</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#6</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Beef Burger</td>
+                            <td class="px-6 py-4 text-gray-500">Main Course</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">187</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 9.724.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#7</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Matcha Latte</td>
+                            <td class="px-6 py-4 text-gray-500">Non-Coffee Drinks</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">156</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 5.148.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#8</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Club Sandwich</td>
+                            <td class="px-6 py-4 text-gray-500">Main Course</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">142</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 6.390.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-indigo-50 text-indigo-700 rounded text-xs font-medium">BSD City</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#9</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Tiramisu</td>
+                            <td class="px-6 py-4 text-gray-500">Desserts</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">128</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 5.120.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-emerald-50 text-emerald-700 rounded text-xs font-medium">Kemang</span></td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="px-6 py-4 font-bold text-gray-400">#10</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Caramel Macchiato</td>
+                            <td class="px-6 py-4 text-gray-500">Coffee & Espresso</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">119</td>
+                            <td class="px-6 py-4 font-medium text-gray-900">Rp 4.522.000</td>
+                            <td class="px-6 py-4"><span class="px-2 py-1 bg-amber-50 text-amber-700 rounded text-xs font-medium">Sudirman</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         </div>
 
     </main>
 
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('adminSidebar');
+            const backdrop = document.getElementById('sidebarBackdrop');
+            const isClosed = sidebar.classList.contains('-translate-x-full');
+            if (isClosed) {
+                sidebar.classList.remove('-translate-x-full');
+                backdrop.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                backdrop.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const sidebar = document.getElementById('adminSidebar');
+                const backdrop = document.getElementById('sidebarBackdrop');
+                if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+                    sidebar.classList.add('-translate-x-full');
+                    backdrop.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                }
+            }
+        });
+    </script>
 </body>
 </html>

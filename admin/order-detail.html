@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Pesanan - Cafe Olga Admin</title>
+    <title>Detail Pesanan #OLG-0042 — Cafe Olga Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -18,16 +18,9 @@
             },
             colors: {
               brand: {
-                50: '#fdf8f0',
-                100: '#f9eddc',
-                200: '#f2d8b4',
-                300: '#e9be84',
-                400: '#dfa053',
-                500: '#d78833',
-                600: '#c87028',
-                700: '#a65523',
-                800: '#854522',
-                900: '#6d3a1e',
+                50: '#fdf8f0', 100: '#f9eddc', 200: '#f2d8b4', 300: '#e9be84',
+                400: '#dfa053', 500: '#d78833', 600: '#c87028', 700: '#a65523',
+                800: '#854522', 900: '#6d3a1e'
               },
             },
           },
@@ -37,254 +30,278 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 antialiased flex h-screen overflow-hidden">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-stone-900 text-stone-300 flex flex-col hidden md:flex h-full flex-shrink-0 z-20">
-        <div class="h-16 flex items-center px-6 border-b border-stone-800 flex-shrink-0">
-            <i class="fa-solid fa-mug-hot text-brand-500 text-xl mr-3"></i>
-            <span class="font-serif text-xl text-white font-bold tracking-wide">Cafe Olga</span>
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300"></div>
+
+    <!-- Sidebar / Navigation Drawer -->
+    <aside id="adminSidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 md:w-64 bg-stone-900 text-stone-300 flex flex-col h-full flex-shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
+        <div class="h-16 flex items-center justify-between px-6 border-b border-stone-800 flex-shrink-0">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-mug-hot text-brand-500 text-xl"></i>
+                <div>
+                    <span class="font-serif text-lg text-white font-bold tracking-wide block leading-tight">Cafe Olga</span>
+                    <span class="text-[10px] text-amber-400 font-medium uppercase tracking-wider block">Branch Admin</span>
+                </div>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-stone-400 hover:text-white p-1 rounded-lg focus:outline-none" aria-label="Tutup Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <div class="px-4 pt-4 pb-2">
+            <div class="bg-stone-800/80 border border-stone-700/60 rounded-xl p-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-2 min-w-0">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-xs font-bold text-white truncate">Sudirman Branch</span>
+                </div>
+                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold px-1.5 py-0.5 rounded">Buka</span>
+            </div>
         </div>
         
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+        <nav class="flex-1 px-4 py-3 space-y-1.5 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-stone-400">
                 <i class="fa-solid fa-chart-pie w-6"></i>
-                <span class="font-medium">Dasbor</span>
+                <span>Dasbor</span>
             </a>
             
-            <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 transition-colors">
-                <i class="fa-solid fa-clipboard-list w-6"></i>
-                <span class="font-medium flex-1">Pesanan</span>
+            <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 font-medium transition-colors">
+                <i class="fa-solid fa-clipboard-list w-6 text-brand-400"></i>
+                <span class="flex-1">Pesanan</span>
                 <span class="bg-brand-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">5</span>
             </a>
             
-            <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+            <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-stone-400">
                 <i class="fa-solid fa-utensils w-6"></i>
-                <span class="font-medium">Manajemen Menu</span>
+                <span>Manajemen Menu</span>
             </a>
             
-            <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+            <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-stone-400">
                 <i class="fa-solid fa-gear w-6"></i>
-                <span class="font-medium">Pengaturan</span>
+                <span>Pengaturan Toko</span>
             </a>
-            
-            <div class="pt-4 mt-4 border-t border-stone-800">
-                <a href="../customer/menu.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+
+            <div class="pt-4 mt-4 border-t border-stone-800 space-y-1.5">
+                <a href="owner-dashboard.html" class="flex items-center px-4 py-2.5 rounded-xl text-amber-300 hover:bg-stone-800 transition-colors border-l-4 border-transparent text-xs font-semibold">
+                    <i class="fa-solid fa-crown w-6 text-amber-400"></i>
+                    <span>Beralih ke Owner HQ</span>
+                </a>
+                <a href="../customer/menu.html" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs text-stone-400">
                     <i class="fa-solid fa-arrow-up-right-from-square w-6"></i>
-                    <span class="font-medium">Lihat Toko</span>
+                    <span>Buka Tampilan Pelanggan</span>
                 </a>
             </div>
         </nav>
         
         <div class="p-4 border-t border-stone-800 flex-shrink-0">
-            <a href="login.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors">
+            <a href="login.html" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors text-sm font-medium">
                 <i class="fa-solid fa-right-from-bracket w-6"></i>
-                <span class="font-medium">Keluar</span>
+                <span>Keluar</span>
             </a>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative w-full min-w-0">
         <!-- Header -->
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center px-8 flex-shrink-0 z-10">
-            <a href="orders.html" class="mr-4 w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
-            <h1 class="text-xl font-bold text-gray-900 font-serif">Detail Pesanan</h1>
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-8 flex-shrink-0 z-10">
+            <div class="flex items-center gap-3">
+                <button id="mobileMenuBtn" onclick="toggleSidebar()" class="md:hidden p-2 -ml-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Buka Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <a href="orders.html" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-600 transition-colors">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 class="text-base sm:text-xl font-bold text-gray-900 font-serif">Detail Pesanan</h1>
+            </div>
+            <span class="text-xs font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full border border-brand-200 font-mono">
+                #OLG-0042
+            </span>
         </header>
 
         <!-- Scrollable Content Area -->
-        <div class="flex-1 overflow-auto p-8">
+        <div class="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
             
             <!-- Title and Status -->
-            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8">
-                <div class="mb-4 md:mb-0">
-                    <div class="flex items-center">
-                        <h2 class="text-2xl font-bold text-gray-900 font-serif mr-4">Order #OLG-0042</h2>
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-emerald-100 text-emerald-800 border border-emerald-200">
-                            <i class="fab fa-whatsapp mr-1.5 text-[#25D366]"></i> Terhubung WhatsApp
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 sm:mb-8">
+                <div>
+                    <div class="flex items-center gap-3">
+                        <h2 class="text-xl sm:text-2xl font-bold text-gray-900 font-serif">Order #OLG-0042</h2>
+                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200">
+                            <i class="fab fa-whatsapp mr-1 text-[#25D366]"></i> WhatsApp
                         </span>
                     </div>
-                    <p class="text-gray-500 mt-1">Dipesan pada 5 Sep 2026 pukul 10:33 WIB</p>
+                    <p class="text-xs sm:text-sm text-gray-500 mt-1">Dipesan pada 5 Sep 2026 pukul 10:33 WIB</p>
                 </div>
                 <div>
-                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%20Santoso%2C%20terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga.%20Pesanan%20Anda%20%23OLG-0042%20(Caf%C3%A9%20Latte%20x2%2C%20Butter%20Croissant)%20sedang%20kami%20proses.%20Ada%20yang%20bisa%20kami%20bantu%20lagi%3F"
+                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%20Santoso%2C%20terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga.%20Pesanan%20Anda%20%23OLG-0042%20sedang%20kami%20proses."
                        target="_blank"
-                       class="inline-flex items-center gap-2.5 px-6 py-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white rounded-xl font-bold shadow-md transition-all hover:shadow-lg hover:scale-[1.02]">
-                        <i class="fab fa-whatsapp text-2xl"></i>
-                        <span>Chat Pelanggan di WhatsApp (0812-3456-7890)</span>
+                       class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#25D366] hover:bg-[#1ebe5d] active:scale-95 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md transition-all">
+                        <i class="fab fa-whatsapp text-xl"></i>
+                        <span>Chat Pelanggan di WhatsApp</span>
                     </a>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
                 
-                <!-- Left Column: Order Item -->
+                <!-- Left Column: Order Items -->
                 <div class="lg:col-span-2 space-y-6">
-                    <!-- Item List -->
                     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div class="p-6 border-b border-gray-100">
-                            <h3 class="text-lg font-bold text-gray-900">Order Item</h3>
+                        <div class="p-4 sm:p-6 border-b border-gray-100 flex items-center justify-between">
+                            <h3 class="text-base sm:text-lg font-bold text-gray-900">Item Pesanan</h3>
+                            <span class="text-xs text-gray-500 font-medium">3 Item</span>
                         </div>
-                        <div class="p-6">
+                        <div class="p-4 sm:p-6">
                             <ul class="divide-y divide-gray-100">
-                                <!-- Item 1 -->
-                                <li class="py-4 first:pt-0 flex justify-between">
-                                    <div class="flex">
-                                        <div class="w-8 h-8 rounded bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-sm mr-4 mt-1">
+                                <li class="py-3 first:pt-0 flex justify-between items-center text-xs sm:text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-xs shrink-0">
                                             2x
                                         </div>
                                         <div>
-                                            <p class="font-medium text-gray-900">Café Latte</p>
-                                            <p class="text-sm text-gray-500 mt-1"><span class="text-gray-400">Catatan:</span> Hot, Less sugar</p>
+                                            <p class="font-bold text-gray-900">Café Latte</p>
+                                            <p class="text-xs text-gray-500 mt-0.5"><span class="text-gray-400">Catatan:</span> Hot, Less sugar</p>
                                         </div>
                                     </div>
-                                    <div class="font-medium text-gray-900">Rp 64.000</div>
+                                    <div class="font-bold text-gray-900">Rp 64.000</div>
                                 </li>
-                                <!-- Item 2 -->
-                                <li class="py-4 pb-0 flex justify-between">
-                                    <div class="flex">
-                                        <div class="w-8 h-8 rounded bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-sm mr-4 mt-1">
+                                <li class="py-3 flex justify-between items-center text-xs sm:text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-xs shrink-0">
                                             1x
                                         </div>
                                         <div>
-                                            <p class="font-medium text-gray-900">Butter Croissant</p>
+                                            <p class="font-bold text-gray-900">Butter Croissant</p>
                                         </div>
                                     </div>
-                                    <div class="font-medium text-gray-900">Rp 22.000</div>
+                                    <div class="font-bold text-gray-900">Rp 22.000</div>
+                                </li>
+                                <li class="py-3 pb-0 flex justify-between items-center text-xs sm:text-sm">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg bg-brand-50 text-brand-700 flex items-center justify-center font-bold text-xs shrink-0">
+                                            1x
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-gray-900">Chicken Pasta</p>
+                                        </div>
+                                    </div>
+                                    <div class="font-bold text-gray-900">Rp 48.000</div>
                                 </li>
                             </ul>
                         </div>
-                        <div class="bg-gray-50 p-6 border-t border-gray-100 space-y-3">
-                            <div class="flex justify-between text-sm text-gray-600">
+                        <div class="bg-gray-50 p-4 sm:p-6 border-t border-gray-100 space-y-2 text-xs sm:text-sm text-gray-600">
+                            <div class="flex justify-between">
                                 <span>Subtotal</span>
-                                <span>Rp 86.000</span>
+                                <span>Rp 134.000</span>
                             </div>
-                            <div class="flex justify-between text-sm text-gray-600">
+                            <div class="flex justify-between">
                                 <span>Ongkos Kirim</span>
-                                <span>Rp 10.000</span>
+                                <span>Rp 8.000</span>
                             </div>
-                            <div class="flex justify-between text-lg font-bold text-gray-900 pt-3 border-t border-gray-200">
-                                <span>Total</span>
-                                <span>Rp 96.000</span>
+                            <div class="flex justify-between">
+                                <span>Biaya Layanan</span>
+                                <span>Rp 2.000</span>
+                            </div>
+                            <div class="flex justify-between text-base font-extrabold text-gray-900 pt-2 border-t border-gray-200">
+                                <span>Total Tagihan</span>
+                                <span class="text-brand-700">Rp 144.000</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Payment Info -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="text-lg font-bold text-gray-900 mb-1">Metode Pembayaran</h3>
-                                <p class="text-gray-500 flex items-center">
-                                    <span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs font-bold rounded mr-2">Dibayar</span> GoPay
-                                </p>
-                            </div>
-                            <div class="w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-green-600 text-xl">
-                                <i class="fa-solid fa-wallet"></i>
-                            </div>
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-1">Metode Pembayaran</h3>
+                            <p class="text-xs sm:text-sm text-gray-600 flex items-center gap-2">
+                                <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] font-bold rounded">LUNAS</span>
+                                <span>QRIS (GoPay / BCA Mobile)</span>
+                            </p>
+                        </div>
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600 text-lg sm:text-xl">
+                            <i class="fa-solid fa-wallet"></i>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right Column: Pelanggan Info & Waktuline -->
+                <!-- Right Column: Pelanggan Info -->
                 <div class="space-y-6">
-                    
-                    <!-- Pelanggan Info -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <h3 class="text-lg font-bold text-gray-900 mb-4 border-b border-gray-100 pb-4">Pelanggan Details</h3>
-                        
-                        <div class="space-y-4">
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6">
+                        <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-3 border-b border-gray-100 pb-3">Informasi Pelanggan</h3>
+                        <div class="space-y-3 text-xs sm:text-sm">
                             <div>
-                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Nama</p>
-                                <p class="font-medium text-gray-900 flex items-center">
-                                    <i class="fa-regular fa-user text-gray-400 mr-2"></i> Budi Santoso
-                                </p>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Nama</p>
+                                <p class="font-medium text-gray-900">Budi Santoso</p>
                             </div>
                             <div>
-                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Telepon / WhatsApp</p>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Telepon / WhatsApp</p>
                                 <div class="flex items-center justify-between">
-                                    <p class="font-medium text-gray-900 flex items-center">
-                                        <i class="fa-solid fa-phone text-gray-400 mr-2"></i> 0812-3456-7890
-                                    </p>
-                                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20kami%20dari%20Cafe%20Olga%20mengenai%20pesanan%20%23OLG-0042%20Anda."
-                                       target="_blank"
-                                       class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#25D366] text-white rounded-lg text-xs font-bold hover:bg-[#1ebe5d] transition-colors">
-                                        <i class="fab fa-whatsapp"></i> Chat WA
-                                    </a>
+                                    <p class="font-mono font-medium text-gray-900">0812-3456-7890</p>
+                                    <a href="https://wa.me/6281234567890" target="_blank" class="text-xs text-emerald-600 font-bold hover:underline">Chat WA</a>
                                 </div>
                             </div>
                             <div>
-                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Tipe Pesanan</p>
-                                <p class="font-medium text-gray-900 flex items-center">
-                                    <i class="fa-solid fa-motorcycle text-gray-400 mr-2"></i> Pengiriman
-                                </p>
+                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Alamat Pengiriman</p>
+                                <p class="text-gray-700 leading-relaxed text-xs">Jl. Gatot Subroto No. 12, Setiabudi, Jakarta Selatan</p>
                             </div>
-                            <div>
-                                <p class="text-xs font-medium text-gray-500 uppercase tracking-wider mb-1">Alamat Pengiriman</p>
-                                <p class="text-gray-700 text-sm leading-relaxed flex items-start">
-                                    <i class="fa-solid fa-location-dot text-gray-400 mr-2 mt-1"></i>
-                                    <span>Jl. Gatot Subroto No. 12,<br>Setiabudi, Jakarta Selatan</span>
-                                </p>
-                            </div>
-                            <div class="bg-amber-50 p-3 rounded-xl border border-amber-100">
-                                <p class="text-xs font-medium text-amber-800 uppercase tracking-wider mb-1">Catatan Pengiriman</p>
-                                <p class="text-sm text-amber-900">"Please ring the bell"</p>
+                            <div class="bg-amber-50 p-3 rounded-xl border border-amber-200">
+                                <p class="text-[10px] font-bold text-amber-800 uppercase tracking-wider mb-0.5">Catatan</p>
+                                <p class="text-xs text-amber-900">"Tolong antarkan ke resepsionis lantai 14"</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Direct WhatsApp Communication Card -->
-                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-gray-100">
-                            <div class="w-10 h-10 rounded-full bg-emerald-100 flex items-center justify-center text-[#25D366] text-xl">
-                                <i class="fab fa-whatsapp"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-base font-bold text-gray-900">Koordinasi via WhatsApp</h3>
-                                <p class="text-xs text-gray-500">Komunikasi langsung tanpa perantara status</p>
-                            </div>
-                        </div>
-                        
-                        <div class="space-y-2.5 text-sm">
-                            <p class="text-xs text-gray-500 mb-2">Pilih template pesan cepat untuk dikirim ke pelanggan:</p>
-                            
-                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20Anda%20sedang%20kami%20siapkan.%20Estimasi%2015-20%20menit.%20Terima%20kasih!%20%F0%9F%8D%B5"
-                               target="_blank"
-                               class="block p-3 rounded-xl border border-emerald-200 bg-emerald-50/60 hover:bg-emerald-100/60 transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-semibold text-emerald-900 text-xs">1. Konfirmasi Pesanan</span>
-                                    <i class="fas fa-paper-plane text-emerald-600 text-xs"></i>
-                                </div>
-                                <p class="text-xs text-emerald-700 mt-1">"Halo Budi, pesanan #OLG-0042 Anda sedang kami siapkan..."</p>
+                    <!-- Quick WhatsApp Templates -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6">
+                        <h3 class="text-sm sm:text-base font-bold text-gray-900 mb-3 flex items-center gap-2">
+                            <i class="fab fa-whatsapp text-[#25D366]"></i>
+                            <span>Template Pesan Cepat</span>
+                        </h3>
+                        <div class="space-y-2 text-xs">
+                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20sedang%20disiapkan%20barista."
+                               target="_blank" class="block p-2.5 rounded-xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-colors">
+                                <span class="font-bold text-emerald-900 block">1. Sedang Disiapkan</span>
+                                <span class="text-emerald-700 text-[11px]">"Halo Budi, pesananmu sedang disiapkan barista..."</span>
                             </a>
-
-                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20Anda%20sudah%20selesai%20dan%20siap%20dikirim%20ke%20Jl.%20Gatot%20Subroto.%20Kurir%20kami%20segera%20meluncur!%20%F0%9F%9B%B5"
-                               target="_blank"
-                               class="block p-3 rounded-xl border border-blue-200 bg-blue-50/60 hover:bg-blue-100/60 transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-semibold text-blue-900 text-xs">2. Update Pengantaran</span>
-                                    <i class="fas fa-paper-plane text-blue-600 text-xs"></i>
-                                </div>
-                                <p class="text-xs text-blue-700 mt-1">"Halo Budi, pesanan #OLG-0042 sudah selesai dan siap dikirim..."</p>
-                            </a>
-
-                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20apakah%20pesanan%20Cafe%20Olga%20sudah%20diterima%20dengan%20baik%3F%20Selamat%20menikmati!%20%E2%98%95"
-                               target="_blank"
-                               class="block p-3 rounded-xl border border-stone-200 bg-stone-50 hover:bg-stone-100 transition-colors">
-                                <div class="flex items-center justify-between">
-                                    <span class="font-semibold text-stone-800 text-xs">3. Cek Kepuasan</span>
-                                    <i class="fas fa-paper-plane text-stone-600 text-xs"></i>
-                                </div>
-                                <p class="text-xs text-stone-600 mt-1">"Halo Budi, apakah pesanan sudah diterima dengan baik?..."</p>
+                            <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20driver%20Andi%20sudah%20membawa%20pesananmu."
+                               target="_blank" class="block p-2.5 rounded-xl border border-blue-200 bg-blue-50 hover:bg-blue-100 transition-colors">
+                                <span class="font-bold text-blue-900 block">2. Sedang Diantar</span>
+                                <span class="text-blue-700 text-[11px]">"Halo Budi, driver sedang meluncur ke lokasimu..."</span>
                             </a>
                         </div>
                     </div>
-                    
                 </div>
-            </div>
 
+            </div>
+            
         </div>
     </main>
 
+    <!-- Sidebar Toggle Script -->
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById('adminSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (!sidebar || !backdrop) return;
+        const isClosed = sidebar.classList.contains('-translate-x-full');
+        if (isClosed) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const sidebar = document.getElementById('adminSidebar');
+          if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+            toggleSidebar();
+          }
+        }
+      });
+    </script>
 </body>
 </html>

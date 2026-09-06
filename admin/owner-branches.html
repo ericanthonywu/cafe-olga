@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Branch Management - Cafe Olga HQ</title>
+    <title>Kelola Cabang — Cafe Olga HQ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -23,244 +23,289 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex min-h-screen">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-stone-900 text-stone-100 flex flex-col fixed h-full shadow-xl">
-        <div class="p-6">
-            <h1 class="text-2xl font-serif font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-crown text-brand-500"></i> Cafe Olga HQ
-            </h1>
-            <p class="text-brand-400 text-sm mt-1 font-medium">Owner Dashboard</p>
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300"></div>
+
+    <!-- Sidebar / Navigation Drawer -->
+    <aside id="adminSidebar" class="fixed inset-y-0 left-0 z-50 w-72 md:w-64 bg-stone-900 text-stone-100 flex flex-col h-full shadow-2xl md:shadow-xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="p-5 flex items-center justify-between border-b border-stone-800">
+            <div>
+                <h1 class="text-xl font-serif font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-amber-500"></i> Cafe Olga HQ
+                </h1>
+                <p class="text-amber-400 text-xs font-semibold mt-0.5">Owner Dashboard (3 Cabang)</p>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-stone-400 hover:text-white p-1 rounded-lg focus:outline-none" aria-label="Tutup Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
         </div>
         
-        <nav class="flex-1 px-4 mt-2 space-y-2">
-            <a href="owner-dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-chart-pie w-5"></i> Overview
+        <nav class="flex-1 px-4 mt-3 space-y-1.5 overflow-y-auto">
+            <a href="owner-dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+                <i class="fa-solid fa-chart-pie w-5"></i>
+                <span>Overview</span>
             </a>
-            <a href="owner-orders.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-clipboard-list w-5"></i> All Orders
+            <a href="owner-orders.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+                <i class="fa-solid fa-clipboard-list w-5"></i>
+                <span class="flex-1">Semua Pesanan</span>
+                <span class="bg-brand-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">141</span>
             </a>
-            <a href="owner-branches.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-stone-800 text-white border-l-4 border-brand-500 font-medium">
-                <i class="fa-solid fa-store w-5"></i> Branches
+            <a href="owner-branches.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-amber-500 font-bold">
+                <i class="fa-solid fa-store w-5 text-amber-400"></i>
+                <span>Kelola Cabang</span>
             </a>
-            <a href="owner-analytics.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-chart-line w-5"></i> Analytics
+            <a href="owner-analytics.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+                <i class="fa-solid fa-chart-line w-5"></i>
+                <span>Analitik Omzet</span>
             </a>
             
-            <div class="border-t border-stone-800 my-4"></div>
-            
-            <a href="../customer/select-branch.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-house w-5"></i> View Store
+            <div class="border-t border-stone-800 my-3"></div>
+
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs font-semibold">
+                <i class="fa-solid fa-store w-5 text-brand-400"></i>
+                <span>Masuk ke Admin Sudirman</span>
             </a>
-            <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors border-l-4 border-transparent hover:border-red-900">
-                <i class="fa-solid fa-arrow-right-from-bracket w-5"></i> Logout
+            
+            <a href="../customer/select-branch.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs">
+                <i class="fa-solid fa-house w-5"></i>
+                <span>Buka Web Pelanggan</span>
+            </a>
+            <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors border-l-4 border-transparent text-xs">
+                <i class="fa-solid fa-arrow-right-from-bracket w-5"></i>
+                <span>Keluar (Logout)</span>
             </a>
         </nav>
         
-        <div class="p-4 mt-auto">
-            <div class="bg-stone-800 p-4 rounded-xl flex items-center gap-3 border border-stone-700">
-                <div class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center text-white">
-                    <i class="fa-solid fa-user-tie"></i>
+        <div class="p-4 mt-auto border-t border-stone-800">
+            <div class="bg-stone-800/80 p-3 rounded-xl flex items-center gap-3 border border-stone-700">
+                <div class="w-9 h-9 rounded-full bg-amber-500 text-stone-900 flex items-center justify-center font-bold text-sm shadow">
+                    <i class="fa-solid fa-crown"></i>
                 </div>
                 <div>
-                    <p class="font-medium text-white">Owner</p>
-                    <p class="text-xs text-brand-400 flex items-center gap-1"><i class="fa-solid fa-crown text-[10px]"></i> HQ Admin</p>
+                    <p class="font-bold text-white text-xs">Owner HQ</p>
+                    <p class="text-[10px] text-amber-400">Super Administrator</p>
                 </div>
             </div>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="ml-64 flex-1 p-8">
-        <header class="mb-8">
-            <h2 class="text-3xl font-serif font-bold text-gray-900">Branch Management</h2>
-            <p class="text-gray-500 mt-1">Manage all Cafe Olga locations and admin credentials.</p>
-        </header>
-
-        <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
-            
-            <!-- Sudirman Branch -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
-                <div class="h-3 w-full bg-amber-600"></div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-serif font-bold text-gray-900">Sudirman</h3>
-                        <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
-                            <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                            <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">Open</span>
-                            <i class="fa-solid fa-chevron-down text-gray-400 text-[10px] ml-1"></i>
-                        </div>
-                    </div>
-                    
-                    <p class="text-sm text-gray-500 mb-6"><i class="fa-solid fa-location-dot mr-2"></i>Jl. Jend. Sudirman No. 45, Jakarta Pusat</p>
-                    
-                    <div class="grid grid-cols-3 gap-4 mb-6 border-y border-gray-100 py-4">
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Today's Revenue</p>
-                            <p class="font-bold text-gray-900">Rp 4.25M</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Orders</p>
-                            <p class="font-bold text-gray-900">47</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Rating</p>
-                            <p class="font-bold text-gray-900 flex items-center gap-1">4.8 <i class="fa-solid fa-star text-amber-500 text-[10px]"></i></p>
-                        </div>
-                    </div>
-                    
-                    <div class="mb-6 space-y-2 flex-1">
-                        <div class="flex items-center gap-3 text-sm text-gray-700">
-                            <i class="fa-solid fa-phone text-gray-400 w-5"></i> 021-5550-0101
-                        </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-700">
-                            <i class="fa-regular fa-clock text-gray-400 w-5"></i> 07:00 - 22:00
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
-                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Admin Credentials</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-sm font-medium text-gray-900">admin.sudirman@cafeolga.id</p>
-                            <button class="text-xs font-medium text-brand-600 hover:text-brand-700 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">Reset Password</button>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-3 mt-auto">
-                        <button class="col-span-2 px-4 py-2 bg-amber-50 text-amber-700 font-medium rounded-lg hover:bg-amber-100 transition-colors border border-amber-200 text-sm">
-                            <i class="fa-solid fa-gear mr-2"></i> Branch Settings
-                        </button>
-                        <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-sm">View Orders</button>
-                        <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-sm">Edit Menu</button>
-                        <a href="dashboard.html" class="col-span-2 mt-2 px-4 py-2 bg-stone-900 text-white font-medium rounded-lg hover:bg-stone-800 transition-colors text-sm text-center">
-                            Open Branch Dashboard &rarr;
-                        </a>
-                    </div>
+    <main class="flex-1 md:ml-64 min-w-0 flex flex-col min-h-screen">
+        <!-- Mobile Header with Hamburger -->
+        <div class="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-20">
+            <div class="flex items-center gap-3">
+                <button id="mobileMenuBtn" onclick="toggleSidebar()" class="p-2 -ml-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Buka Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-crown text-amber-500 text-sm"></i>
+                    <span class="font-serif font-bold text-gray-900 text-sm">Cafe Olga HQ</span>
                 </div>
             </div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full border border-amber-200">Owner</span>
+        </div>
 
-            <!-- Kemang Branch -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
-                <div class="h-3 w-full bg-emerald-600"></div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-serif font-bold text-gray-900">Kemang</h3>
-                        <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
-                            <span class="w-2.5 h-2.5 rounded-full bg-green-500"></span>
-                            <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">Open</span>
-                            <i class="fa-solid fa-chevron-down text-gray-400 text-[10px] ml-1"></i>
+        <div class="p-4 sm:p-6 lg:p-8 flex-1">
+            <header class="mb-6 sm:mb-8">
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-gray-900">Manajemen Cabang</h2>
+                <p class="text-xs sm:text-sm text-gray-500 mt-1">Kelola seluruh gerai Cafe Olga dan kredensial akses admin.</p>
+            </header>
+
+            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Sudirman Branch -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                    <div class="h-3 w-full bg-amber-600"></div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-900">Sudirman</h3>
+                            <div class="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-lg border border-green-200">
+                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                <span class="text-[11px] font-bold text-green-700 uppercase">Buka</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <p class="text-sm text-gray-500 mb-6"><i class="fa-solid fa-location-dot mr-2"></i>Jl. Kemang Raya No. 12, Jakarta Selatan</p>
-                    
-                    <div class="grid grid-cols-3 gap-4 mb-6 border-y border-gray-100 py-4">
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Today's Revenue</p>
-                            <p class="font-bold text-gray-900">Rp 5.82M</p>
+                        
+                        <p class="text-xs text-gray-500 mb-5"><i class="fa-solid fa-location-dot mr-1 text-brand-600"></i>Jl. Jend. Sudirman No. 45, Jakarta Pusat</p>
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-5 border-y border-gray-100 py-3 text-center text-xs">
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Omzet Hari Ini</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">Rp 4.25M</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Order</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">47</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Rating</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">4.8 ★</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Orders</p>
-                            <p class="font-bold text-gray-900">61</p>
+                        
+                        <div class="mb-5 space-y-1.5 text-xs text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-phone text-gray-400 w-4"></i> 021-5550-0101
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-regular fa-clock text-gray-400 w-4"></i> 07:00 - 22:00
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Rating</p>
-                            <p class="font-bold text-gray-900 flex items-center gap-1">4.9 <i class="fa-solid fa-star text-amber-500 text-[10px]"></i></p>
+                        
+                        <div class="bg-gray-50 rounded-xl p-3 mb-5 border border-gray-100 text-xs">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Kredensial Admin</p>
+                            <div class="flex items-center justify-between">
+                                <p class="font-mono text-gray-800 truncate">admin.sudirman@cafeolga.id</p>
+                                <span class="text-brand-600 font-bold ml-1 shrink-0">Aktif</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="mb-6 space-y-2 flex-1">
-                        <div class="flex items-center gap-3 text-sm text-gray-700">
-                            <i class="fa-solid fa-phone text-gray-400 w-5"></i> 021-5550-0202
+                        
+                        <div class="mt-auto pt-2 space-y-2">
+                            <a href="dashboard.html" class="block w-full py-2.5 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white font-bold rounded-xl text-xs text-center transition-all">
+                                Masuk ke Dasbor Sudirman &rarr;
+                            </a>
                         </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-700">
-                            <i class="fa-regular fa-clock text-gray-400 w-5"></i> 08:00 - 23:00
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
-                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Admin Credentials</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-sm font-medium text-gray-900">admin.kemang@cafeolga.id</p>
-                            <button class="text-xs font-medium text-brand-600 hover:text-brand-700 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">Reset Password</button>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-3 mt-auto">
-                        <button class="col-span-2 px-4 py-2 bg-emerald-50 text-emerald-700 font-medium rounded-lg hover:bg-emerald-100 transition-colors border border-emerald-200 text-sm">
-                            <i class="fa-solid fa-gear mr-2"></i> Branch Settings
-                        </button>
-                        <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-sm">View Orders</button>
-                        <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-sm">Edit Menu</button>
-                        <a href="dashboard.html" class="col-span-2 mt-2 px-4 py-2 bg-stone-900 text-white font-medium rounded-lg hover:bg-stone-800 transition-colors text-sm text-center">
-                            Open Branch Dashboard &rarr;
-                        </a>
                     </div>
                 </div>
-            </div>
 
-            <!-- BSD City Branch -->
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden flex flex-col">
-                <div class="h-3 w-full bg-indigo-600"></div>
-                <div class="p-6 flex-1 flex flex-col">
-                    <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-2xl font-serif font-bold text-gray-900">BSD City</h3>
-                        <div class="flex items-center gap-2 bg-gray-50 px-3 py-1.5 rounded-lg border border-gray-200">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                            <span class="text-xs font-semibold text-gray-700 uppercase tracking-wide">Busy</span>
-                            <i class="fa-solid fa-chevron-down text-gray-400 text-[10px] ml-1"></i>
+                <!-- Kemang Branch -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                    <div class="h-3 w-full bg-emerald-600"></div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-900">Kemang</h3>
+                            <div class="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-lg border border-green-200">
+                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                <span class="text-[11px] font-bold text-green-700 uppercase">Buka</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <p class="text-sm text-gray-500 mb-6"><i class="fa-solid fa-location-dot mr-2"></i>Jl. Pahlawan Seribu, BSD City, Tangerang Selatan</p>
-                    
-                    <div class="grid grid-cols-3 gap-4 mb-6 border-y border-gray-100 py-4">
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Today's Revenue</p>
-                            <p class="font-bold text-gray-900">Rp 2.68M</p>
+                        
+                        <p class="text-xs text-gray-500 mb-5"><i class="fa-solid fa-location-dot mr-1 text-emerald-600"></i>Jl. Kemang Raya No. 12, Jakarta Selatan</p>
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-5 border-y border-gray-100 py-3 text-center text-xs">
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Omzet Hari Ini</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">Rp 5.82M</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Order</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">61</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Rating</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">4.9 ★</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Orders</p>
-                            <p class="font-bold text-gray-900">33</p>
+                        
+                        <div class="mb-5 space-y-1.5 text-xs text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-phone text-gray-400 w-4"></i> 021-5550-0202
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-regular fa-clock text-gray-400 w-4"></i> 07:00 - 23:00
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Rating</p>
-                            <p class="font-bold text-gray-900 flex items-center gap-1">4.7 <i class="fa-solid fa-star text-amber-500 text-[10px]"></i></p>
+                        
+                        <div class="bg-gray-50 rounded-xl p-3 mb-5 border border-gray-100 text-xs">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Kredensial Admin</p>
+                            <div class="flex items-center justify-between">
+                                <p class="font-mono text-gray-800 truncate">admin.kemang@cafeolga.id</p>
+                                <span class="text-emerald-600 font-bold ml-1 shrink-0">Aktif</span>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="mb-6 space-y-2 flex-1">
-                        <div class="flex items-center gap-3 text-sm text-gray-700">
-                            <i class="fa-solid fa-phone text-gray-400 w-5"></i> 021-5550-0303
+                        
+                        <div class="mt-auto pt-2 space-y-2">
+                            <a href="dashboard.html" class="block w-full py-2.5 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white font-bold rounded-xl text-xs text-center transition-all">
+                                Masuk ke Dasbor Kemang &rarr;
+                            </a>
                         </div>
-                        <div class="flex items-center gap-3 text-sm text-gray-700">
-                            <i class="fa-regular fa-clock text-gray-400 w-5"></i> 07:00 - 21:00
-                        </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-100">
-                        <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">Admin Credentials</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-sm font-medium text-gray-900">admin.bsd@cafeolga.id</p>
-                            <button class="text-xs font-medium text-brand-600 hover:text-brand-700 bg-white border border-gray-200 px-3 py-1.5 rounded-lg shadow-sm">Reset Password</button>
-                        </div>
-                    </div>
-                    
-                    <div class="grid grid-cols-2 gap-3 mt-auto">
-                        <button class="col-span-2 px-4 py-2 bg-indigo-50 text-indigo-700 font-medium rounded-lg hover:bg-indigo-100 transition-colors border border-indigo-200 text-sm">
-                            <i class="fa-solid fa-gear mr-2"></i> Branch Settings
-                        </button>
-                        <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-sm">View Orders</button>
-                        <button class="px-4 py-2 bg-white border border-gray-200 text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors text-sm">Edit Menu</button>
-                        <a href="dashboard.html" class="col-span-2 mt-2 px-4 py-2 bg-stone-900 text-white font-medium rounded-lg hover:bg-stone-800 transition-colors text-sm text-center">
-                            Open Branch Dashboard &rarr;
-                        </a>
                     </div>
                 </div>
+
+                <!-- BSD City Branch -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                    <div class="h-3 w-full bg-indigo-600"></div>
+                    <div class="p-5 sm:p-6 flex-1 flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl sm:text-2xl font-serif font-bold text-gray-900">BSD City</h3>
+                            <div class="flex items-center gap-1.5 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+                                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                <span class="text-[11px] font-bold text-amber-700 uppercase">Ramai</span>
+                            </div>
+                        </div>
+                        
+                        <p class="text-xs text-gray-500 mb-5"><i class="fa-solid fa-location-dot mr-1 text-indigo-600"></i>Jl. Pahlawan Seribu, BSD City, Tangsel</p>
+                        
+                        <div class="grid grid-cols-3 gap-2 mb-5 border-y border-gray-100 py-3 text-center text-xs">
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Omzet Hari Ini</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">Rp 2.68M</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Order</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">33</p>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-[10px]">Rating</p>
+                                <p class="font-bold text-gray-900 text-sm mt-0.5">4.7 ★</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-5 space-y-1.5 text-xs text-gray-600">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-phone text-gray-400 w-4"></i> 021-5550-0303
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-regular fa-clock text-gray-400 w-4"></i> 08:00 - 22:00
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-xl p-3 mb-5 border border-gray-100 text-xs">
+                            <p class="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Kredensial Admin</p>
+                            <div class="flex items-center justify-between">
+                                <p class="font-mono text-gray-800 truncate">admin.bsd@cafeolga.id</p>
+                                <span class="text-indigo-600 font-bold ml-1 shrink-0">Aktif</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-auto pt-2 space-y-2">
+                            <a href="dashboard.html" class="block w-full py-2.5 bg-stone-900 hover:bg-stone-800 active:scale-95 text-white font-bold rounded-xl text-xs text-center transition-all">
+                                Masuk ke Dasbor BSD &rarr;
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
 
     </main>
 
+    <!-- Sidebar Toggle Script -->
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById('adminSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (!sidebar || !backdrop) return;
+        const isClosed = sidebar.classList.contains('-translate-x-full');
+        if (isClosed) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const sidebar = document.getElementById('adminSidebar');
+          if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+            toggleSidebar();
+          }
+        }
+      });
+    </script>
 </body>
 </html>

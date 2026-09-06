@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cafe Olga - Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cafe Olga — Keranjang Belanja</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -18,16 +18,9 @@
           },
           colors: {
             brand: {
-              50: '#fdf8f0',
-              100: '#f9eddc',
-              200: '#f2d8b4',
-              300: '#e9be84',
-              400: '#dfa053',
-              500: '#d78833',
-              600: '#c87028',
-              700: '#a65523',
-              800: '#854522',
-              900: '#6d3a1e',
+              50: '#fdf8f0', 100: '#f9eddc', 200: '#f2d8b4', 300: '#e9be84',
+              400: '#dfa053', 500: '#d78833', 600: '#c87028', 700: '#a65523',
+              800: '#854522', 900: '#6d3a1e'
             },
           },
         },
@@ -35,240 +28,322 @@
     }
   </script>
   <style>
-    body { background-color: #fafaf9; } /* stone-50 */
+    body { background-color: #1c1917; }
+    .hero-bg { background: linear-gradient(135deg,#3b1f0b 0%,#5c3317 50%,#8b5e3c 100%); }
   </style>
 </head>
-<body class="text-stone-800 antialiased font-sans flex flex-col min-h-screen">
-  <!-- Navbar -->
-  <nav class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16 items-center">
-        <a href="../index.html" class="flex items-center space-x-2 shrink-0">
-          <i class="fa-solid fa-mug-hot text-brand-600 text-2xl"></i>
-          <span class="font-serif font-bold text-xl text-brand-900 tracking-tight">Cafe Olga</span>
+<body class="font-sans text-stone-800 antialiased min-h-screen sm:py-6 flex justify-center selection:bg-brand-500 selection:text-white">
+
+  <!-- Mobile App Frame Container -->
+  <div class="w-full max-w-md bg-stone-50 min-h-screen sm:min-h-[844px] sm:max-h-[95vh] sm:overflow-y-auto sm:rounded-[36px] sm:shadow-2xl sm:border sm:border-stone-700/40 relative flex flex-col pb-28">
+
+    <!-- ══════════════════════════════════════════
+         MOBILE APP HEADER
+    ══════════════════════════════════════════ -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a id="backToMenu" href="menu.html" class="w-8 h-8 rounded-full bg-stone-100 flex items-center justify-center text-stone-600 hover:text-stone-900 active:scale-95 transition-all">
+          <i class="fa-solid fa-arrow-left text-xs"></i>
         </a>
-        <div class="hidden md:flex flex-1 max-w-md mx-8">
-          <div class="relative w-full">
-            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <i class="fa-solid fa-search text-stone-400"></i>
-            </div>
-            <input type="text" class="block w-full pl-10 pr-3 py-2 border border-stone-200 rounded-full bg-stone-50 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent sm:text-sm" placeholder="Search for coffee, meals, snacks...">
+        <div>
+          <h1 class="font-serif font-bold text-base text-stone-900 leading-tight">Keranjang Belanja</h1>
+          <p id="branchLabel" class="text-[11px] text-brand-600 font-medium leading-none mt-0.5">Cafe Olga Sudirman</p>
+        </div>
+      </div>
+      <span class="text-xs bg-brand-50 text-brand-700 font-bold px-2.5 py-1 rounded-full border border-brand-200">
+        3 Item
+      </span>
+    </header>
+
+    <!-- ══════════════════════════════════════════
+         MAIN CONTENT
+    ══════════════════════════════════════════ -->
+    <main class="flex-grow p-4 space-y-4">
+
+      <!-- Branch & Delivery Alert -->
+      <div class="bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm flex items-center justify-between">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-9 h-9 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-store text-sm"></i>
+          </div>
+          <div class="min-w-0">
+            <p class="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Memesan Dari</p>
+            <p id="branchNameDetail" class="text-xs font-bold text-stone-900 truncate">Cafe Olga Sudirman</p>
           </div>
         </div>
-        <div class="flex items-center gap-2 sm:gap-3">
-          <!-- Active Order Pill -->
-          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold transition-all shadow-sm">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-            </span>
-            <span class="hidden sm:inline">Pesanan Aktif:</span>
-            <span class="font-mono text-amber-800">#0042</span>
-          </a>
+        <a href="select-branch.html" class="text-[11px] text-brand-600 font-bold hover:underline shrink-0 flex items-center gap-1">
+          <i class="fas fa-exchange-alt text-[10px]"></i> Ganti
+        </a>
+      </div>
 
-          <a href="cart.html" class="relative p-2 text-brand-600 transition-colors">
-            <i class="fa-solid fa-shopping-cart text-xl"></i>
-            <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/4 -translate-y-1/4 bg-brand-600 rounded-full">3</span>
+      <!-- Cart Items Section -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold text-xs text-stone-500 uppercase tracking-wider">Item Pesanan</h2>
+          <a id="addMoreLink" href="menu.html" class="text-xs text-brand-600 font-bold flex items-center gap-1">
+            <i class="fa-solid fa-plus text-[10px]"></i> Tambah Menu
           </a>
         </div>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Branch Indicator Bar -->
-  <div class="bg-stone-800 text-white text-sm py-2 px-4">
-    <div class="max-w-7xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <i class="fas fa-store text-brand-400 text-xs"></i>
-        <span class="text-stone-400 text-xs">Memesan dari:</span>
-        <span id="branchName" class="font-semibold text-white text-xs"></span>
-        <span id="branchAddress" class="text-stone-400 text-xs hidden sm:inline"></span>
-      </div>
-      <a href="select-branch.html" class="text-xs text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1">
-        <i class="fas fa-exchange-alt text-xs"></i> Ganti cabang
-      </a>
-    </div>
-  </div>
-  <script>
-    (function() {
-      const branches = {
-        sudirman: { name: 'Cafe Olga Sudirman', address: '— Jl. Jend. Sudirman No. 45, Jakarta Pusat' },
-        kemang:   { name: 'Cafe Olga Kemang',   address: '— Jl. Kemang Raya No. 12, Jakarta Selatan' },
-        bsd:      { name: 'Cafe Olga BSD City', address: '— Jl. Pahlawan Seribu, BSD City, Tangerang Selatan' },
-      };
-      const params = new URLSearchParams(window.location.search);
-      const key = params.get('branch') || 'sudirman';
-      const b = branches[key] || branches.sudirman;
-      document.getElementById('branchName').textContent = b.name;
-      document.getElementById('branchAddress').textContent = b.address;
-    })();
-  </script>
-
-  <!-- Main Content -->
-  <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
-    <div class="flex items-center mb-8 space-x-4">
-      <a href="menu.html" class="text-stone-400 hover:text-stone-600"><i class="fa-solid fa-arrow-left"></i></a>
-      <h1 class="text-3xl font-serif font-bold text-stone-800">Shopping Cart (3 items)</h1>
-    </div>
-
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Cart Items List -->
-      <div class="flex-grow">
-        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 space-y-6">
-          
-          <!-- Item 1 -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b border-stone-100 last:border-0 last:pb-0">
-            <div class="h-20 w-20 rounded-xl bg-stone-100 flex items-center justify-center text-stone-300 text-2xl shrink-0">
+        <!-- Item 1: Cafe Latte -->
+        <div class="cart-item bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm space-y-3">
+          <div class="flex gap-3">
+            <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-xl text-stone-500 shrink-0 border border-stone-200">
               <i class="fa-solid fa-mug-saucer"></i>
             </div>
-            <div class="sm:ml-4 flex-grow mt-4 sm:mt-0 w-full">
+            <div class="flex-1 min-w-0">
               <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="font-bold text-lg text-stone-800">Café Latte</h3>
-                  <p class="text-sm text-stone-500">Note: Hot, Less sugar</p>
-                </div>
-                <button class="text-stone-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                <h3 class="font-bold text-sm text-stone-900 truncate">Café Latte</h3>
+                <button class="text-stone-400 hover:text-red-500 p-1 transition-colors">
+                  <i class="fa-solid fa-trash-can text-xs"></i>
+                </button>
               </div>
-              <div class="flex justify-between items-center mt-4">
-                <div class="flex items-center border border-stone-200 rounded-lg">
-                  <button class="px-3 py-1 text-stone-500 hover:text-brand-600">-</button>
-                  <span class="px-3 py-1 font-medium text-stone-800 border-x border-stone-200">2</span>
-                  <button class="px-3 py-1 text-stone-500 hover:text-brand-600">+</button>
-                </div>
-                <span class="font-semibold text-brand-600 text-lg">Rp 64.000</span>
-              </div>
+              <p class="text-[11px] text-stone-500 mt-0.5"><span class="text-stone-400">Catatan:</span> Hot, Less sugar</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 32.000</p>
             </div>
           </div>
 
-          <!-- Item 2 -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b border-stone-100 last:border-0 last:pb-0">
-            <div class="h-20 w-20 rounded-xl bg-amber-50 flex items-center justify-center text-amber-300 text-2xl shrink-0">
+          <div class="flex justify-between items-center pt-2 border-t border-stone-100">
+            <span class="text-xs text-stone-400">Subtotal</span>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center border border-stone-200 rounded-xl bg-stone-50 overflow-hidden">
+                <button onclick="changeQty(this, -1, 32000)" class="px-2.5 py-1 text-xs font-bold text-stone-600 hover:bg-stone-200 active:scale-95 transition-all">-</button>
+                <span class="px-3 py-1 text-xs font-bold text-stone-900 bg-white border-x border-stone-200">2</span>
+                <button onclick="changeQty(this, 1, 32000)" class="px-2.5 py-1 text-xs font-bold text-brand-600 hover:bg-stone-200 active:scale-95 transition-all">+</button>
+              </div>
+              <span class="text-sm font-bold text-stone-900 item-subtotal">Rp 64.000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Butter Croissant -->
+        <div class="cart-item bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm space-y-3">
+          <div class="flex gap-3">
+            <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-xl text-amber-600 shrink-0 border border-amber-100">
               <i class="fa-solid fa-bread-slice"></i>
             </div>
-            <div class="sm:ml-4 flex-grow mt-4 sm:mt-0 w-full">
+            <div class="flex-1 min-w-0">
               <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="font-bold text-lg text-stone-800">Butter Croissant</h3>
-                </div>
-                <button class="text-stone-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                <h3 class="font-bold text-sm text-stone-900 truncate">Butter Croissant</h3>
+                <button class="text-stone-400 hover:text-red-500 p-1 transition-colors">
+                  <i class="fa-solid fa-trash-can text-xs"></i>
+                </button>
               </div>
-              <div class="flex justify-between items-center mt-4">
-                <div class="flex items-center border border-stone-200 rounded-lg">
-                  <button class="px-3 py-1 text-stone-500 hover:text-brand-600">-</button>
-                  <span class="px-3 py-1 font-medium text-stone-800 border-x border-stone-200">1</span>
-                  <button class="px-3 py-1 text-stone-500 hover:text-brand-600">+</button>
-                </div>
-                <span class="font-semibold text-brand-600 text-lg">Rp 22.000</span>
-              </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">Golden flaky warm croissant</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 22.000</p>
             </div>
           </div>
 
-          <!-- Item 3 -->
-          <div class="flex flex-col sm:flex-row items-start sm:items-center py-4 border-b border-stone-100 last:border-0 last:pb-0">
-            <div class="h-20 w-20 rounded-xl bg-stone-100 flex items-center justify-center text-stone-400 text-2xl shrink-0">
+          <div class="flex justify-between items-center pt-2 border-t border-stone-100">
+            <span class="text-xs text-stone-400">Subtotal</span>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center border border-stone-200 rounded-xl bg-stone-50 overflow-hidden">
+                <button onclick="changeQty(this, -1, 22000)" class="px-2.5 py-1 text-xs font-bold text-stone-600 hover:bg-stone-200 active:scale-95 transition-all">-</button>
+                <span class="px-3 py-1 text-xs font-bold text-stone-900 bg-white border-x border-stone-200">1</span>
+                <button onclick="changeQty(this, 1, 22000)" class="px-2.5 py-1 text-xs font-bold text-brand-600 hover:bg-stone-200 active:scale-95 transition-all">+</button>
+              </div>
+              <span class="text-sm font-bold text-stone-900 item-subtotal">Rp 22.000</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Chicken Pasta -->
+        <div class="cart-item bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm space-y-3">
+          <div class="flex gap-3">
+            <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-xl text-stone-500 shrink-0 border border-stone-200">
               <i class="fa-solid fa-bowl-food"></i>
             </div>
-            <div class="sm:ml-4 flex-grow mt-4 sm:mt-0 w-full">
+            <div class="flex-1 min-w-0">
               <div class="flex justify-between items-start">
-                <div>
-                  <h3 class="font-bold text-lg text-stone-800">Chicken Pasta</h3>
-                </div>
-                <button class="text-stone-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-trash-can"></i></button>
+                <h3 class="font-bold text-sm text-stone-900 truncate">Chicken Pasta</h3>
+                <button class="text-stone-400 hover:text-red-500 p-1 transition-colors">
+                  <i class="fa-solid fa-trash-can text-xs"></i>
+                </button>
               </div>
-              <div class="flex justify-between items-center mt-4">
-                <div class="flex items-center border border-stone-200 rounded-lg">
-                  <button class="px-3 py-1 text-stone-500 hover:text-brand-600">-</button>
-                  <span class="px-3 py-1 font-medium text-stone-800 border-x border-stone-200">1</span>
-                  <button class="px-3 py-1 text-stone-500 hover:text-brand-600">+</button>
-                </div>
-                <span class="font-semibold text-brand-600 text-lg">Rp 48.000</span>
-              </div>
+              <p class="text-[11px] text-stone-500 mt-0.5">Creamy alfredo with grilled chicken</p>
+              <p class="text-xs font-bold text-brand-700 mt-1">Rp 48.000</p>
             </div>
           </div>
 
-        </div>
-        <div class="mt-6">
-          <a href="menu.html" class="text-brand-600 font-medium hover:underline inline-flex items-center"><i class="fa-solid fa-arrow-left mr-2"></i> Continue Shopping</a>
+          <div class="flex justify-between items-center pt-2 border-t border-stone-100">
+            <span class="text-xs text-stone-400">Subtotal</span>
+            <div class="flex items-center gap-3">
+              <div class="flex items-center border border-stone-200 rounded-xl bg-stone-50 overflow-hidden">
+                <button onclick="changeQty(this, -1, 48000)" class="px-2.5 py-1 text-xs font-bold text-stone-600 hover:bg-stone-200 active:scale-95 transition-all">-</button>
+                <span class="px-3 py-1 text-xs font-bold text-stone-900 bg-white border-x border-stone-200">1</span>
+                <button onclick="changeQty(this, 1, 48000)" class="px-2.5 py-1 text-xs font-bold text-brand-600 hover:bg-stone-200 active:scale-95 transition-all">+</button>
+              </div>
+              <span class="text-sm font-bold text-stone-900 item-subtotal">Rp 48.000</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Order Summary -->
-      <div class="w-full lg:w-96 shrink-0">
-        <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-6 sticky top-24">
-          <h2 class="font-serif font-bold text-xl text-stone-800 mb-6">Order Summary</h2>
-          
-          <div class="space-y-4 text-stone-600 mb-5">
-            <div class="flex justify-between">
-              <span>Subtotal</span>
-              <span class="font-medium text-stone-800">Rp 134.000</span>
-            </div>
-            <!-- Delivery fee based on calculated location -->
-            <div class="flex justify-between items-center py-2 border-t border-stone-100">
-              <div>
-                <span class="text-stone-700 font-medium">Delivery Fee</span>
-                <p class="text-xs text-stone-400 mt-0.5" id="deliveryFeeDistance">Dihitung otomatis dari lokasi Anda</p>
-              </div>
-              <span id="deliveryFeeLabel" class="font-bold text-stone-800">Rp 8.000</span>
-            </div>
+      <!-- Promo Code Card -->
+      <div class="bg-white rounded-2xl p-3.5 border border-stone-200 shadow-sm space-y-2">
+        <label class="block text-xs font-bold text-stone-700">Kode Promo / Voucher</label>
+        <div class="flex gap-2">
+          <div class="relative flex-1">
+            <i class="fa-solid fa-tag absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+            <input type="text" id="promoInput" placeholder="Masukkan kode promo"
+              class="w-full pl-8 pr-3 py-2 text-xs border border-stone-300 rounded-xl bg-stone-50 focus:bg-white focus:ring-2 focus:ring-brand-500 uppercase font-mono" />
           </div>
-          
-          <div class="border-t border-stone-200 pt-4 mb-6">
-            <div class="flex justify-between items-center">
-              <span class="font-bold text-lg text-stone-800">Total</span>
-              <span class="font-bold text-2xl text-brand-600" id="grandTotal">Rp 142.000</span>
-            </div>
-          </div>
-
-          <script>
-            (function() {
-              const branchFees = {
-                sudirman: { near: 8000,  mid: 12000, far: 18000 },
-                kemang:   { near: 7000,  mid: 11000, far: 16000 },
-                bsd:      { near: 9000,  mid: 14000, far: 20000 },
-              };
-              const subtotal = 134000;
-              const params = new URLSearchParams(window.location.search);
-              const key = params.get('branch') || localStorage.getItem('userBranch') || 'sudirman';
-              const fees = branchFees[key] || branchFees.sudirman;
-              const fmt = n => 'Rp ' + n.toLocaleString('id-ID');
-
-              // Check if we have calculated distance/fee from select-branch or localStorage
-              let fee = fees.near;
-              let distText = 'Dihitung otomatis dari lokasi Anda';
-              try {
-                const infoStr = localStorage.getItem('branchDeliveryInfo');
-                if (infoStr) {
-                  const info = JSON.parse(infoStr);
-                  if (info && info[key]) {
-                    fee = info[key].fee;
-                    distText = info[key].km.toFixed(1) + ' km dari lokasi Anda';
-                  }
-                }
-              } catch(e) {}
-
-              document.getElementById('deliveryFeeLabel').textContent = fmt(fee);
-              document.getElementById('deliveryFeeDistance').textContent = distText;
-              document.getElementById('grandTotal').textContent = fmt(subtotal + fee);
-
-              const checkoutBtn = document.getElementById('checkoutBtn');
-              if (checkoutBtn) {
-                checkoutBtn.href = 'checkout.html?branch=' + key;
-              }
-            })();
-          </script>
-
-          <div class="mb-6">
-            <label class="block text-sm font-medium text-stone-700 mb-2">Promo Code</label>
-            <div class="flex space-x-2">
-              <input type="text" class="flex-grow border border-stone-300 rounded-lg px-3 py-2 focus:ring-brand-500 focus:border-brand-500" placeholder="Enter code">
-              <button class="bg-stone-800 text-white px-4 py-2 rounded-lg font-medium hover:bg-stone-700 transition-colors">Apply</button>
-            </div>
-          </div>
-
-          <a href="checkout.html" id="checkoutBtn" class="block w-full bg-brand-600 text-white text-center py-3 rounded-xl font-bold hover:bg-brand-700 transition-colors shadow-sm">Proceed to Checkout</a>
+          <button onclick="applyPromo()" class="px-3.5 py-2 bg-stone-800 hover:bg-stone-900 active:scale-95 text-white rounded-xl text-xs font-bold transition-all">
+            Gunakan
+          </button>
         </div>
+        <!-- Quick Promo Pills -->
+        <div class="flex gap-1.5 pt-1">
+          <button onclick="setPromo('OLGACOFFEE')" class="text-[10px] bg-brand-50 hover:bg-brand-100 text-brand-800 font-bold px-2 py-0.5 rounded-md border border-brand-200">
+            🏷️ OLGACOFFEE (-10k)
+          </button>
+          <button onclick="setPromo('GRATISONGKIR')" class="text-[10px] bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-md border border-emerald-200">
+            🛵 GRATISONGKIR
+          </button>
+        </div>
+      </div>
+
+      <!-- Payment Breakdown -->
+      <div class="bg-white rounded-2xl p-4 border border-stone-200 shadow-sm space-y-2.5 text-xs text-stone-600">
+        <h3 class="font-bold text-stone-900 text-sm mb-3">Ringkasan Pembayaran</h3>
+        <div class="flex justify-between">
+          <span>Subtotal Pesanan</span>
+          <span class="font-bold text-stone-800" id="subtotalLabel">Rp 134.000</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <div>
+            <span>Ongkos Kirim</span>
+            <p class="text-[10px] text-stone-400" id="deliveryFeeDistance">Dihitung otomatis dari lokasi</p>
+          </div>
+          <span class="font-bold text-stone-800" id="deliveryFeeLabel">Rp 8.000</span>
+        </div>
+        <div class="flex justify-between">
+          <span>Biaya Layanan & Pengemasan</span>
+          <span class="font-bold text-stone-800">Rp 2.000</span>
+        </div>
+        <div id="promoRow" class="hidden flex justify-between text-emerald-600 font-bold">
+          <span id="promoNameLabel">Diskon Promo</span>
+          <span id="promoAmountLabel">- Rp 10.000</span>
+        </div>
+        <div class="pt-2.5 border-t border-stone-200 flex justify-between items-center">
+          <span class="font-bold text-stone-900 text-sm">Total Pembayaran</span>
+          <span class="font-extrabold text-base text-brand-700" id="grandTotalLabel">Rp 144.000</span>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ══════════════════════════════════════════
+         STICKY BOTTOM CHECKOUT ACTION BAR
+    ══════════════════════════════════════════ -->
+    <div class="fixed sm:absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 p-4 z-40 max-w-md mx-auto shadow-lg">
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <span class="text-[10px] text-stone-400 block uppercase font-bold tracking-wider leading-none">Total Pembayaran</span>
+          <span id="bottomTotal" class="text-base font-extrabold text-stone-900 leading-tight mt-0.5">Rp 144.000</span>
+        </div>
+        <a id="checkoutBtn" href="checkout.html"
+           class="flex-1 max-w-[220px] py-3.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-2xl font-bold text-xs flex items-center justify-center gap-2 shadow-md shadow-brand-600/30 transition-all active:scale-[0.98]">
+          <span>Lanjut ke Checkout</span>
+          <i class="fa-solid fa-arrow-right text-[11px]"></i>
+        </a>
       </div>
     </div>
-  </main>
+
+  </div>
+
+  <script>
+    const branchFees = {
+      sudirman: { near: 8000, mid: 12000, far: 18000, name: 'Cafe Olga Sudirman' },
+      kemang:   { near: 7000, mid: 11000, far: 16000, name: 'Cafe Olga Kemang' },
+      bsd:      { near: 9000, mid: 14000, far: 20000, name: 'Cafe Olga BSD City' },
+    };
+
+    let subtotal = 134000;
+    let serviceFee = 2000;
+    let deliveryFee = 8000;
+    let discount = 0;
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get('branch') || localStorage.getItem('userNearestBranch') || 'sudirman';
+    const currentBranch = branchFees[key] || branchFees.sudirman;
+
+    document.getElementById('branchLabel').textContent = currentBranch.name;
+    document.getElementById('branchNameDetail').textContent = currentBranch.name;
+    document.getElementById('backToMenu').href = 'menu.html?branch=' + key;
+    document.getElementById('addMoreLink').href = 'menu.html?branch=' + key;
+    document.getElementById('checkoutBtn').href = 'checkout.html?branch=' + key;
+
+    // Delivery fee check
+    try {
+      const infoStr = localStorage.getItem('branchDeliveryInfo');
+      if (infoStr) {
+        const info = JSON.parse(infoStr);
+        if (info && info[key]) {
+          deliveryFee = info[key].fee;
+          document.getElementById('deliveryFeeDistance').textContent = info[key].km.toFixed(1) + ' km dari alamat Anda';
+        }
+      }
+    } catch(e) {}
+
+    function fmtRp(n) {
+      return 'Rp ' + n.toLocaleString('id-ID');
+    }
+
+    function recalculate() {
+      document.getElementById('subtotalLabel').textContent = fmtRp(subtotal);
+      document.getElementById('deliveryFeeLabel').textContent = fmtRp(deliveryFee);
+      const total = Math.max(0, subtotal + deliveryFee + serviceFee - discount);
+      document.getElementById('grandTotalLabel').textContent = fmtRp(total);
+      document.getElementById('bottomTotal').textContent = fmtRp(total);
+    }
+
+    function changeQty(btn, delta, unitPrice) {
+      const parent = btn.parentElement;
+      const span = parent.querySelector('span');
+      let q = parseInt(span.textContent) + delta;
+      if (q < 1) q = 1;
+      span.textContent = q;
+
+      const card = btn.closest('.cart-item');
+      card.querySelector('.item-subtotal').textContent = fmtRp(q * unitPrice);
+
+      // Re-sum
+      let newSubtotal = 0;
+      document.querySelectorAll('.cart-item').forEach(item => {
+        const txt = item.querySelector('.item-subtotal').textContent.replace(/[^\d]/g, '');
+        newSubtotal += parseInt(txt) || 0;
+      });
+      subtotal = newSubtotal;
+      recalculate();
+    }
+
+    function setPromo(code) {
+      document.getElementById('promoInput').value = code;
+      applyPromo();
+    }
+
+    function applyPromo() {
+      const val = document.getElementById('promoInput').value.trim().toUpperCase();
+      const pRow = document.getElementById('promoRow');
+      if (val === 'OLGACOFFEE') {
+        discount = 10000;
+        document.getElementById('promoNameLabel').textContent = 'Diskon OLGACOFFEE';
+        document.getElementById('promoAmountLabel').textContent = '- Rp 10.000';
+        pRow.classList.remove('hidden');
+      } else if (val === 'GRATISONGKIR') {
+        discount = deliveryFee;
+        document.getElementById('promoNameLabel').textContent = 'Diskon Ongkir';
+        document.getElementById('promoAmountLabel').textContent = '- ' + fmtRp(deliveryFee);
+        pRow.classList.remove('hidden');
+      } else {
+        alert('Kode promo tidak valid atau sudah kedaluwarsa.');
+        return;
+      }
+      recalculate();
+    }
+
+    recalculate();
+  </script>
 </body>
 </html>

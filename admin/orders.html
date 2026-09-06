@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pesanan - Cafe Olga Admin</title>
+    <title>Pesanan — Cafe Olga Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -18,16 +18,9 @@
             },
             colors: {
               brand: {
-                50: '#fdf8f0',
-                100: '#f9eddc',
-                200: '#f2d8b4',
-                300: '#e9be84',
-                400: '#dfa053',
-                500: '#d78833',
-                600: '#c87028',
-                700: '#a65523',
-                800: '#854522',
-                900: '#6d3a1e',
+                50: '#fdf8f0', 100: '#f9eddc', 200: '#f2d8b4', 300: '#e9be84',
+                400: '#dfa053', 500: '#d78833', 600: '#c87028', 700: '#a65523',
+                800: '#854522', 900: '#6d3a1e'
               },
             },
           },
@@ -37,381 +30,295 @@
 </head>
 <body class="bg-gray-50 font-sans text-gray-900 antialiased flex h-screen overflow-hidden">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-stone-900 text-stone-300 flex flex-col hidden md:flex h-full flex-shrink-0 z-20">
-        <div class="h-16 flex items-center px-6 border-b border-stone-800 flex-shrink-0">
-            <i class="fa-solid fa-mug-hot text-brand-500 text-xl mr-3"></i>
-            <span class="font-serif text-xl text-white font-bold tracking-wide">Cafe Olga</span>
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300"></div>
+
+    <!-- Sidebar / Navigation Drawer -->
+    <aside id="adminSidebar" class="fixed md:static inset-y-0 left-0 z-50 w-72 md:w-64 bg-stone-900 text-stone-300 flex flex-col h-full flex-shrink-0 transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out shadow-2xl md:shadow-none">
+        <!-- Sidebar Header with Close Button on Mobile -->
+        <div class="h-16 flex items-center justify-between px-6 border-b border-stone-800 flex-shrink-0">
+            <div class="flex items-center gap-2.5">
+                <i class="fa-solid fa-mug-hot text-brand-500 text-xl"></i>
+                <div>
+                    <span class="font-serif text-lg text-white font-bold tracking-wide block leading-tight">Cafe Olga</span>
+                    <span class="text-[10px] text-amber-400 font-medium uppercase tracking-wider block">Branch Admin</span>
+                </div>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-stone-400 hover:text-white p-1 rounded-lg focus:outline-none" aria-label="Tutup Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Branch Indicator Pill in Sidebar -->
+        <div class="px-4 pt-4 pb-2">
+            <div class="bg-stone-800/80 border border-stone-700/60 rounded-xl p-2.5 flex items-center justify-between">
+                <div class="flex items-center gap-2 min-w-0">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="text-xs font-bold text-white truncate">Sudirman Branch</span>
+                </div>
+                <span class="text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold px-1.5 py-0.5 rounded">Buka</span>
+            </div>
         </div>
         
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-            <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+        <!-- Navigation Links -->
+        <nav class="flex-1 px-4 py-3 space-y-1.5 overflow-y-auto">
+            <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-stone-400">
                 <i class="fa-solid fa-chart-pie w-6"></i>
-                <span class="font-medium">Dasbor</span>
+                <span>Dasbor</span>
             </a>
             
-            <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 transition-colors">
-                <i class="fa-solid fa-clipboard-list w-6"></i>
-                <span class="font-medium flex-1">Pesanan</span>
+            <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 font-medium transition-colors">
+                <i class="fa-solid fa-clipboard-list w-6 text-brand-400"></i>
+                <span class="flex-1">Pesanan</span>
                 <span class="bg-brand-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">5</span>
             </a>
             
-            <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+            <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-stone-400">
                 <i class="fa-solid fa-utensils w-6"></i>
-                <span class="font-medium">Manajemen Menu</span>
+                <span>Manajemen Menu</span>
             </a>
             
-            <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+            <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-stone-400">
                 <i class="fa-solid fa-gear w-6"></i>
-                <span class="font-medium">Pengaturan</span>
+                <span>Pengaturan Toko</span>
             </a>
-            
-            <div class="pt-4 mt-4 border-t border-stone-800">
-                <a href="../customer/menu.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
+
+            <div class="pt-4 mt-4 border-t border-stone-800 space-y-1.5">
+                <a href="owner-dashboard.html" class="flex items-center px-4 py-2.5 rounded-xl text-amber-300 hover:bg-stone-800 transition-colors border-l-4 border-transparent text-xs font-semibold">
+                    <i class="fa-solid fa-crown w-6 text-amber-400"></i>
+                    <span>Beralih ke Owner HQ</span>
+                </a>
+                <a href="../customer/menu.html" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs text-stone-400">
                     <i class="fa-solid fa-arrow-up-right-from-square w-6"></i>
-                    <span class="font-medium">Lihat Toko</span>
+                    <span>Buka Tampilan Pelanggan</span>
                 </a>
             </div>
         </nav>
         
+        <!-- Sidebar Footer -->
         <div class="p-4 border-t border-stone-800 flex-shrink-0">
-            <a href="login.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors">
+            <a href="login.html" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors text-sm font-medium">
                 <i class="fa-solid fa-right-from-bracket w-6"></i>
-                <span class="font-medium">Keluar</span>
+                <span>Keluar</span>
             </a>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative w-full min-w-0">
         <!-- Header -->
-        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0 z-10">
-            <div>
-                <h1 class="text-xl font-bold text-gray-900 font-serif">Pesanan</h1>
+        <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-4 sm:px-8 flex-shrink-0 z-10">
+            <div class="flex items-center gap-3">
+                <button id="mobileMenuBtn" onclick="toggleSidebar()" class="md:hidden p-2 -ml-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Buka Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold text-gray-900 font-serif">Pesanan</h1>
+                </div>
             </div>
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 sm:space-x-4">
                 <div class="relative">
-                    <input type="text" placeholder="Cari pesanan..." class="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-brand-500 focus:border-brand-500 w-64">
-                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                    <input type="text" placeholder="Cari..." class="pl-8 pr-3 py-1.5 sm:py-2 border border-gray-300 rounded-xl text-xs sm:text-sm focus:ring-brand-500 focus:border-brand-500 w-36 sm:w-60">
+                    <div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-gray-400 text-xs">
+                        <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                 </div>
             </div>
         </header>
 
         <!-- Scrollable Content Area -->
-        <div class="flex-1 overflow-auto p-8">
+        <div class="flex-1 overflow-auto p-4 sm:p-6 lg:p-8">
             
-            <!-- Filters -->
-            <div class="flex space-x-2 mb-8 overflow-x-auto pb-2">
-                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">Semua Pesanan (49)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
+            <!-- Horizontal Swipeable Filter Pills -->
+            <div class="flex space-x-2 mb-6 sm:mb-8 overflow-x-auto pb-2 scrollbar-none text-xs sm:text-sm">
+                <button class="px-3.5 py-2 bg-gray-900 text-white rounded-xl font-medium whitespace-nowrap shadow-sm">Semua (49)</button>
+                <button class="px-3.5 py-2 bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 rounded-xl font-medium whitespace-nowrap flex items-center gap-1.5 shadow-sm">
                     <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span> Pesanan Masuk <span class="bg-red-100 text-red-700 py-0.5 px-2 rounded-full text-xs font-bold">3</span>
                 </button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
-                    <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal (Upcoming) <span class="bg-indigo-100 text-indigo-700 py-0.5 px-2 rounded-full text-xs font-bold">2</span>
+                <button class="px-3.5 py-2 bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 rounded-xl font-medium whitespace-nowrap flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal <span class="bg-indigo-100 text-indigo-700 py-0.5 px-2 rounded-full text-xs font-bold">2</span>
                 </button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap flex items-center gap-1.5">
-                    <i class="fab fa-whatsapp text-[#25D366]"></i> Sudah Dihubungi (44)
+                <button class="px-3.5 py-2 bg-white text-gray-700 hover:bg-gray-50 border border-gray-200 rounded-xl font-medium whitespace-nowrap flex items-center gap-1.5 shadow-sm">
+                    <i class="fab fa-whatsapp text-[#25D366]"></i> Terhubung WA (44)
                 </button>
             </div>
 
-            <!-- Action Item (Pesanan Masuk) -->
-            <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span> Pesanan Masuk Terbaru — Siap Dihubungi via WhatsApp
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
-                <!-- Baru Order 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0045</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-1">Anton Wijaya</h4>
+            <!-- Pesanan Masuk (Needs Action) -->
+            <div class="mb-8">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-3 font-serif flex items-center">
+                    <span class="w-2.5 h-2.5 bg-red-500 rounded-full mr-2 animate-pulse"></span> Pesanan Masuk Terbaru — Siap Dihubungi
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                    <!-- Baru Order 1 -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 border-l-4 border-l-red-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-xs font-bold text-brand-700">#OLG-0045</span>
+                                <h4 class="text-base font-bold text-gray-900 mt-0.5">Anton Wijaya</h4>
+                            </div>
+                            <span class="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Baru</span>
                         </div>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-2">Americano x2, Club Sandwich, Cheesecake Slice</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                            <i class="fas fa-phone text-gray-400 text-[11px]"></i>
+                            <span class="font-mono">0821-4567-8901</span>
+                            <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1 text-[11px]"></i>2 mnt lalu</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-3 pt-2 border-t border-gray-100">
+                            <span class="text-xs text-gray-400">Total</span>
+                            <span class="font-extrabold text-sm text-gray-900">Rp 130.000</span>
+                        </div>
+                        <a href="https://wa.me/6282145678901?text=Halo%20Anton%2C%20pesanan%20%23OLG-0045%20Anda%20sedang%20kami%20proses."
+                           target="_blank" onclick="event.stopPropagation();"
+                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] active:scale-95 text-white py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm">
+                            <i class="fab fa-whatsapp text-sm"></i> Hubungi via WhatsApp
+                        </a>
                     </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Americano x2, Club Sandwich, Cheesecake Slice</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0821-4567-8901</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>2 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 130.000</span>
-                    </div>
-                    <a href="https://wa.me/6282145678901?text=Halo%20Anton%2C%20pesanan%20%23OLG-0045%20Anda%20(Americano%20x2%2C%20Club%20Sandwich%2C%20Cheesecake%20Slice)%20sedang%20kami%20proses.%20Terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
-                    </a>
-                </div>
 
-                <!-- Baru Order 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0044</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-1">Maya Sari</h4>
+                    <!-- Baru Order 2 -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 border-l-4 border-l-red-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-xs font-bold text-brand-700">#OLG-0044</span>
+                                <h4 class="text-base font-bold text-gray-900 mt-0.5">Maya Sari</h4>
+                            </div>
+                            <span class="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Baru</span>
                         </div>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-2">Matcha Latte, Banana Bread</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                            <i class="fas fa-phone text-gray-400 text-[11px]"></i>
+                            <span class="font-mono">0857-9012-3456</span>
+                            <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1 text-[11px]"></i>5 mnt lalu</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-3 pt-2 border-t border-gray-100">
+                            <span class="text-xs text-gray-400">Total</span>
+                            <span class="font-extrabold text-sm text-gray-900">Rp 53.000</span>
+                        </div>
+                        <a href="https://wa.me/6285790123456?text=Halo%20Maya%2C%20pesanan%20%23OLG-0044%20Anda%20sedang%20kami%20proses."
+                           target="_blank" onclick="event.stopPropagation();"
+                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] active:scale-95 text-white py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm">
+                            <i class="fab fa-whatsapp text-sm"></i> Hubungi via WhatsApp
+                        </a>
                     </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Matcha Latte, Banana Bread</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0857-9012-3456</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>5 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 53.000</span>
-                    </div>
-                    <a href="https://wa.me/6285790123456?text=Halo%20Maya%2C%20pesanan%20%23OLG-0044%20Anda%20(Matcha%20Latte%2C%20Banana%20Bread)%20sedang%20kami%20proses.%20Terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
-                    </a>
-                </div>
 
-                <!-- Baru Order 3 -->
-                <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0043</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-1">Doni Pratama</h4>
+                    <!-- Baru Order 3 -->
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 border-l-4 border-l-red-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                        <div class="flex justify-between items-start mb-3">
+                            <div>
+                                <span class="text-xs font-bold text-brand-700">#OLG-0043</span>
+                                <h4 class="text-base font-bold text-gray-900 mt-0.5">Doni Pratama</h4>
+                            </div>
+                            <span class="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Baru</span>
                         </div>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-2">Cappuccino x4</p>
+                        <div class="flex items-center gap-2 text-xs text-gray-500 mb-3">
+                            <i class="fas fa-phone text-gray-400 text-[11px]"></i>
+                            <span class="font-mono">0813-2109-8765</span>
+                            <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1 text-[11px]"></i>8 mnt lalu</span>
+                        </div>
+                        <div class="flex items-center justify-between mb-3 pt-2 border-t border-gray-100">
+                            <span class="text-xs text-gray-400">Total</span>
+                            <span class="font-extrabold text-sm text-gray-900">Rp 120.000</span>
+                        </div>
+                        <a href="https://wa.me/6281321098765?text=Halo%20Doni%2C%20pesanan%20%23OLG-0043%20Anda%20sedang%20kami%20proses."
+                           target="_blank" onclick="event.stopPropagation();"
+                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] active:scale-95 text-white py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm">
+                            <i class="fab fa-whatsapp text-sm"></i> Hubungi via WhatsApp
+                        </a>
                     </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Cappuccino x4</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0813-2109-8765</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>8 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 120.000</span>
-                    </div>
-                    <a href="https://wa.me/6281321098765?text=Halo%20Doni%2C%20pesanan%20%23OLG-0043%20Anda%20(Cappuccino%20x4)%20sedang%20kami%20proses.%20Terima%20kasih%20sudah%20memesan%20di%20Cafe%20Olga!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
-                    </a>
                 </div>
             </div>
 
-            <!-- Pesanan Terjadwal / Upcoming -->
-            <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif flex items-center">
-                <i class="fa-solid fa-calendar-clock text-indigo-600 mr-2"></i> Pesanan Terjadwal (Upcoming) — Jadwal Pengiriman Mendatang
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
-                <!-- Scheduled Order 1 -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-indigo-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0046</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-0.5">Rina Wulandari</h4>
+            <!-- Pesanan Terjadwal -->
+            <div class="mb-8">
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-3 font-serif flex items-center">
+                    <i class="fa-solid fa-calendar-clock text-indigo-600 mr-2"></i> Pesanan Terjadwal (Upcoming)
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 border-l-4 border-l-indigo-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="text-xs font-bold text-brand-700">#OLG-0046</span>
+                                <h4 class="text-base font-bold text-gray-900 mt-0.5">Rina Wulandari</h4>
+                            </div>
+                            <span class="bg-indigo-100 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                <i class="fa-solid fa-calendar-clock text-[9px]"></i> Terjadwal
+                            </span>
                         </div>
-                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal
-                        </span>
-                    </div>
-                    <div class="bg-indigo-50 rounded-xl p-3 mb-3 border border-indigo-100">
-                        <div class="text-xs text-indigo-600 font-medium">Jadwal Kirim:</div>
-                        <div class="text-sm font-bold text-indigo-950 flex items-center gap-1.5 mt-0.5">
-                            <i class="fa-regular fa-calendar text-indigo-600"></i> Besok, 7 Sep 2026 • 10:00 WIB
+                        <div class="bg-indigo-50 rounded-xl p-2.5 mb-2.5 border border-indigo-100 text-xs">
+                            <span class="text-indigo-600 font-medium">Jadwal Kirim:</span>
+                            <p class="font-bold text-indigo-950 mt-0.5"><i class="fa-regular fa-calendar text-indigo-600 mr-1"></i> Besok, 7 Sep 2026 • 10:00 WIB</p>
                         </div>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Caramel Macchiato x3, Almond Croissant x2</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0812-9876-5432</span>
-                        <span class="text-gray-400 ml-auto">Dipesan via Web</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 165.000</span>
-                        <span class="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">Delivery Terjadwal</span>
-                    </div>
-                    <a href="https://wa.me/6281298765432?text=Halo%20Rina%2C%20pesanan%20terjadwal%20%23OLG-0046%20Anda%20untuk%20Besok%2C%207%20Sep%202026%20pukul%2010%3A00%20WIB%20sudah%20kami%20catat.%20Pesanan%20akan%20kami%20siapkan%20tepat%20waktu.%20Terima%20kasih%20telah%20memesan%20di%20Cafe%20Olga!%20%E2%98%95"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Konfirmasi Jadwal via WhatsApp
-                    </a>
-                </div>
-
-                <!-- Scheduled Order 2 -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border-l-4 border-indigo-500 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-3">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0047</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-0.5">Farhan Hidayat</h4>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-1">Caramel Macchiato x3, Almond Croissant x2</p>
+                        <div class="flex items-center justify-between mb-3 pt-2 border-t border-gray-100">
+                            <span class="text-xs text-gray-400">Total</span>
+                            <span class="font-extrabold text-sm text-gray-900">Rp 165.000</span>
                         </div>
-                        <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
-                            <i class="fa-solid fa-calendar-clock text-indigo-600"></i> Terjadwal
-                        </span>
+                        <a href="https://wa.me/6281298765432?text=Halo%20Rina%2C%20pesanan%20terjadwal%20%23OLG-0046%20sudah%20kami%20catat."
+                           target="_blank" onclick="event.stopPropagation();"
+                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] active:scale-95 text-white py-2.5 rounded-xl text-xs font-bold transition-all shadow-sm">
+                            <i class="fab fa-whatsapp text-sm"></i> Konfirmasi Jadwal via WA
+                        </a>
                     </div>
-                    <div class="bg-indigo-50 rounded-xl p-3 mb-3 border border-indigo-100">
-                        <div class="text-xs text-indigo-600 font-medium">Jadwal Kirim:</div>
-                        <div class="text-sm font-bold text-indigo-950 flex items-center gap-1.5 mt-0.5">
-                            <i class="fa-regular fa-calendar text-indigo-600"></i> Besok, 7 Sep 2026 • 14:30 WIB
-                        </div>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Cold Brew x2, Cinnamon Roll x3</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0878-1122-3344</span>
-                        <span class="text-gray-400 ml-auto">Dipesan via Web</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 142.000</span>
-                        <span class="text-xs font-semibold text-indigo-700 bg-indigo-50 border border-indigo-200 px-2 py-0.5 rounded-md">Delivery Terjadwal</span>
-                    </div>
-                    <a href="https://wa.me/6287811223344?text=Halo%20Farhan%2C%20pesanan%20terjadwal%20%23OLG-0047%20Anda%20untuk%20Besok%2C%207%20Sep%202026%20pukul%2014%3A30%20WIB%20sudah%20kami%20catat.%20Pesanan%20akan%20kami%20siapkan%20tepat%20waktu.%20Terima%20kasih%20telah%20memesan%20di%20Cafe%20Olga!%20%E2%98%95"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Konfirmasi Jadwal via WhatsApp
-                    </a>
                 </div>
             </div>
 
             <!-- Active & Past Orders -->
-            <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif">Sedang Berjalan & Selesai</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                <!-- Menyiapkan Order -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0042</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-1">Budi Santoso</h4>
+            <div>
+                <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-3 font-serif">Sedang Berjalan & Selesai</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+                    <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-200 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <span class="text-xs font-bold text-brand-700">#OLG-0042</span>
+                                <h4 class="text-base font-bold text-gray-900 mt-0.5">Budi Santoso</h4>
+                            </div>
+                            <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 bg-amber-500 rounded-full"></span> Menyiapkan
+                            </span>
                         </div>
-                        <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <span class="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></span> Menyiapkan
-                        </span>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Café Latte x2, Butter Croissant</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0812-3456-7890</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>15 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 86.000</span>
-                    </div>
-                    <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20Anda%20(Caf%C3%A9%20Latte%20x2%2C%20Butter%20Croissant)%20sedang%20kami%20siapkan.%20Estimasi%2015-20%20menit.%20Terima%20kasih!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
-                    </a>
-                </div>
-
-                <!-- Siap Order -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0041</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-1">Siti Rahayu</h4>
+                        <p class="text-xs text-gray-500 mb-3 line-clamp-1">Café Latte x2, Butter Croissant, Pasta</p>
+                        <div class="flex items-center justify-between mb-3 pt-2 border-t border-gray-100">
+                            <span class="text-xs text-gray-400">Total</span>
+                            <span class="font-extrabold text-sm text-gray-900">Rp 144.000</span>
                         </div>
-                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></span> Siap
-                        </span>
+                        <a href="https://wa.me/6281234567890?text=Halo%20Budi%2C%20pesanan%20%23OLG-0042%20sedang%20disiapkan."
+                           target="_blank" onclick="event.stopPropagation();"
+                           class="w-full flex items-center justify-center gap-2 bg-stone-100 hover:bg-stone-200 active:scale-95 text-stone-800 py-2.5 rounded-xl text-xs font-bold transition-all border border-stone-200">
+                            <i class="fab fa-whatsapp text-emerald-600"></i> Buka Chat WA
+                        </a>
                     </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Beef Burger, Thai Tea</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0878-5678-9012</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>20 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 77.000</span>
-                    </div>
-                    <a href="https://wa.me/6287856789012?text=Halo%20Siti%2C%20pesanan%20%23OLG-0041%20Anda%20(Beef%20Burger%2C%20Thai%20Tea)%20sudah%20siap%20dan%20sedang%20kami%20kirimkan!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
-                    </a>
-                </div>
-
-                <!-- Dalam Perjalanan Order -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-brand-700">#OLG-0040</span>
-                            <h4 class="text-lg font-bold text-gray-900 mt-1">Ahmad Rizky</h4>
-                        </div>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></span> Dalam Perjalanan
-                        </span>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Chicken Pasta, Mocha</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0819-3456-7890</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>33 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-900">Rp 83.000</span>
-                    </div>
-                    <a href="https://wa.me/6281934567890?text=Halo%20Ahmad%2C%20pesanan%20%23OLG-0040%20Anda%20(Chicken%20Pasta%2C%20Mocha)%20sedang%20dalam%20perjalanan%20ke%20lokasi%20Anda!%20%F0%9F%9B%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white py-2.5 rounded-xl text-sm font-bold transition-colors">
-                        <i class="fab fa-whatsapp text-base"></i> Hubungi via WhatsApp
-                    </a>
-                </div>
-
-                <!-- Terkirim Order -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow opacity-75" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-gray-500">#OLG-0039</span>
-                            <h4 class="text-lg font-bold text-gray-700 mt-1">Diana Putri</h4>
-                        </div>
-                        <span class="bg-gray-100 text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Terkirim
-                        </span>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Caesar Salad, Fresh Orange Juice</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0856-7890-1234</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>46 menit lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-500">Rp 65.000</span>
-                    </div>
-                    <a href="https://wa.me/6285678901234?text=Halo%20Diana%2C%20pesanan%20%23OLG-0039%20Anda%20sudah%20terkirim.%20Semoga%20menikmati!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-stone-100 hover:bg-stone-200 text-stone-600 py-2.5 rounded-xl text-sm font-medium transition-colors">
-                        <i class="fab fa-whatsapp text-base text-[#25D366]"></i> Hubungi via WhatsApp
-                    </a>
-                </div>
-
-                <!-- Terkirim Order -->
-                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow opacity-75" onclick="window.location.href='order-detail.html'">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <span class="text-sm font-bold text-gray-500">#OLG-0038</span>
-                            <h4 class="text-lg font-bold text-gray-700 mt-1">Reza Mahendra</h4>
-                        </div>
-                        <span class="bg-gray-100 text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Terkirim
-                        </span>
-                    </div>
-                    <p class="text-sm text-gray-500 mb-3 line-clamp-2">Tiramisu, Café Latte x2</p>
-                    <div class="flex items-center gap-2 text-xs text-gray-500 mb-4">
-                        <i class="fas fa-phone text-gray-400"></i>
-                        <span class="font-mono">0822-3456-7890</span>
-                        <span class="text-gray-400 ml-auto"><i class="fa-regular fa-clock mr-1"></i>1 jam lalu</span>
-                    </div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="font-bold text-gray-500">Rp 104.000</span>
-                    </div>
-                    <a href="https://wa.me/6282234567890?text=Halo%20Reza%2C%20pesanan%20%23OLG-0038%20Anda%20sudah%20terkirim.%20Semoga%20menikmati!%20%F0%9F%8D%B5"
-                       target="_blank" onclick="event.stopPropagation();"
-                       class="w-full flex items-center justify-center gap-2 bg-stone-100 hover:bg-stone-200 text-stone-600 py-2.5 rounded-xl text-sm font-medium transition-colors">
-                        <i class="fab fa-whatsapp text-base text-[#25D366]"></i> Hubungi via WhatsApp
-                    </a>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- Sidebar Toggle Script -->
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById('adminSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (!sidebar || !backdrop) return;
+        const isClosed = sidebar.classList.contains('-translate-x-full');
+        if (isClosed) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const sidebar = document.getElementById('adminSidebar');
+          if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+            toggleSidebar();
+          }
+        }
+      });
+    </script>
 </body>
 </html>

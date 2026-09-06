@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Owner Dashboard - Cafe Olga HQ</title>
+    <title>Owner Dashboard — Cafe Olga HQ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -23,352 +23,306 @@
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans flex min-h-screen">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-stone-900 text-stone-100 flex flex-col fixed h-full shadow-xl">
-        <div class="p-6">
-            <h1 class="text-2xl font-serif font-bold text-white flex items-center gap-2">
-                <i class="fa-solid fa-crown text-brand-500"></i> Cafe Olga HQ
-            </h1>
-            <p class="text-brand-400 text-sm mt-1 font-medium">Owner Dashboard</p>
+    <!-- Mobile Drawer Backdrop -->
+    <div id="sidebarBackdrop" onclick="toggleSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden md:hidden transition-opacity duration-300"></div>
+
+    <!-- Sidebar / Navigation Drawer -->
+    <aside id="adminSidebar" class="fixed inset-y-0 left-0 z-50 w-72 md:w-64 bg-stone-900 text-stone-100 flex flex-col h-full shadow-2xl md:shadow-xl transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out">
+        <div class="p-5 flex items-center justify-between border-b border-stone-800">
+            <div>
+                <h1 class="text-xl font-serif font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-crown text-amber-500"></i> Cafe Olga HQ
+                </h1>
+                <p class="text-amber-400 text-xs font-semibold mt-0.5">Owner Dashboard (3 Cabang)</p>
+            </div>
+            <button onclick="toggleSidebar()" class="md:hidden text-stone-400 hover:text-white p-1 rounded-lg focus:outline-none" aria-label="Tutup Menu">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
         </div>
         
-        <nav class="flex-1 px-4 mt-2 space-y-2">
-            <a href="owner-dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-stone-800 text-white border-l-4 border-brand-500 font-medium">
-                <i class="fa-solid fa-chart-pie w-5"></i> Overview
+        <nav class="flex-1 px-4 mt-3 space-y-1.5 overflow-y-auto">
+            <a href="owner-dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-amber-500 font-bold">
+                <i class="fa-solid fa-chart-pie w-5 text-amber-400"></i>
+                <span>Overview</span>
             </a>
-            <a href="owner-orders.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-clipboard-list w-5"></i> All Orders
+            <a href="owner-orders.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+                <i class="fa-solid fa-clipboard-list w-5"></i>
+                <span class="flex-1">Semua Pesanan</span>
+                <span class="bg-brand-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">141</span>
             </a>
-            <a href="owner-branches.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-store w-5"></i> Branches
+            <a href="owner-branches.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+                <i class="fa-solid fa-store w-5"></i>
+                <span>Kelola Cabang</span>
             </a>
-            <a href="owner-analytics.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-chart-line w-5"></i> Analytics
+            <a href="owner-analytics.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
+                <i class="fa-solid fa-chart-line w-5"></i>
+                <span>Analitik Omzet</span>
             </a>
             
-            <div class="border-t border-stone-800 my-4"></div>
-            
-            <a href="../customer/select-branch.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent hover:border-stone-700">
-                <i class="fa-solid fa-house w-5"></i> View Store
+            <div class="border-t border-stone-800 my-3"></div>
+
+            <a href="dashboard.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs font-semibold">
+                <i class="fa-solid fa-store w-5 text-brand-400"></i>
+                <span>Masuk ke Admin Sudirman</span>
             </a>
-            <a href="login.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors border-l-4 border-transparent hover:border-red-900">
-                <i class="fa-solid fa-arrow-right-from-bracket w-5"></i> Logout
+            
+            <a href="../customer/select-branch.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-stone-300 hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent text-xs">
+                <i class="fa-solid fa-house w-5"></i>
+                <span>Buka Web Pelanggan</span>
+            </a>
+            <a href="login.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-red-400 hover:bg-stone-800 hover:text-red-300 transition-colors border-l-4 border-transparent text-xs">
+                <i class="fa-solid fa-arrow-right-from-bracket w-5"></i>
+                <span>Keluar (Logout)</span>
             </a>
         </nav>
         
-        <div class="p-4 mt-auto">
-            <div class="bg-stone-800 p-4 rounded-xl flex items-center gap-3 border border-stone-700">
-                <div class="w-10 h-10 rounded-full bg-brand-600 flex items-center justify-center text-white">
-                    <i class="fa-solid fa-user-tie"></i>
+        <div class="p-4 mt-auto border-t border-stone-800">
+            <div class="bg-stone-800/80 p-3 rounded-xl flex items-center gap-3 border border-stone-700">
+                <div class="w-9 h-9 rounded-full bg-amber-500 text-stone-900 flex items-center justify-center font-bold text-sm shadow">
+                    <i class="fa-solid fa-crown"></i>
                 </div>
                 <div>
-                    <p class="font-medium text-white">Owner</p>
-                    <p class="text-xs text-brand-400 flex items-center gap-1"><i class="fa-solid fa-crown text-[10px]"></i> HQ Admin</p>
+                    <p class="font-bold text-white text-xs">Owner HQ</p>
+                    <p class="text-[10px] text-amber-400">Super Administrator</p>
                 </div>
             </div>
         </div>
     </aside>
 
     <!-- Main Content -->
-    <main class="ml-64 flex-1 p-8">
-        <header class="mb-8">
-            <h2 class="text-3xl font-serif font-bold text-gray-900">HQ Overview</h2>
-            <p class="text-gray-500 mt-1">Good morning, Owner <i class="fa-solid fa-crown text-amber-500"></i> &bull; Sunday, Sep 6, 2026</p>
-        </header>
-
-        <!-- Top Stats Row -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Total Orders Today</p>
-                    <div class="flex items-baseline gap-2 mt-1">
-                        <h3 class="text-2xl font-bold text-gray-900">141</h3>
-                        <span class="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full"><i class="fa-solid fa-arrow-up mr-1"></i>18%</span>
-                    </div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-shopping-bag"></i>
+    <main class="flex-1 md:ml-64 min-w-0 flex flex-col min-h-screen">
+        <!-- Mobile Header with Hamburger -->
+        <div class="md:hidden bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between sticky top-0 z-20">
+            <div class="flex items-center gap-3">
+                <button id="mobileMenuBtn" onclick="toggleSidebar()" class="p-2 -ml-2 rounded-xl text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500" aria-label="Buka Menu">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-crown text-amber-500 text-sm"></i>
+                    <span class="font-serif font-bold text-gray-900 text-sm">Cafe Olga HQ</span>
                 </div>
             </div>
-            
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Total Revenue Today</p>
-                    <div class="flex items-baseline gap-2 mt-1">
-                        <h3 class="text-2xl font-bold text-gray-900">Rp 12.750.000</h3>
-                        <span class="text-xs font-medium text-green-600 bg-green-50 px-2 py-0.5 rounded-full"><i class="fa-solid fa-arrow-up mr-1"></i>11%</span>
-                    </div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-green-50 text-green-600 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-money-bill-wave"></i>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Pending Orders</p>
-                    <div class="flex items-baseline gap-2 mt-1">
-                        <h3 class="text-2xl font-bold text-amber-600">14</h3>
-                    </div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-clock"></i>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
-                <div>
-                    <p class="text-sm font-medium text-gray-500">Avg Rating</p>
-                    <div class="flex items-baseline gap-2 mt-1">
-                        <h3 class="text-2xl font-bold text-gray-900">4.8</h3>
-                        <span class="text-sm text-purple-600"><i class="fa-solid fa-star"></i></span>
-                    </div>
-                </div>
-                <div class="w-12 h-12 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center text-xl">
-                    <i class="fa-solid fa-star-half-stroke"></i>
-                </div>
-            </div>
+            <span class="text-xs font-bold bg-amber-100 text-amber-900 px-2.5 py-1 rounded-full border border-amber-200">Owner</span>
         </div>
 
-        <!-- Branch Performance Cards -->
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Branch Performance</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <!-- Sudirman -->
-            <div class="bg-white rounded-2xl shadow-sm border-l-4 border-amber-600 overflow-hidden">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h4 class="font-bold text-lg text-gray-900 flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-amber-600"></span> Sudirman
-                            </h4>
-                            <p class="text-sm text-gray-500">Jakarta Pusat</p>
-                        </div>
-                        <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full border border-green-200">Open</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4 mb-5">
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Orders Today</p>
-                            <p class="font-bold text-gray-900 text-lg">47</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Revenue</p>
-                            <p class="font-bold text-gray-900 text-lg">Rp 4.250.000</p>
+        <div class="p-4 sm:p-6 lg:p-8 flex-1">
+            <header class="mb-6 sm:mb-8">
+                <h2 class="text-2xl sm:text-3xl font-serif font-bold text-gray-900">HQ Overview</h2>
+                <p class="text-xs sm:text-sm text-gray-500 mt-1">Selamat datang, Owner <i class="fa-solid fa-crown text-amber-500"></i> &bull; Minggu, 6 Sep 2026 &bull; Pantauan 3 Cabang</p>
+            </header>
+
+            <!-- Top Stats Row: 2-col on Mobile, 4-col on Desktop -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs sm:text-sm font-medium text-gray-500">Total Order</p>
+                        <div class="flex items-baseline gap-1 sm:gap-2 mt-1">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">141</h3>
+                            <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded-full">+18%</span>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between border-t border-gray-100 pt-4">
-                        <div class="flex items-center gap-2">
-                            <span class="bg-amber-100 text-amber-700 text-xs font-bold px-2 py-1 rounded-full">5</span>
-                            <span class="text-sm text-gray-600 font-medium">Pending</span>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-base sm:text-xl">
+                        <i class="fa-solid fa-shopping-bag"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs sm:text-sm font-medium text-gray-500">Total Omzet</p>
+                        <div class="flex items-baseline gap-1 sm:gap-2 mt-1">
+                            <h3 class="text-base sm:text-xl font-bold text-gray-900">Rp 12.75M</h3>
+                            <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded-full">+11%</span>
                         </div>
-                        <a href="dashboard.html" class="text-sm font-medium text-amber-600 hover:text-amber-700">View Branch &rarr;</a>
+                    </div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-base sm:text-xl">
+                        <i class="fa-solid fa-money-bill-wave"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs sm:text-sm font-medium text-gray-500">Pending</p>
+                        <div class="flex items-baseline gap-1 sm:gap-2 mt-1">
+                            <h3 class="text-xl sm:text-2xl font-bold text-amber-600">14</h3>
+                            <span class="text-[10px] text-amber-700 font-bold bg-amber-50 px-1.5 py-0.5 rounded-full">Proses</span>
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-base sm:text-xl">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs sm:text-sm font-medium text-gray-500">Rating Jaringan</p>
+                        <div class="flex items-baseline gap-1 sm:gap-2 mt-1">
+                            <h3 class="text-xl sm:text-2xl font-bold text-gray-900">4.8</h3>
+                            <span class="text-xs text-amber-500"><i class="fa-solid fa-star"></i></span>
+                        </div>
+                    </div>
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-base sm:text-xl">
+                        <i class="fa-solid fa-star-half-stroke"></i>
                     </div>
                 </div>
             </div>
 
-            <!-- Kemang -->
-            <div class="bg-white rounded-2xl shadow-sm border-l-4 border-emerald-600 overflow-hidden">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h4 class="font-bold text-lg text-gray-900 flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-emerald-600"></span> Kemang
-                            </h4>
-                            <p class="text-sm text-gray-500">Jakarta Selatan</p>
+            <!-- Branch Performance Cards -->
+            <div class="mb-8">
+                <h3 class="text-lg sm:text-xl font-bold text-gray-800 mb-3 font-serif">Performa Antar Cabang</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
+                    <!-- Sudirman -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-amber-600 overflow-hidden">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-bold text-base text-gray-900 flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-amber-600"></span> Sudirman
+                                    </h4>
+                                    <p class="text-xs text-gray-500">Jakarta Pusat</p>
+                                </div>
+                                <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full">Buka</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4 text-xs">
+                                <div>
+                                    <p class="text-gray-400">Order Hari Ini</p>
+                                    <p class="font-bold text-gray-900 text-sm mt-0.5">47 pesanan</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Omzet</p>
+                                    <p class="font-bold text-gray-900 text-sm mt-0.5">Rp 4.250.000</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+                                <span class="text-amber-700 font-bold bg-amber-50 px-2 py-0.5 rounded-md">5 Pending</span>
+                                <a href="dashboard.html" class="text-brand-600 font-bold hover:underline">Buka Dasbor &rarr;</a>
+                            </div>
                         </div>
-                        <span class="px-2.5 py-1 bg-green-100 text-green-700 text-xs font-semibold rounded-full border border-green-200">Open</span>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mb-5">
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Orders Today</p>
-                            <p class="font-bold text-gray-900 text-lg">61</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Revenue</p>
-                            <p class="font-bold text-gray-900 text-lg">Rp 5.820.000</p>
+
+                    <!-- Kemang -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-emerald-600 overflow-hidden">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-bold text-base text-gray-900 flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span> Kemang
+                                    </h4>
+                                    <p class="text-xs text-gray-500">Jakarta Selatan</p>
+                                </div>
+                                <span class="px-2 py-0.5 bg-green-100 text-green-700 text-[10px] font-bold rounded-full">Buka</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4 text-xs">
+                                <div>
+                                    <p class="text-gray-400">Order Hari Ini</p>
+                                    <p class="font-bold text-gray-900 text-sm mt-0.5">61 pesanan</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Omzet</p>
+                                    <p class="font-bold text-gray-900 text-sm mt-0.5">Rp 5.820.000</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+                                <span class="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">6 Pending</span>
+                                <a href="dashboard.html" class="text-emerald-600 font-bold hover:underline">Buka Dasbor &rarr;</a>
+                            </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-between border-t border-gray-100 pt-4">
-                        <div class="flex items-center gap-2">
-                            <span class="bg-emerald-100 text-emerald-700 text-xs font-bold px-2 py-1 rounded-full">6</span>
-                            <span class="text-sm text-gray-600 font-medium">Pending</span>
+
+                    <!-- BSD City -->
+                    <div class="bg-white rounded-2xl shadow-sm border border-gray-200 border-l-4 border-l-indigo-600 overflow-hidden">
+                        <div class="p-5">
+                            <div class="flex justify-between items-start mb-3">
+                                <div>
+                                    <h4 class="font-bold text-base text-gray-900 flex items-center gap-2">
+                                        <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> BSD City
+                                    </h4>
+                                    <p class="text-xs text-gray-500">Tangerang Selatan</p>
+                                </div>
+                                <span class="px-2 py-0.5 bg-amber-100 text-amber-700 text-[10px] font-bold rounded-full">Ramai</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 mb-4 text-xs">
+                                <div>
+                                    <p class="text-gray-400">Order Hari Ini</p>
+                                    <p class="font-bold text-gray-900 text-sm mt-0.5">33 pesanan</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-400">Omzet</p>
+                                    <p class="font-bold text-gray-900 text-sm mt-0.5">Rp 2.680.000</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between border-t border-gray-100 pt-3 text-xs">
+                                <span class="text-indigo-700 font-bold bg-indigo-50 px-2 py-0.5 rounded-md">3 Pending</span>
+                                <a href="dashboard.html" class="text-indigo-600 font-bold hover:underline">Buka Dasbor &rarr;</a>
+                            </div>
                         </div>
-                        <a href="dashboard.html" class="text-sm font-medium text-emerald-600 hover:text-emerald-700">View Branch &rarr;</a>
                     </div>
                 </div>
             </div>
 
-            <!-- BSD City -->
-            <div class="bg-white rounded-2xl shadow-sm border-l-4 border-indigo-600 overflow-hidden">
-                <div class="p-6">
-                    <div class="flex justify-between items-start mb-4">
-                        <div>
-                            <h4 class="font-bold text-lg text-gray-900 flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-indigo-600"></span> BSD City
-                            </h4>
-                            <p class="text-sm text-gray-500">Tangerang Selatan</p>
-                        </div>
-                        <span class="px-2.5 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full border border-amber-200">Busy</span>
+            <!-- Recent Network Orders Table (Touch scrollable on mobile) -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="p-4 sm:p-6 border-b border-gray-100 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base sm:text-lg font-bold text-gray-900 font-serif">Aktivitas Pesanan Jaringan</h3>
+                        <p class="text-xs text-gray-500">Semua transaksi real-time dari 3 cabang</p>
                     </div>
-                    <div class="grid grid-cols-2 gap-4 mb-5">
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Orders Today</p>
-                            <p class="font-bold text-gray-900 text-lg">33</p>
-                        </div>
-                        <div>
-                            <p class="text-xs text-gray-500 mb-1">Revenue</p>
-                            <p class="font-bold text-gray-900 text-lg">Rp 2.680.000</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-between border-t border-gray-100 pt-4">
-                        <div class="flex items-center gap-2">
-                            <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-2 py-1 rounded-full">3</span>
-                            <span class="text-sm text-gray-600 font-medium">Pending</span>
-                        </div>
-                        <a href="dashboard.html" class="text-sm font-medium text-indigo-600 hover:text-indigo-700">View Branch &rarr;</a>
-                    </div>
+                    <a href="owner-orders.html" class="text-xs sm:text-sm font-bold text-brand-600 hover:text-brand-700">Lihat Semua (141) &rarr;</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Recent Orders Across All Branches & Top Items -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- Table: Recent Orders -->
-            <div class="lg:col-span-2">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-xl font-bold text-gray-800">Recent Network Activity</h3>
-                    <a href="owner-orders.html" class="text-sm font-medium text-brand-600 hover:text-brand-700">View All Orders &rarr;</a>
-                </div>
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <table class="w-full text-left border-collapse">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse text-xs sm:text-sm">
                         <thead>
-                            <tr class="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
-                                <th class="px-6 py-4 font-medium">Order ID</th>
-                                <th class="px-6 py-4 font-medium">Branch</th>
-                                <th class="px-6 py-4 font-medium">Customer & Items</th>
-                                <th class="px-6 py-4 font-medium">Total</th>
-                                <th class="px-6 py-4 font-medium">Status & Time</th>
+                            <tr class="bg-gray-50 text-gray-500 text-[11px] uppercase tracking-wider">
+                                <th class="px-4 sm:px-6 py-3 font-medium">Order ID</th>
+                                <th class="px-4 sm:px-6 py-3 font-medium">Cabang</th>
+                                <th class="px-4 sm:px-6 py-3 font-medium">Pelanggan & Menu</th>
+                                <th class="px-4 sm:px-6 py-3 font-medium">Total</th>
+                                <th class="px-4 sm:px-6 py-3 font-medium">Status & Waktu</th>
                             </tr>
                         </thead>
-                        <tbody class="text-sm divide-y divide-gray-100">
+                        <tbody class="divide-y divide-gray-100">
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-SDR-0042</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Sudirman</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Budi Santoso</p>
-                                    <p class="text-xs text-gray-500">Café Latte x2, Croissant</p>
+                                <td class="px-4 sm:px-6 py-3.5 font-bold text-brand-700">#OLG-SDR-0042</td>
+                                <td class="px-4 sm:px-6 py-3.5"><span class="px-2 py-0.5 bg-amber-100 text-amber-800 text-xs font-bold rounded-full">Sudirman</span></td>
+                                <td class="px-4 sm:px-6 py-3.5">
+                                    <p class="font-bold text-gray-900">Budi Santoso</p>
+                                    <p class="text-[11px] text-gray-500">Café Latte x2, Croissant</p>
                                 </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 86.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="w-2 h-2 rounded-full bg-yellow-400"></span> Preparing
-                                    </div>
-                                    <p class="text-xs text-gray-500">10:33 AM</p>
+                                <td class="px-4 sm:px-6 py-3.5 font-bold text-gray-900">Rp 86.000</td>
+                                <td class="px-4 sm:px-6 py-3.5">
+                                    <span class="inline-flex items-center gap-1 text-amber-700 text-xs font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Disiapkan
+                                    </span>
+                                    <p class="text-[10px] text-gray-400">10:33 WIB</p>
                                 </td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-KMG-0089</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-medium rounded-full">Kemang</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Siti Rahayu</p>
-                                    <p class="text-xs text-gray-500">Beef Burger, Thai Tea</p>
+                                <td class="px-4 sm:px-6 py-3.5 font-bold text-brand-700">#OLG-KMG-0089</td>
+                                <td class="px-4 sm:px-6 py-3.5"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">Kemang</span></td>
+                                <td class="px-4 sm:px-6 py-3.5">
+                                    <p class="font-bold text-gray-900">Siti Rahayu</p>
+                                    <p class="text-[11px] text-gray-500">Beef Burger, Thai Tea</p>
                                 </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 77.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="w-2 h-2 rounded-full bg-green-500"></span> Ready
-                                    </div>
-                                    <p class="text-xs text-gray-500">10:28 AM</p>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-BSD-0031</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">BSD City</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Ahmad Rizky</p>
-                                    <p class="text-xs text-gray-500">Chicken Pasta, Mocha</p>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 83.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="w-2 h-2 rounded-full bg-blue-500"></span> On the Way
-                                    </div>
-                                    <p class="text-xs text-gray-500">10:15 AM</p>
+                                <td class="px-4 sm:px-6 py-3.5 font-bold text-gray-900">Rp 77.000</td>
+                                <td class="px-4 sm:px-6 py-3.5">
+                                    <span class="inline-flex items-center gap-1 text-emerald-700 text-xs font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Siap Kirim
+                                    </span>
+                                    <p class="text-[10px] text-gray-400">10:28 WIB</p>
                                 </td>
                             </tr>
                             <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-SDR-0041</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Sudirman</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Diana Putri</p>
-                                    <p class="text-xs text-gray-500">Caesar Salad, OJ</p>
+                                <td class="px-4 sm:px-6 py-3.5 font-bold text-brand-700">#OLG-BSD-0033</td>
+                                <td class="px-4 sm:px-6 py-3.5"><span class="px-2 py-0.5 bg-indigo-100 text-indigo-800 text-xs font-bold rounded-full">BSD City</span></td>
+                                <td class="px-4 sm:px-6 py-3.5">
+                                    <p class="font-bold text-gray-900">Andika Wijaya</p>
+                                    <p class="text-[11px] text-gray-500">Americano x4, Fries</p>
                                 </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 65.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <i class="fa-solid fa-check text-green-500 text-xs"></i> Delivered
-                                    </div>
-                                    <p class="text-xs text-gray-500">10:02 AM</p>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-KMG-0088</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-medium rounded-full">Kemang</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Reza Mahendra</p>
-                                    <p class="text-xs text-gray-500">Tiramisu, Latte x2</p>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 104.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <i class="fa-solid fa-check text-green-500 text-xs"></i> Delivered
-                                    </div>
-                                    <p class="text-xs text-gray-500">9:45 AM</p>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-BSD-0030</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-indigo-100 text-indigo-800 text-xs font-medium rounded-full">BSD City</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Lia Kusuma</p>
-                                    <p class="text-xs text-gray-500">Americano x3, Muffin</p>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 93.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <i class="fa-solid fa-check text-green-500 text-xs"></i> Delivered
-                                    </div>
-                                    <p class="text-xs text-gray-500">9:30 AM</p>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-KMG-0087</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-medium rounded-full">Kemang</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Wati Setiawan</p>
-                                    <p class="text-xs text-gray-500">Matcha Latte, Cheesecake</p>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 68.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <i class="fa-solid fa-check text-green-500 text-xs"></i> Delivered
-                                    </div>
-                                    <p class="text-xs text-gray-500">9:15 AM</p>
-                                </td>
-                            </tr>
-                            <tr class="hover:bg-gray-50 transition-colors">
-                                <td class="px-6 py-4 font-medium text-gray-900">#OLG-SDR-0040</td>
-                                <td class="px-6 py-4"><span class="px-2.5 py-1 bg-amber-100 text-amber-800 text-xs font-medium rounded-full">Sudirman</span></td>
-                                <td class="px-6 py-4">
-                                    <p class="font-medium text-gray-900">Hendra Wijaya</p>
-                                    <p class="text-xs text-gray-500">Cappuccino x2, Club Sandwich</p>
-                                </td>
-                                <td class="px-6 py-4 font-medium text-gray-900">Rp 105.000</td>
-                                <td class="px-6 py-4">
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <i class="fa-solid fa-check text-green-500 text-xs"></i> Delivered
-                                    </div>
-                                    <p class="text-xs text-gray-500">9:00 AM</p>
+                                <td class="px-4 sm:px-6 py-3.5 font-bold text-gray-900">Rp 124.000</td>
+                                <td class="px-4 sm:px-6 py-3.5">
+                                    <span class="inline-flex items-center gap-1 text-blue-700 text-xs font-bold">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Diantar
+                                    </span>
+                                    <p class="text-[10px] text-gray-400">10:15 WIB</p>
                                 </td>
                             </tr>
                         </tbody>
@@ -376,66 +330,34 @@
                 </div>
             </div>
 
-            <!-- Top Menu Items -->
-            <div>
-                <h3 class="text-xl font-bold text-gray-800 mb-4">Top Items Network-wide</h3>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col gap-5">
-                    
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-medium text-gray-900 text-sm">1. Café Latte</p>
-                            <p class="text-xs font-bold text-gray-500">89 orders</p>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2">
-                            <div class="bg-brand-500 h-2 rounded-full" style="width: 100%"></div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-medium text-gray-900 text-sm">2. Cappuccino</p>
-                            <p class="text-xs font-bold text-gray-500">67 orders</p>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2">
-                            <div class="bg-brand-500 h-2 rounded-full" style="width: 75%"></div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-medium text-gray-900 text-sm">3. Chicken Pasta</p>
-                            <p class="text-xs font-bold text-gray-500">54 orders</p>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2">
-                            <div class="bg-brand-500 h-2 rounded-full" style="width: 60%"></div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-medium text-gray-900 text-sm">4. Butter Croissant</p>
-                            <p class="text-xs font-bold text-gray-500">49 orders</p>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2">
-                            <div class="bg-brand-500 h-2 rounded-full" style="width: 55%"></div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <p class="font-medium text-gray-900 text-sm">5. Americano</p>
-                            <p class="text-xs font-bold text-gray-500">43 orders</p>
-                        </div>
-                        <div class="w-full bg-gray-100 rounded-full h-2">
-                            <div class="bg-brand-500 h-2 rounded-full" style="width: 48%"></div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
         </div>
     </main>
 
+    <!-- Sidebar Toggle Script -->
+    <script>
+      function toggleSidebar() {
+        const sidebar = document.getElementById('adminSidebar');
+        const backdrop = document.getElementById('sidebarBackdrop');
+        if (!sidebar || !backdrop) return;
+        const isClosed = sidebar.classList.contains('-translate-x-full');
+        if (isClosed) {
+          sidebar.classList.remove('-translate-x-full');
+          backdrop.classList.remove('hidden');
+          document.body.classList.add('overflow-hidden');
+        } else {
+          sidebar.classList.add('-translate-x-full');
+          backdrop.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          const sidebar = document.getElementById('adminSidebar');
+          if (sidebar && !sidebar.classList.contains('-translate-x-full')) {
+            toggleSidebar();
+          }
+        }
+      });
+    </script>
 </body>
 </html>
