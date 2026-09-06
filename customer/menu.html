@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Cafe Olga — Menu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Olga — Menu & Pemesanan Online</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -28,26 +28,27 @@
     }
   </script>
   <style>
-    body { background-color: #1c1917; }
-    .hero-bg { background: linear-gradient(135deg,#3b1f0b 0%,#5c3317 50%,#8b5e3c 100%); }
+    .hero-bg { background: linear-gradient(135deg,#2e1708 0%,#4a2610 45%,#7c4a24 100%); }
     .scrollbar-none::-webkit-scrollbar { display: none; }
     .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    .menu-card { transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
+    .menu-card:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,0,0,0.06); }
     .toast {
       visibility: hidden;
-      min-width: 200px;
+      min-width: 220px;
       background-color: rgba(28, 25, 23, 0.95);
       color: #fff;
       text-align: center;
       border-radius: 9999px;
-      padding: 10px 18px;
+      padding: 10px 20px;
       position: fixed;
       z-index: 60;
       left: 50%;
       bottom: 84px;
       transform: translateX(-50%);
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 600;
-      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.4);
+      box-shadow: 0 15px 30px -5px rgba(0,0,0,0.4);
       backdrop-filter: blur(8px);
       border: 1px solid rgba(255,255,255,0.15);
       opacity: 0;
@@ -60,17 +61,23 @@
     }
   </style>
 </head>
-<body class="font-sans text-stone-800 antialiased min-h-screen sm:py-6 flex justify-center selection:bg-brand-500 selection:text-white">
+<body class="font-sans bg-[#fbf9f6] text-stone-800 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white pb-24 lg:pb-12">
 
-  <!-- Mobile App Frame Container (100% on mobile, phone-framed on desktop) -->
-  <div class="w-full max-w-md bg-stone-50 min-h-screen sm:min-h-[844px] sm:max-h-[95vh] sm:overflow-y-auto sm:rounded-[36px] sm:shadow-2xl sm:border sm:border-stone-700/40 relative flex flex-col pb-36">
+  <!-- ══════════════════════════════════════════
+       RESPONSIVE HEADER
+  ══════════════════════════════════════════ -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-4">
+      
+      <!-- Left: Logo & Outlet Selector -->
+      <div class="flex items-center gap-3 min-w-0">
+        <a href="select-branch.html" class="flex items-center gap-2 group shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-md shadow-brand-600/20 group-hover:scale-105 transition-transform">
+            <i class="fas fa-mug-hot text-base text-amber-200"></i>
+          </div>
+          <span class="font-serif font-bold text-lg sm:text-xl text-stone-900 leading-tight hidden sm:block">Cafe Olga</span>
+        </a>
 
-    <!-- ══════════════════════════════════════════
-         STICKY MOBILE HEADER
-    ══════════════════════════════════════════ -->
-    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm">
-      <!-- Top Row: Location & Actions -->
-      <div class="px-4 py-2.5 flex items-center justify-between gap-2">
         <!-- Store Selector Pill -->
         <a href="select-branch.html" class="flex items-center gap-2 bg-stone-100 hover:bg-stone-200/80 active:scale-95 py-1.5 px-3 rounded-full transition-all min-w-0">
           <i class="fa-solid fa-store text-brand-600 text-xs shrink-0"></i>
@@ -80,506 +87,763 @@
           </div>
           <i class="fa-solid fa-chevron-down text-[10px] text-stone-400 shrink-0 ml-0.5"></i>
         </a>
-
-        <!-- Right: Active Order Pill & Cart -->
-        <div class="flex items-center gap-1.5 shrink-0">
-          <!-- Active Order Pill -->
-          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300/80 text-amber-900 text-[11px] font-bold shadow-sm transition-all">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-            </span>
-            <span>#0042</span>
-          </a>
-
-          <!-- Cart Icon -->
-          <a id="topCartLink" href="cart.html" class="relative p-2 text-stone-700 hover:text-brand-600 transition-colors">
-            <i class="fa-solid fa-cart-shopping text-lg"></i>
-            <span id="topCartBadge" class="absolute top-0.5 right-0.5 inline-flex items-center justify-center w-4 h-4 text-[10px] font-extrabold text-white bg-brand-600 rounded-full shadow">3</span>
-          </a>
-        </div>
       </div>
 
-      <!-- Live Search Input (Always Visible on Mobile!) -->
-      <div class="px-4 pb-2.5">
+      <!-- Center: Search Bar (Desktop & Tablet) -->
+      <div class="hidden md:flex flex-1 max-w-md mx-4">
         <div class="relative w-full">
-          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-stone-400">
+          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
             <i class="fa-solid fa-search text-xs"></i>
           </div>
-          <input type="text" id="menuSearchInput" oninput="filterMenu(this.value)"
-            class="block w-full pl-8 pr-8 py-2 text-xs border border-stone-200 rounded-xl bg-stone-100/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all placeholder:text-stone-400"
-            placeholder="Cari kopi, pastry, makanan..." />
-          <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-600">
+          <input type="text" id="menuSearchInputDesk" oninput="filterMenu(this.value)"
+            class="block w-full pl-9 pr-9 py-2 text-xs border border-stone-200 rounded-xl bg-stone-100/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all placeholder:text-stone-400"
+            placeholder="Cari kopi favorit, pastry, pasta, camilan..." />
+          <button id="clearSearchBtnDesk" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-600">
             <i class="fa-solid fa-circle-xmark text-xs"></i>
           </button>
         </div>
       </div>
 
-      <!-- Horizontal Swipeable Category Chips -->
-      <div class="px-4 pb-2 flex gap-1.5 overflow-x-auto scrollbar-none text-xs">
-        <button onclick="setCategory('all', this)" class="cat-pill active px-3.5 py-1.5 rounded-full bg-brand-600 text-white font-bold whitespace-nowrap shadow-sm transition-all">
-          Semua
+      <!-- Right: Active Order Pill & Cart Badge -->
+      <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+        <!-- Active Order Pill -->
+        <a href="tracking.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300/80 text-amber-900 text-xs font-bold shadow-sm transition-all">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+          </span>
+          <span class="hidden sm:inline">Pesanan</span>
+          <span>#0042</span>
+        </a>
+
+        <!-- Cart Link with Dynamic Badge -->
+        <a id="topCartLink" href="cart.html" class="relative p-2 rounded-xl bg-stone-100 hover:bg-brand-50 text-stone-700 hover:text-brand-600 transition-colors" aria-label="Keranjang Belanja">
+          <i class="fa-solid fa-cart-shopping text-base"></i>
+          <span id="topCartBadge" class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-[11px] font-extrabold text-white bg-brand-600 rounded-full shadow">3</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Search Bar -->
+    <div class="md:hidden px-4 pb-2.5">
+      <div class="relative w-full">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-stone-400">
+          <i class="fa-solid fa-search text-xs"></i>
+        </div>
+        <input type="text" id="menuSearchInput" oninput="filterMenu(this.value)"
+          class="block w-full pl-9 pr-9 py-2 text-xs border border-stone-200 rounded-xl bg-stone-100/80 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all placeholder:text-stone-400"
+          placeholder="Cari kopi, pastry, makanan..." />
+        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-600">
+          <i class="fa-solid fa-circle-xmark text-xs"></i>
         </button>
-        <button onclick="setCategory('coffee', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
-          ☕ Kopi
+      </div>
+    </div>
+
+    <!-- Sticky Category Tabs Subbar -->
+    <div class="border-t border-stone-100 bg-white/80 backdrop-blur-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex items-center gap-2 overflow-x-auto scrollbar-none text-xs">
+        <button onclick="setCategory('all', this)" class="cat-pill active px-4 py-2 rounded-full bg-brand-600 text-white font-bold whitespace-nowrap shadow-sm transition-all">
+          Semua Menu
         </button>
-        <button onclick="setCategory('non-coffee', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+        <button onclick="setCategory('coffee', this)" class="cat-pill px-4 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          ☕ Kopi & Espresso
+        </button>
+        <button onclick="setCategory('non-coffee', this)" class="cat-pill px-4 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
           🧊 Non-Kopi
         </button>
-        <button onclick="setCategory('pastry', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
-          🥐 Pastry
+        <button onclick="setCategory('pastry', this)" class="cat-pill px-4 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🥐 Pastry & Bakery
         </button>
-        <button onclick="setCategory('meals', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
-          🍝 Makanan
+        <button onclick="setCategory('meals', this)" class="cat-pill px-4 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🍝 Main Course
         </button>
-        <button onclick="setCategory('dessert', this)" class="cat-pill px-3 py-1.5 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
-          🍰 Dessert
+        <button onclick="setCategory('dessert', this)" class="cat-pill px-4 py-2 rounded-full bg-white text-stone-600 border border-stone-200 hover:border-brand-300 font-medium whitespace-nowrap transition-all">
+          🍰 Desserts
         </button>
       </div>
-    </header>
-
-    <!-- ══════════════════════════════════════════
-         ACTIVE ORDER COMPACT BANNER
-    ══════════════════════════════════════════ -->
-    <div class="mx-4 mt-3 bg-gradient-to-r from-amber-600 to-brand-600 text-white rounded-2xl p-3 shadow-sm flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2.5 min-w-0">
-        <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center shrink-0">
-          <i class="fa-solid fa-motorcycle text-white text-sm animate-pulse"></i>
-        </div>
-        <div class="min-w-0">
-          <p class="text-[11px] font-bold truncate">Pesanan #0042 dalam perjalanan</p>
-          <p class="text-[10px] text-amber-100 truncate">Driver Andi Pratama (~10 menit)</p>
-        </div>
-      </div>
-      <a href="tracking.html" class="shrink-0 px-2.5 py-1 bg-white text-brand-700 font-bold rounded-lg text-[10px] shadow active:scale-95 transition-transform">
-        Pantau
-      </a>
     </div>
+  </header>
 
-    <!-- ══════════════════════════════════════════
-         MOBILE MENU LIST
-    ══════════════════════════════════════════ -->
-    <main class="p-4 space-y-6">
+  <!-- ══════════════════════════════════════════
+       MAIN CONTENT: 12-COLUMN RESPONSIVE LAYOUT
+  ══════════════════════════════════════════ -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 w-full flex-grow">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- ─── LEFT COLUMN: MENU CATALOG (8 Cols on Desktop) ─── -->
+      <div class="lg:col-span-8 space-y-8">
 
-      <!-- Section: Coffee & Espresso -->
-      <div class="menu-section" data-cat="coffee">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-            <span>☕ Coffee & Espresso</span>
-          </h2>
-          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
+        <!-- Active Order Compact Banner -->
+        <div class="bg-gradient-to-r from-amber-600 to-brand-600 text-white rounded-2xl p-3.5 shadow-sm flex items-center justify-between gap-3">
+          <div class="flex items-center gap-3 min-w-0">
+            <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+              <i class="fa-solid fa-motorcycle text-white text-sm animate-pulse"></i>
+            </div>
+            <div class="min-w-0">
+              <p class="text-xs font-bold truncate">Pesanan #0042 sedang diantar oleh kurir</p>
+              <p class="text-[11px] text-amber-100 truncate">Driver Andi Pratama (~10 menit lagi)</p>
+            </div>
+          </div>
+          <a href="tracking.html" class="shrink-0 px-3 py-1.5 bg-white text-brand-700 font-bold rounded-xl text-xs shadow hover:bg-amber-50 active:scale-95 transition-all">
+            Pantau Live
+          </a>
         </div>
 
-        <div class="space-y-3">
-          <!-- Item: Americano -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="americano classic black coffee">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-mug-hot"></i>
+        <!-- ── Section: Coffee & Espresso ── -->
+        <section class="menu-section" data-cat="coffee">
+          <div class="flex items-center justify-between mb-4 border-b border-stone-200 pb-2.5">
+            <div>
+              <h2 class="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
+                <span>☕ Coffee & Espresso</span>
+              </h2>
+              <p class="text-xs text-stone-500 mt-0.5">Diseduh dari 100% biji Arabika pilihan Nusantara.</p>
             </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Americano</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Classic black espresso roast</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 25.000</p>
-            </div>
-            <button onclick="addToCart('Americano', 25000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
+            <span class="text-xs font-semibold text-stone-400 bg-stone-100 px-2.5 py-1 rounded-full">6 Menu</span>
           </div>
 
-          <!-- Item: Cafe Latte -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="cafe latte smooth espresso steamed milk">
-            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
-              <i class="fa-solid fa-mug-saucer"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Café Latte</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Smooth espresso with steamed milk</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 32.000</p>
-            </div>
-            <button onclick="addToCart('Café Latte', 32000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Cappuccino -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="cappuccino rich espresso foamy milk">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-800 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-coffee"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Cappuccino</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Rich espresso with thick foamy milk</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 30.000</p>
-            </div>
-            <button onclick="addToCart('Cappuccino', 30000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Caramel Macchiato -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="caramel macchiato vanilla caramel espresso">
-            <div class="w-16 h-16 rounded-xl bg-amber-100/60 flex items-center justify-center text-2xl text-brand-700 shrink-0 border border-amber-200">
-              <i class="fa-solid fa-cup-togo"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center gap-1.5">
-                <h3 class="font-bold text-sm text-stone-900 truncate">Caramel Macchiato</h3>
-                <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1 rounded">Favorit</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <!-- Item: Americano -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="americano classic black coffee espresso">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Americano</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Classic black espresso roast, clean and aromatic.</p>
+                </div>
               </div>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Vanilla, caramel & rich espresso</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 38.000</p>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 25.000</span>
+                <button onclick="addToCart('Americano', 25000, 'fa-mug-hot')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
             </div>
-            <button onclick="addToCart('Caramel Macchiato', 38000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
+
+            <!-- Item: Cafe Latte -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="cafe latte smooth espresso steamed milk">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
+                  <i class="fa-solid fa-mug-saucer"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1">
+                    <h3 class="font-bold text-sm text-stone-900 truncate">Café Latte</h3>
+                    <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1 rounded">Best</span>
+                  </div>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Smooth double espresso with velvet steamed milk.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 32.000</span>
+                <button onclick="addToCart('Café Latte', 32000, 'fa-mug-saucer')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Cappuccino -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="cappuccino rich espresso foamy milk">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-800 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-coffee"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Cappuccino</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Rich espresso with thick foamy milk & cocoa dust.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 30.000</span>
+                <button onclick="addToCart('Cappuccino', 30000, 'fa-coffee')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Caramel Macchiato -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="caramel macchiato vanilla caramel espresso">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-100/60 flex items-center justify-center text-2xl text-brand-700 shrink-0 border border-amber-200">
+                  <i class="fa-solid fa-whiskey-glass"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-1">
+                    <h3 class="font-bold text-sm text-stone-900 truncate">Caramel Macchiato</h3>
+                    <span class="text-[9px] bg-amber-100 text-amber-800 font-bold px-1 rounded">Favorit</span>
+                  </div>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Vanilla syrup, steamed milk, espresso & caramel drizzle.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 38.000</span>
+                <button onclick="addToCart('Caramel Macchiato', 38000, 'fa-whiskey-glass')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Mocha -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="mocha chocolate espresso milk">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-700 shrink-0 border border-stone-200">
+                  <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Mocha</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Espresso blend with premium dark chocolate & milk.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 35.000</span>
+                <button onclick="addToCart('Mocha', 35000, 'fa-mug-hot')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Espresso -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="espresso bold single shot">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-900 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-mug-saucer"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Espresso Single</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Bold, aromatic & thick crema single shot.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 20.000</span>
+                <button onclick="addToCart('Espresso Single', 20000, 'fa-mug-saucer')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Section: Non-Coffee Drinks ── -->
+        <section class="menu-section" data-cat="non-coffee">
+          <div class="flex items-center justify-between mb-4 border-b border-stone-200 pb-2.5">
+            <div>
+              <h2 class="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
+                <span>🧊 Non-Coffee Drinks</span>
+              </h2>
+              <p class="text-xs text-stone-500 mt-0.5">Pilihan segar teh artisan, matcha Kyoto & cokelat murni.</p>
+            </div>
+            <span class="text-xs font-semibold text-stone-400 bg-stone-100 px-2.5 py-1 rounded-full">4 Menu</span>
           </div>
 
-          <!-- Item: Mocha -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="mocha chocolate espresso milk">
-            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-700 shrink-0 border border-stone-200">
-              <i class="fa-solid fa-mug-hot"></i>
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <!-- Item: Matcha Latte -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="matcha latte japanese green tea uji kyoto">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl text-emerald-600 shrink-0 border border-emerald-100">
+                  <i class="fa-solid fa-leaf"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Matcha Latte</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Pure Uji Kyoto ceremonial matcha with fresh milk.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 33.000</span>
+                <button onclick="addToCart('Matcha Latte', 33000, 'fa-leaf')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
             </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Mocha</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Espresso blend with dark chocolate & milk</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 35.000</p>
+
+            <!-- Item: Chocolate Deluxe -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="chocolate deluxe belgian dark cocoa">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-700 shrink-0 border border-stone-200">
+                  <i class="fa-solid fa-cookie-bite"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Chocolate Deluxe</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Rich Belgian dark chocolate blend with steamed milk.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 30.000</span>
+                <button onclick="addToCart('Chocolate Deluxe', 30000, 'fa-cookie-bite')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
             </div>
-            <button onclick="addToCart('Mocha', 35000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
+
+            <!-- Item: Lychee Tea -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="lychee tea iced fresh fruit">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-pink-50 flex items-center justify-center text-2xl text-pink-500 shrink-0 border border-pink-100">
+                  <i class="fa-solid fa-glass-water"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Iced Lychee Tea</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Fresh brewed black tea with real whole sweet lychees.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 24.000</span>
+                <button onclick="addToCart('Iced Lychee Tea', 24000, 'fa-glass-water')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Taro Latte -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="taro latte sweet purple creamy">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-purple-50 flex items-center justify-center text-2xl text-purple-500 shrink-0 border border-purple-100">
+                  <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Taro Latte</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Creamy aromatic purple taro with fresh warm milk.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 28.000</span>
+                <button onclick="addToCart('Taro Latte', 28000, 'fa-mug-hot')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Section: Pastry & Bakery ── -->
+        <section class="menu-section" data-cat="pastry">
+          <div class="flex items-center justify-between mb-4 border-b border-stone-200 pb-2.5">
+            <div>
+              <h2 class="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
+                <span>🥐 Pastry & Bakery</span>
+              </h2>
+              <p class="text-xs text-stone-500 mt-0.5">Dipanggang segar setiap pagi dengan French butter premium.</p>
+            </div>
+            <span class="text-xs font-semibold text-stone-400 bg-stone-100 px-2.5 py-1 rounded-full">3 Menu</span>
           </div>
 
-          <!-- Item: Espresso -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="espresso bold single shot">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-900 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-mug-saucer"></i>
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <!-- Item: Butter Croissant -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="butter croissant flaky french pastry">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-600 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-bread-slice"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Butter Croissant</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Golden, flaky & crispy layers of French butter goodness.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 22.000</span>
+                <button onclick="addToCart('Butter Croissant', 22000, 'fa-bread-slice')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
             </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Espresso Single</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Bold & aromatic single shot</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 20.000</p>
+
+            <!-- Item: Almond Croissant -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="almond croissant frangipane sliced almonds">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-100/50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-200">
+                  <i class="fa-solid fa-bread-slice"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Almond Croissant</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Filled with almond frangipane & toasted almond flakes.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 26.000</span>
+                <button onclick="addToCart('Almond Croissant', 26000, 'fa-bread-slice')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
             </div>
-            <button onclick="addToCart('Espresso', 20000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
+
+            <!-- Item: Truffle Fries -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="french fries truffle parmesan crispy potato">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-600 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-bowl-food"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Truffle Fries</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Crispy shoestring fries tossed in white truffle oil & parmesan.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 24.000</span>
+                <button onclick="addToCart('Truffle Fries', 24000, 'fa-bowl-food')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </section>
+
+        <!-- ── Section: Main Course ── -->
+        <section class="menu-section" data-cat="meals">
+          <div class="flex items-center justify-between mb-4 border-b border-stone-200 pb-2.5">
+            <div>
+              <h2 class="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
+                <span>🍝 Main Course</span>
+              </h2>
+              <p class="text-xs text-stone-500 mt-0.5">Hidangan berat lezat yang dimasak segar oleh chef Cafe Olga.</p>
+            </div>
+            <span class="text-xs font-semibold text-stone-400 bg-stone-100 px-2.5 py-1 rounded-full">2 Menu</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <!-- Item: Chicken Pasta -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="chicken pasta creamy fettuccine mushroom">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
+                  <i class="fa-solid fa-bowl-food"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Chicken Pasta Alfredo</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Creamy parmesan fettuccine with juicy grilled chicken.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 48.000</span>
+                <button onclick="addToCart('Chicken Pasta Alfredo', 48000, 'fa-bowl-food')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Beef Burger -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="beef burger patty cheese brioche bun">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-800 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-burger"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Olga Beef Burger</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">150g grilled Australian patty, melted cheddar on brioche.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 52.000</span>
+                <button onclick="addToCart('Olga Beef Burger', 52000, 'fa-burger')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Section: Desserts ── -->
+        <section class="menu-section" data-cat="dessert">
+          <div class="flex items-center justify-between mb-4 border-b border-stone-200 pb-2.5">
+            <div>
+              <h2 class="font-serif font-bold text-xl text-stone-900 flex items-center gap-2">
+                <span>🍰 Desserts</span>
+              </h2>
+              <p class="text-xs text-stone-500 mt-0.5">Penutup manis istimewa perpaduan mascarpone dan espresso.</p>
+            </div>
+            <span class="text-xs font-semibold text-stone-400 bg-stone-100 px-2.5 py-1 rounded-full">2 Menu</span>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+            <!-- Item: Tiramisu -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="tiramisu slice italian mascarpone espresso">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-100">
+                  <i class="fa-solid fa-cake-candles"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Tiramisu Slice</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Authentic Italian mascarpone with espresso-soaked ladyfingers.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 35.000</span>
+                <button onclick="addToCart('Tiramisu Slice', 35000, 'fa-cake-candles')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+
+            <!-- Item: Affogato -->
+            <div class="menu-card menu-item bg-white rounded-2xl p-4 border border-stone-200 shadow-sm flex flex-col justify-between" data-name="affogato espresso gelato vanilla ice cream">
+              <div class="flex gap-3 items-start mb-3">
+                <div class="w-14 h-14 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
+                  <i class="fa-solid fa-ice-cream"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="font-bold text-sm text-stone-900 truncate">Classic Affogato</h3>
+                  <p class="text-xs text-stone-500 line-clamp-2 mt-0.5">Hot double espresso shot poured over cold Madagascar vanilla gelato.</p>
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-stone-100">
+                <span class="text-sm font-extrabold text-brand-700">Rp 30.000</span>
+                <button onclick="addToCart('Classic Affogato', 30000, 'fa-ice-cream')" class="px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+                  <i class="fa-solid fa-plus text-[10px]"></i> Tambah
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
 
-      <!-- Section: Non-Coffee Drinks -->
-      <div class="menu-section" data-cat="non-coffee">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-            <span>🧊 Non-Coffee Drinks</span>
-          </h2>
-          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
+      <!-- ─── RIGHT COLUMN: STICKY CART SIDEBAR (Desktop Only) ─── -->
+      <aside class="hidden lg:block lg:col-span-4 sticky top-28 space-y-4">
+        <div class="bg-white rounded-3xl p-5 border border-stone-200 shadow-sm space-y-4">
+          
+          <!-- Sidebar Header -->
+          <div class="flex items-center justify-between border-b border-stone-100 pb-3">
+            <div class="flex items-center gap-2">
+              <i class="fa-solid fa-bag-shopping text-brand-600 text-lg"></i>
+              <h3 class="font-serif font-bold text-lg text-stone-900">Ringkasan Pesanan</h3>
+            </div>
+            <span id="deskCartCountBadge" class="text-xs font-bold bg-brand-50 text-brand-700 border border-brand-200 px-2.5 py-0.5 rounded-full">
+              3 Item
+            </span>
+          </div>
+
+          <!-- Outlet & Delivery Method -->
+          <div class="bg-stone-50 p-3 rounded-2xl border border-stone-200/70 text-xs space-y-2">
+            <div class="flex justify-between items-center">
+              <span class="text-stone-400 font-medium">Outlet Dipilih:</span>
+              <a href="select-branch.html" class="text-brand-600 font-bold hover:underline flex items-center gap-1">
+                <span id="deskBranchName">Cafe Olga Sudirman</span>
+                <i class="fas fa-pencil text-[10px]"></i>
+              </a>
+            </div>
+            <div class="flex justify-between items-center text-stone-500">
+              <span>Metode:</span>
+              <span class="font-bold text-stone-800"><i class="fa-solid fa-motorcycle text-brand-600 mr-1"></i> Delivery (~25 mnt)</span>
+            </div>
+          </div>
+
+          <!-- Cart Items List -->
+          <div id="deskCartItemsList" class="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+            <!-- Rendered by JS -->
+          </div>
+
+          <!-- Price Calculation -->
+          <div class="border-t border-stone-100 pt-3 space-y-2 text-xs">
+            <div class="flex justify-between text-stone-500">
+              <span>Subtotal Menu</span>
+              <span id="deskSubtotal" class="font-semibold text-stone-800">Rp 126.000</span>
+            </div>
+            <div class="flex justify-between text-stone-500">
+              <span>Ongkos Kirim</span>
+              <span id="deskDeliveryFee" class="font-semibold text-stone-800">Rp 8.000</span>
+            </div>
+            <div class="flex justify-between text-emerald-600 font-medium">
+              <span>Voucher Diskon</span>
+              <span id="deskDiscount">-Rp 0</span>
+            </div>
+            <div class="border-t border-stone-200 pt-2 flex justify-between items-baseline">
+              <span class="text-sm font-bold text-stone-900">Total Pembayaran</span>
+              <span id="deskGrandTotal" class="text-lg font-extrabold text-brand-700">Rp 134.000</span>
+            </div>
+          </div>
+
+          <!-- Checkout CTA -->
+          <a id="deskCheckoutBtn" href="checkout.html" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-2xl font-bold text-sm shadow-md shadow-brand-600/20 flex items-center justify-center gap-2 transition-all">
+            <span>Lanjut ke Pembayaran</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+
+          <p class="text-center text-[11px] text-stone-400">
+            <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i> Pembayaran instan aman via QRIS & VA
+          </p>
+
         </div>
+      </aside>
 
-        <div class="space-y-3">
-          <!-- Item: Matcha Latte -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="matcha latte japanese green tea">
-            <div class="w-16 h-16 rounded-xl bg-emerald-50 flex items-center justify-center text-2xl text-emerald-600 shrink-0 border border-emerald-100">
-              <i class="fa-solid fa-leaf"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Matcha Latte</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Uji Kyoto matcha with fresh milk</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 33.000</p>
-            </div>
-            <button onclick="addToCart('Matcha Latte', 33000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Chocolate Deluxe -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="chocolate deluxe belgian dark cocoa">
-            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-700 shrink-0 border border-stone-200">
-              <i class="fa-solid fa-cookie-bite"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Chocolate Deluxe</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Belgian dark chocolate blend</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 30.000</p>
-            </div>
-            <button onclick="addToCart('Chocolate Deluxe', 30000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Lychee Tea -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="lychee tea iced fresh fruit">
-            <div class="w-16 h-16 rounded-xl bg-pink-50 flex items-center justify-center text-2xl text-pink-500 shrink-0 border border-pink-100">
-              <i class="fa-solid fa-glass-water"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Iced Lychee Tea</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Black tea with real sweet lychees</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 24.000</p>
-            </div>
-            <button onclick="addToCart('Iced Lychee Tea', 24000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Taro Latte -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="taro latte sweet purple creamy">
-            <div class="w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center text-2xl text-purple-500 shrink-0 border border-purple-100">
-              <i class="fa-solid fa-mug-hot"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Taro Latte</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Creamy purple taro with fresh milk</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 28.000</p>
-            </div>
-            <button onclick="addToCart('Taro Latte', 28000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section: Pastry & Snacks -->
-      <div class="menu-section" data-cat="pastry">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-            <span>🥐 Pastry & Snacks</span>
-          </h2>
-          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
-        </div>
-
-        <div class="space-y-3">
-          <!-- Item: Butter Croissant -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="butter croissant flaky french pastry">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-600 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-bread-slice"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Butter Croissant</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Flaky, golden French butter pastry</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 22.000</p>
-            </div>
-            <button onclick="addToCart('Butter Croissant', 22000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Almond Croissant -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="almond croissant frangipane sliced almonds">
-            <div class="w-16 h-16 rounded-xl bg-amber-100/50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-200">
-              <i class="fa-solid fa-bread-slice"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Almond Croissant</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Filled with almond frangipane cream</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 26.000</p>
-            </div>
-            <button onclick="addToCart('Almond Croissant', 26000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: French Fries -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="french fries truffle parmesan crispy potato">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-600 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-bowl-food"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Truffle Fries</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Crispy shoestring with truffle oil & dip</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 24.000</p>
-            </div>
-            <button onclick="addToCart('Truffle Fries', 24000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section: Main Course -->
-      <div class="menu-section" data-cat="meals">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-            <span>🍝 Main Course</span>
-          </h2>
-          <span class="text-[10px] text-stone-400 font-medium uppercase">6 item</span>
-        </div>
-
-        <div class="space-y-3">
-          <!-- Item: Chicken Pasta -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="chicken pasta creamy fettuccine mushroom">
-            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
-              <i class="fa-solid fa-bowl-food"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Chicken Pasta</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Creamy alfredo pasta with grilled chicken</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 48.000</p>
-            </div>
-            <button onclick="addToCart('Chicken Pasta', 48000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Beef Burger -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="beef burger patty cheese brioche bun">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-800 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-burger"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Olga Beef Burger</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Juicy beef patty with cheese on brioche</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 52.000</p>
-            </div>
-            <button onclick="addToCart('Olga Beef Burger', 52000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Section: Desserts -->
-      <div class="menu-section" data-cat="dessert">
-        <div class="flex items-center justify-between mb-3">
-          <h2 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
-            <span>🍰 Desserts</span>
-          </h2>
-          <span class="text-[10px] text-stone-400 font-medium uppercase">5 item</span>
-        </div>
-
-        <div class="space-y-3">
-          <!-- Item: Tiramisu -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="tiramisu slice italian mascarpone espresso">
-            <div class="w-16 h-16 rounded-xl bg-amber-50 flex items-center justify-center text-2xl text-amber-700 shrink-0 border border-amber-100">
-              <i class="fa-solid fa-cake-candles"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Tiramisu Slice</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Italian mascarpone with espresso-soaked sponge</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 35.000</p>
-            </div>
-            <button onclick="addToCart('Tiramisu Slice', 35000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-
-          <!-- Item: Affogato -->
-          <div class="menu-item bg-white rounded-2xl p-3 border border-stone-200 shadow-sm flex gap-3 items-center" data-name="affogato espresso gelato vanilla ice cream">
-            <div class="w-16 h-16 rounded-xl bg-stone-100 flex items-center justify-center text-2xl text-stone-600 shrink-0 border border-stone-200">
-              <i class="fa-solid fa-ice-cream"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-bold text-sm text-stone-900 truncate">Classic Affogato</h3>
-              <p class="text-[11px] text-stone-500 line-clamp-1 mt-0.5">Hot double espresso over cold vanilla gelato</p>
-              <p class="text-xs font-bold text-brand-700 mt-1">Rp 30.000</p>
-            </div>
-            <button onclick="addToCart('Affogato', 30000)" class="shrink-0 px-3 py-1.5 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1">
-              <i class="fa-solid fa-plus text-[10px]"></i> Tambah
-            </button>
-          </div>
-        </div>
-      </div>
-
-    </main>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast">Ditambahkan ke keranjang!</div>
-
-    <!-- ══════════════════════════════════════════
-         STICKY FLOATING CART BAR (GoFood / ShopeeFood style)
-    ══════════════════════════════════════════ -->
-    <div class="fixed sm:absolute bottom-14 inset-x-0 px-4 z-40 max-w-md mx-auto pointer-events-none">
-      <a id="floatingCartBar" href="cart.html"
-         class="pointer-events-auto w-full bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white px-4 py-3 rounded-2xl shadow-xl border border-white/20 flex items-center justify-between transition-all duration-200">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center font-bold text-xs relative">
-            <i class="fa-solid fa-cart-shopping text-sm"></i>
-            <span id="fabCartBadge" class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-white text-brand-700 text-[10px] font-extrabold rounded-full flex items-center justify-center shadow">3</span>
-          </div>
-          <div>
-            <span id="cartCountLabel" class="text-[10px] text-amber-200 block uppercase font-bold tracking-wider leading-none">3 Item di Keranjang</span>
-            <span id="cartTotalLabel" class="text-sm font-extrabold text-white leading-tight mt-0.5">Rp 134.000</span>
-          </div>
-        </div>
-        <div class="flex items-center gap-1.5 text-xs font-bold text-amber-200">
-          <span>Lihat Keranjang</span>
-          <i class="fa-solid fa-arrow-right text-[11px]"></i>
-        </div>
-      </a>
     </div>
 
-    <!-- ══════════════════════════════════════════
-         MOBILE APP BOTTOM NAVIGATION BAR
-    ══════════════════════════════════════════ -->
-    <nav class="fixed sm:absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 z-40 max-w-md mx-auto">
-      <div class="grid grid-cols-4 py-2 text-center text-[10px] font-medium">
-        <a href="select-branch.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
-          <i class="fa-solid fa-store text-base"></i>
-          <span>Cabang</span>
-        </a>
-        <a href="menu.html" class="flex flex-col items-center gap-1 text-brand-600 font-bold">
-          <i class="fa-solid fa-mug-hot text-base"></i>
-          <span>Menu</span>
-        </a>
-        <a href="cart.html" id="navCartLink" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
-          <div class="relative">
-            <i class="fa-solid fa-cart-shopping text-base"></i>
-            <span id="navCartBadge" class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
-          </div>
-          <span>Keranjang</span>
-        </a>
-        <a href="tracking.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
-          <div class="relative">
-            <i class="fa-solid fa-location-crosshairs text-base"></i>
-            <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-          </div>
-          <span>Lacak</span>
-        </a>
-      </div>
-    </nav>
+  </main>
 
+  <!-- Toast Notification -->
+  <div id="toast" class="toast">Menu berhasil ditambahkan!</div>
+
+  <!-- ══════════════════════════════════════════
+       STICKY FLOATING CART BAR (Mobile Only)
+  ══════════════════════════════════════════ -->
+  <div class="lg:hidden fixed bottom-14 inset-x-0 px-4 z-40 max-w-lg mx-auto pointer-events-none">
+    <a id="floatingCartBar" href="cart.html"
+       class="pointer-events-auto w-full bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white px-4 py-3 rounded-2xl shadow-2xl border border-white/20 flex items-center justify-between transition-all duration-200">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center font-bold text-xs relative">
+          <i class="fa-solid fa-cart-shopping text-base"></i>
+          <span id="fabCartBadge" class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-white text-brand-700 text-[10px] font-extrabold rounded-full flex items-center justify-center shadow">3</span>
+        </div>
+        <div>
+          <span id="cartCountLabel" class="text-[10px] text-amber-200 block uppercase font-bold tracking-wider leading-none">3 Item di Keranjang</span>
+          <span id="cartTotalLabel" class="text-sm font-extrabold text-white leading-tight mt-0.5">Rp 134.000</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 text-xs font-bold text-amber-200">
+        <span>Lihat Keranjang</span>
+        <i class="fa-solid fa-arrow-right text-[11px]"></i>
+      </div>
+    </a>
   </div>
 
+  <!-- ══════════════════════════════════════════
+       MOBILE APP BOTTOM NAVIGATION BAR (Mobile Only)
+  ══════════════════════════════════════════ -->
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 z-40">
+    <div class="grid grid-cols-4 py-2 text-center text-[10px] font-medium max-w-md mx-auto">
+      <a href="select-branch.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
+        <i class="fa-solid fa-store text-base"></i>
+        <span>Cabang</span>
+      </a>
+      <a href="menu.html" class="flex flex-col items-center gap-1 text-brand-600 font-bold">
+        <i class="fa-solid fa-mug-hot text-base"></i>
+        <span>Menu</span>
+      </a>
+      <a id="navCartLink" href="cart.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+        <div class="relative">
+          <i class="fa-solid fa-cart-shopping text-base"></i>
+          <span id="navCartBadge" class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
+        </div>
+        <span>Keranjang</span>
+      </a>
+      <a href="tracking.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+        <div class="relative">
+          <i class="fa-solid fa-location-crosshairs text-base"></i>
+          <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+        </div>
+        <span>Lacak</span>
+      </a>
+    </div>
+  </nav>
+
   <script>
-    // Cart state
-    let cartCount = 3;
-    let cartTotal = 134000;
+    // Initial sample cart items
+    let cart = [
+      { id: 1, name: 'Café Latte', price: 32000, qty: 2, icon: 'fa-mug-saucer' },
+      { id: 2, name: 'Butter Croissant', price: 22000, qty: 1, icon: 'fa-bread-slice' },
+      { id: 3, name: 'Chicken Pasta Alfredo', price: 48000, qty: 1, icon: 'fa-bowl-food' }
+    ];
 
     const branches = {
-      sudirman: { name: 'Cafe Olga Sudirman' },
-      kemang:   { name: 'Cafe Olga Kemang' },
-      bsd:      { name: 'Cafe Olga BSD City' },
+      sudirman: { name: 'Cafe Olga Sudirman', fee: 8000 },
+      kemang:   { name: 'Cafe Olga Kemang',   fee: 7000 },
+      bsd:      { name: 'Cafe Olga BSD City', fee: 9000 },
     };
 
     const params = new URLSearchParams(window.location.search);
     const currentBranch = params.get('branch') || localStorage.getItem('userNearestBranch') || 'sudirman';
     const b = branches[currentBranch] || branches.sudirman;
+    
     document.getElementById('branchName').textContent = b.name;
+    const deskBranchName = document.getElementById('deskBranchName');
+    if (deskBranchName) deskBranchName.textContent = b.name;
 
-    // Update links with branch parameter
-    ['topCartLink', 'floatingCartBar', 'navCartLink'].forEach(id => {
+    // Update query strings
+    ['topCartLink', 'floatingCartBar', 'navCartLink', 'deskCheckoutBtn'].forEach(id => {
       const el = document.getElementById(id);
-      if (el) el.href = 'cart.html?branch=' + currentBranch;
+      if (el) el.href = (id === 'deskCheckoutBtn' ? 'checkout.html' : 'cart.html') + '?branch=' + currentBranch;
     });
 
-    function addToCart(name, price) {
-      cartCount++;
-      cartTotal += price;
+    function fmtRp(n) {
+      return 'Rp ' + n.toLocaleString('id-ID');
+    }
 
-      // Update badge elements
-      document.getElementById('topCartBadge').textContent = cartCount;
-      document.getElementById('fabCartBadge').textContent = cartCount;
-      document.getElementById('navCartBadge').textContent = cartCount;
+    function updateCartUI() {
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const deliveryFee = b.fee;
+      const grandTotal = subtotal + deliveryFee;
 
-      document.getElementById('cartCountLabel').textContent = cartCount + ' Item di Keranjang';
-      document.getElementById('cartTotalLabel').textContent = 'Rp ' + cartTotal.toLocaleString('id-ID');
+      // Badges
+      const topBadge = document.getElementById('topCartBadge');
+      if (topBadge) topBadge.textContent = totalCount;
+      const fabBadge = document.getElementById('fabCartBadge');
+      if (fabBadge) fabBadge.textContent = totalCount;
+      const navBadge = document.getElementById('navCartBadge');
+      if (navBadge) navBadge.textContent = totalCount;
+      const deskBadge = document.getElementById('deskCartCountBadge');
+      if (deskBadge) deskBadge.textContent = totalCount + ' Item';
+
+      // Mobile labels
+      const countLabel = document.getElementById('cartCountLabel');
+      if (countLabel) countLabel.textContent = totalCount + ' Item di Keranjang';
+      const totalLabel = document.getElementById('cartTotalLabel');
+      if (totalLabel) totalLabel.textContent = fmtRp(grandTotal);
+
+      // Desktop Sidebar
+      const deskSubtotal = document.getElementById('deskSubtotal');
+      if (deskSubtotal) deskSubtotal.textContent = fmtRp(subtotal);
+      const deskFee = document.getElementById('deskDeliveryFee');
+      if (deskFee) deskFee.textContent = fmtRp(deliveryFee);
+      const deskGrand = document.getElementById('deskGrandTotal');
+      if (deskGrand) deskGrand.textContent = fmtRp(grandTotal);
+
+      // Desktop items list
+      const listEl = document.getElementById('deskCartItemsList');
+      if (listEl) {
+        if (cart.length === 0) {
+          listEl.innerHTML = '<div class="text-center py-6 text-stone-400 text-xs">Keranjang belanja kosong.<br>Pilih menu lezat di sebelah kiri!</div>';
+        } else {
+          listEl.innerHTML = cart.map((item, idx) => `
+            <div class="flex items-center justify-between gap-2 p-2 bg-stone-50 rounded-xl border border-stone-200/60">
+              <div class="flex items-center gap-2 min-w-0">
+                <div class="w-8 h-8 rounded-lg bg-amber-100/70 text-brand-800 flex items-center justify-center text-xs shrink-0">
+                  <i class="fa-solid ${item.icon || 'fa-mug-hot'}"></i>
+                </div>
+                <div class="min-w-0">
+                  <p class="font-bold text-stone-900 text-xs truncate">${item.name}</p>
+                  <p class="text-[11px] text-brand-700 font-semibold">${fmtRp(item.price)}</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0">
+                <button onclick="changeQty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-white border border-stone-200 text-stone-600 hover:bg-stone-100 flex items-center justify-center text-xs font-bold active:scale-95" aria-label="Kurang">
+                  <i class="fa-solid fa-minus text-[9px]"></i>
+                </button>
+                <span class="text-xs font-bold text-stone-900 min-w-[14px] text-center">${item.qty}</span>
+                <button onclick="changeQty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-brand-600 text-white hover:bg-brand-700 flex items-center justify-center text-xs font-bold active:scale-95" aria-label="Tambah">
+                  <i class="fa-solid fa-plus text-[9px]"></i>
+                </button>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    }
+
+    function changeQty(index, delta) {
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function addToCart(name, price, icon) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ id: Date.now(), name, price, qty: 1, icon: icon || 'fa-mug-hot' });
+      }
+
+      updateCartUI();
 
       // Toast feedback
       const toast = document.getElementById("toast");
       toast.textContent = name + ' ditambahkan!';
       toast.classList.add("show");
-      setTimeout(() => { toast.classList.remove("show"); }, 2000);
+      setTimeout(() => { toast.classList.remove("show"); }, 1800);
 
-      // Bounce FAB
+      // Mobile bounce
       const fab = document.getElementById("floatingCartBar");
       if (fab) {
         fab.classList.add("scale-[1.02]");
@@ -609,10 +873,13 @@
     function filterMenu(query) {
       const q = query.toLowerCase().trim();
       const clearBtn = document.getElementById('clearSearchBtn');
+      const clearBtnDesk = document.getElementById('clearSearchBtnDesk');
       if (q.length > 0) {
-        clearBtn.classList.remove('hidden');
+        if (clearBtn) clearBtn.classList.remove('hidden');
+        if (clearBtnDesk) clearBtnDesk.classList.remove('hidden');
       } else {
-        clearBtn.classList.add('hidden');
+        if (clearBtn) clearBtn.classList.add('hidden');
+        if (clearBtnDesk) clearBtnDesk.classList.add('hidden');
       }
 
       document.querySelectorAll('.menu-item').forEach(item => {
@@ -624,7 +891,7 @@
         }
       });
 
-      // Hide empty category headers
+      // Hide empty category sections
       document.querySelectorAll('.menu-section').forEach(sec => {
         const visibleItems = sec.querySelectorAll('.menu-item:not(.hidden)').length;
         if (visibleItems === 0) {
@@ -637,10 +904,16 @@
 
     function clearSearch() {
       const inp = document.getElementById('menuSearchInput');
-      inp.value = '';
+      if (inp) inp.value = '';
+      const inpDesk = document.getElementById('menuSearchInputDesk');
+      if (inpDesk) inpDesk.value = '';
       filterMenu('');
-      inp.focus();
     }
+
+    // Initialize cart on load
+    window.addEventListener('DOMContentLoaded', () => {
+      updateCartUI();
+    });
   </script>
 </body>
 </html>

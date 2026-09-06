@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Cafe Olga — Pesanan Berhasil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Olga — Pesanan Berhasil Diterima</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -28,7 +28,7 @@
     }
   </script>
   <style>
-    body { background-color: #1c1917; }
+    .hero-bg { background: linear-gradient(135deg,#2e1708 0%,#4a2610 45%,#7c4a24 100%); }
     .bounce-in {
       animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
     }
@@ -39,102 +39,110 @@
     }
   </style>
 </head>
-<body class="font-sans text-stone-800 antialiased min-h-screen sm:py-6 flex justify-center selection:bg-brand-500 selection:text-white">
+<body class="font-sans bg-[#fbf9f6] text-stone-800 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
 
-  <!-- Mobile App Frame Container -->
-  <div class="w-full max-w-md bg-stone-50 min-h-screen sm:min-h-[844px] sm:max-h-[95vh] sm:overflow-y-auto sm:rounded-[36px] sm:shadow-2xl sm:border sm:border-stone-700/40 relative flex flex-col justify-between p-5">
-
-    <!-- Top App Bar Indicator -->
-    <div class="flex items-center justify-between pb-3">
-      <div class="flex items-center gap-2">
-        <i class="fa-solid fa-mug-hot text-brand-600 text-lg"></i>
-        <span class="font-serif font-bold text-base text-stone-900">Cafe Olga</span>
-      </div>
-      <span class="text-[11px] font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">
-        Terkonfirmasi
+  <!-- Header -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-sm py-3.5 px-4 sm:px-6">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <a href="select-branch.html" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-brand-600 text-white flex items-center justify-center shadow-sm">
+          <i class="fas fa-mug-hot text-amber-200 text-sm"></i>
+        </div>
+        <span class="font-serif font-bold text-lg text-stone-900">Cafe Olga</span>
+      </a>
+      <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full border border-emerald-200 flex items-center gap-1.5">
+        <i class="fa-solid fa-circle-check text-emerald-600"></i> Terkonfirmasi
       </span>
     </div>
+  </header>
 
-    <!-- Center Content -->
-    <div class="my-auto text-center space-y-4">
+  <!-- Main Responsive Container -->
+  <main class="max-w-xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 flex-grow flex items-center justify-center">
+    
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xl w-full text-center space-y-6">
+      
       <!-- Animated Check Icon -->
-      <div class="mx-auto w-20 h-20 bg-emerald-100 rounded-3xl flex items-center justify-center bounce-in shadow-inner border border-emerald-200">
-        <i class="fa-solid fa-check text-4xl text-emerald-600"></i>
+      <div class="mx-auto w-20 h-20 sm:w-24 sm:h-24 bg-emerald-100 rounded-3xl flex items-center justify-center bounce-in shadow-inner border border-emerald-200">
+        <i class="fa-solid fa-check text-4xl sm:text-5xl text-emerald-600"></i>
       </div>
 
       <div>
-        <h1 class="font-serif text-2xl font-bold text-stone-900 mb-1">Pesanan Diterima!</h1>
-        <p class="text-stone-500 text-xs max-w-xs mx-auto leading-relaxed">
-          Terima kasih, pesananmu sedang diteruskan ke barista dan dipersiapkan dengan hangat.
+        <h1 class="font-serif text-2xl sm:text-3xl font-bold text-stone-900 mb-2">Pesanan Diterima!</h1>
+        <p class="text-stone-500 text-xs sm:text-sm max-w-sm mx-auto leading-relaxed">
+          Terima kasih! Pesanan Anda telah diteruskan ke tim barista Cafe Olga dan sedang dipersiapkan dengan cermat.
         </p>
       </div>
 
       <!-- Order ID Pill with Copy -->
-      <div class="inline-flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-stone-200 shadow-sm text-xs">
-        <span class="text-stone-400 font-medium">Order ID:</span>
+      <div class="inline-flex items-center gap-2.5 bg-stone-50 px-4 py-2 rounded-full border border-stone-200 shadow-sm text-xs">
+        <span class="text-stone-400 font-medium">Nomor Pesanan:</span>
         <span id="orderIdText" class="font-mono font-bold text-stone-900">#OLG-20260905-0042</span>
-        <button onclick="copyOrderId()" id="copyBtn" class="text-brand-600 hover:text-brand-700 text-[11px] font-bold ml-1">
+        <button onclick="copyOrderId()" id="copyBtn" class="text-brand-600 hover:text-brand-700 text-xs font-bold ml-1" aria-label="Salin ID Pesanan">
           <i class="fa-regular fa-copy"></i>
         </button>
       </div>
 
       <!-- Order Summary Card -->
-      <div class="bg-white rounded-2xl shadow-sm border border-stone-200 p-4 text-left space-y-3">
-        <div class="flex justify-between items-center pb-3 border-b border-stone-100">
+      <div class="bg-stone-50 rounded-2xl border border-stone-200 p-4 sm:p-5 text-left space-y-3.5">
+        <div class="flex justify-between items-center pb-3 border-b border-stone-200">
           <div>
             <p class="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Cabang Pengirim</p>
-            <p id="succBranch" class="text-xs font-bold text-stone-900 mt-0.5">Cafe Olga Sudirman</p>
+            <p id="succBranch" class="text-xs sm:text-sm font-bold text-stone-900 mt-0.5">Cafe Olga Sudirman</p>
           </div>
           <div class="text-right">
-            <p class="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Est. Tiba</p>
-            <p class="text-xs font-bold text-brand-600 mt-0.5">25–35 menit</p>
+            <p class="text-[10px] text-stone-400 uppercase font-bold tracking-wider">Estimasi Tiba</p>
+            <p class="text-xs sm:text-sm font-bold text-emerald-700 mt-0.5">25–35 menit</p>
           </div>
         </div>
 
-        <div class="space-y-1.5 text-xs text-stone-600">
+        <div class="space-y-2 text-xs text-stone-600">
           <div class="flex justify-between">
-            <span>2x Café Latte (Hot)</span>
-            <span class="font-medium text-stone-800">Rp 64.000</span>
+            <span>2x Café Latte (Hot, Less sugar)</span>
+            <span class="font-semibold text-stone-800">Rp 64.000</span>
           </div>
           <div class="flex justify-between">
-            <span>1x Butter Croissant</span>
-            <span class="font-medium text-stone-800">Rp 22.000</span>
+            <span>1x Butter Croissant (Warm)</span>
+            <span class="font-semibold text-stone-800">Rp 22.000</span>
           </div>
           <div class="flex justify-between">
-            <span>1x Chicken Pasta</span>
-            <span class="font-medium text-stone-800">Rp 48.000</span>
+            <span>1x Chicken Pasta Alfredo</span>
+            <span class="font-semibold text-stone-800">Rp 48.000</span>
           </div>
         </div>
 
-        <div class="pt-2.5 border-t border-stone-100 flex justify-between items-center text-xs">
-          <span class="font-bold text-stone-800">Total Dibayar</span>
-          <span class="font-extrabold text-sm text-brand-700">Rp 144.000</span>
+        <div class="pt-3 border-t border-stone-200 flex justify-between items-baseline text-xs">
+          <span class="font-bold text-stone-900 text-sm">Total Dibayar</span>
+          <span class="font-extrabold text-base sm:text-lg text-brand-700">Rp 144.000</span>
         </div>
       </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-3 pt-2">
+        <a id="waLink" href="https://wa.me/6281234567890?text=Halo%20Cafe%20Olga%2C%20saya%20sudah%20membuat%20pesanan%20%23OLG-20260905-0042%20(Total%20Rp%20144.000).%20Mohon%20segera%20diproses%2C%20terima%20kasih!"
+           target="_blank"
+           class="w-full bg-[#25D366] hover:bg-[#1ebe5d] active:scale-[0.98] text-white py-3.5 rounded-2xl font-bold text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2">
+          <i class="fab fa-whatsapp text-lg"></i>
+          <span>Konfirmasi ke WhatsApp Barista</span>
+        </a>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <a href="tracking.html"
+             class="w-full bg-brand-600 hover:bg-brand-700 active:scale-[0.98] text-white py-3 rounded-2xl font-bold text-xs sm:text-sm shadow-md shadow-brand-600/20 transition-all flex items-center justify-center gap-2">
+            <i class="fa-solid fa-location-crosshairs text-sm"></i>
+            <span>Pantau Tracking Live</span>
+          </a>
+
+          <a id="menuLink" href="menu.html"
+             class="w-full bg-white hover:bg-stone-50 active:scale-[0.98] border border-stone-300 text-stone-700 py-3 rounded-2xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-mug-hot text-xs text-brand-600"></i>
+            <span>Kembali ke Menu</span>
+          </a>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Action Buttons -->
-    <div class="space-y-2.5 pt-4">
-      <a id="waLink" href="https://wa.me/6281234567890?text=Halo%20Cafe%20Olga%2C%20saya%20sudah%20membuat%20pesanan%20%23OLG-20260905-0042%20(Total%20Rp%20144.000).%20Mohon%20segera%20diproses%2C%20terima%20kasih!"
-         target="_blank"
-         class="w-full bg-[#25D366] hover:bg-[#1ebe5d] active:scale-[0.98] text-white py-3.5 rounded-2xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2">
-        <i class="fab fa-whatsapp text-lg"></i>
-        <span>Konfirmasi via WhatsApp Toko</span>
-      </a>
-
-      <a href="tracking.html"
-         class="w-full bg-brand-600 hover:bg-brand-700 active:scale-[0.98] text-white py-3.5 rounded-2xl font-bold text-xs shadow-md shadow-brand-600/30 transition-all flex items-center justify-center gap-2">
-        <i class="fa-solid fa-location-crosshairs text-sm"></i>
-        <span>Pantau Pesanan di Peta</span>
-      </a>
-
-      <a id="menuLink" href="menu.html"
-         class="w-full bg-white hover:bg-stone-50 active:scale-[0.98] border border-stone-200 text-stone-600 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5">
-        <span>Pesan Menu Lainnya</span>
-      </a>
-    </div>
-
-  </div>
+  </main>
 
   <script>
     const params = new URLSearchParams(window.location.search);

@@ -2,8 +2,8 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Cafe Olga — Pilih Cabang</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cafe Olga — Pilih Cabang & Pesan Online</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -21,410 +21,552 @@
     }
   </script>
   <style>
-    body { background-color: #1c1917; }
-    .hero-bg { background: linear-gradient(135deg,#3b1f0b 0%,#5c3317 50%,#8b5e3c 100%); }
-    .branch-card { transition: all 0.25s cubic-bezier(0.4,0,0.2,1); }
-    .branch-card:active { transform: scale(0.985); }
+    .hero-bg { background: linear-gradient(135deg,#2e1708 0%,#4a2610 45%,#7c4a24 100%); }
+    .branch-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); }
+    .branch-card:hover { transform: translateY(-4px); }
+    .branch-card:active { transform: scale(0.99); }
     @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
-    @keyframes fadeIn    { from{opacity:0} to{opacity:1} }
-    .fade-in   { animation: fadeInUp 0.4s ease forwards; }
-    #locModal  { animation: fadeIn 0.2s ease; }
+    .fade-in { animation: fadeInUp 0.4s ease forwards; }
     .scrollbar-none::-webkit-scrollbar { display: none; }
     .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 </head>
-<body class="font-sans text-stone-800 antialiased min-h-screen sm:py-6 flex justify-center selection:bg-brand-500 selection:text-white">
+<body class="font-sans bg-[#fbf9f6] text-stone-800 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white pb-16 lg:pb-0">
 
-  <!-- Mobile App Frame Container (100% on mobile, phone-framed on desktop) -->
-  <div class="w-full max-w-md bg-stone-50 min-h-screen sm:min-h-[844px] sm:max-h-[95vh] sm:overflow-y-auto sm:rounded-[36px] sm:shadow-2xl sm:border sm:border-stone-700/40 relative flex flex-col pb-20">
+  <!-- ══════════════════════════════════════════
+       LOCATION MODAL (Responsive Modal / Bottom Sheet)
+  ══════════════════════════════════════════ -->
+  <div id="locModal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm px-0 sm:px-4 hidden">
+    <div class="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden transform transition-all">
+      <!-- Sheet Handle on mobile -->
+      <div class="w-12 h-1.5 bg-stone-300 rounded-full mx-auto mt-3 mb-1 sm:hidden"></div>
 
-    <!-- ══════════════════════════════════════════
-         LOCATION MODAL (Bottom Sheet on Mobile)
-    ══════════════════════════════════════════ -->
-    <div id="locModal" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 backdrop-blur-sm px-0 sm:px-4">
-      <div class="bg-white w-full max-w-md rounded-t-3xl sm:rounded-3xl shadow-2xl overflow-hidden transform transition-all">
-        <!-- Sheet Handle on mobile -->
-        <div class="w-12 h-1.5 bg-stone-300 rounded-full mx-auto mt-3 mb-1 sm:hidden"></div>
-
-        <!-- Modal Header -->
-        <div class="hero-bg px-6 pt-5 pb-5 text-center text-white relative">
-          <button onclick="closeModal()" class="absolute top-4 right-4 text-white/70 hover:text-white p-1 rounded-full text-lg">
-            <i class="fa-solid fa-xmark"></i>
-          </button>
-          <div class="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mx-auto mb-2 shadow-inner">
-            <i class="fas fa-location-crosshairs text-2xl text-amber-300"></i>
-          </div>
-          <h2 class="font-serif text-xl font-bold mb-1">Cari Cabang Terdekat</h2>
-          <p class="text-stone-200 text-xs leading-relaxed">Deteksi lokasi untuk menemukan gerai Cafe Olga terdekat dan hitung ongkir instan.</p>
+      <!-- Modal Header -->
+      <div class="hero-bg px-6 pt-5 pb-5 text-center text-white relative">
+        <button onclick="closeModal()" class="absolute top-4 right-4 text-white/70 hover:text-white p-1.5 rounded-full text-lg focus:outline-none" aria-label="Tutup">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="w-12 h-12 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center mx-auto mb-2 shadow-inner">
+          <i class="fas fa-location-crosshairs text-2xl text-amber-300"></i>
         </div>
+        <h2 class="font-serif text-xl font-bold mb-1">Cari Cabang Terdekat</h2>
+        <p class="text-stone-200 text-xs leading-relaxed max-w-sm mx-auto">Deteksi lokasi Anda untuk menemukan gerai Cafe Olga terdekat serta perhitungan ongkir instan.</p>
+      </div>
 
-        <!-- Modal Body -->
-        <div class="p-5">
-          <!-- GPS Button -->
-          <button id="modalGpsBtn" onclick="requestGPS()" class="w-full flex items-center justify-center gap-2.5 py-3.5 bg-brand-600 active:bg-brand-700 text-white rounded-2xl font-bold shadow-md shadow-brand-600/30 text-sm mb-3 transition-transform active:scale-[0.98]">
-            <i id="modalGpsIcon" class="fas fa-location-crosshairs text-base"></i>
-            <span id="modalGpsText">Gunakan Lokasi GPS Saya</span>
-          </button>
+      <!-- Modal Body -->
+      <div class="p-5 sm:p-6">
+        <!-- GPS Button -->
+        <button id="modalGpsBtn" onclick="requestGPS()" class="w-full flex items-center justify-center gap-2.5 py-3.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-2xl font-bold shadow-md shadow-brand-600/30 text-sm mb-3 transition-transform active:scale-[0.98]">
+          <i id="modalGpsIcon" class="fas fa-location-crosshairs text-base"></i>
+          <span id="modalGpsText">Gunakan Lokasi GPS Saya</span>
+        </button>
 
-          <!-- Manual address -->
-          <div id="manualSection" class="hidden mb-3">
-            <div class="relative">
-              <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
-              <input id="modalAddrInput" type="text" placeholder="Ketik nama jalan / area (e.g. Sudirman, Kemang, BSD)..."
-                class="w-full pl-10 pr-9 py-3 border border-stone-200 rounded-xl text-sm bg-stone-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
-                oninput="onModalAddrInput(this.value)" />
-              <div id="modalSpinner" class="absolute inset-y-0 right-3.5 flex items-center hidden">
-                <svg class="animate-spin h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
-                </svg>
-              </div>
+        <!-- Manual address -->
+        <div id="manualSection" class="hidden mb-3">
+          <div class="relative">
+            <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 text-sm"></i>
+            <input id="modalAddrInput" type="text" placeholder="Ketik nama jalan / area (e.g. Sudirman, Kemang, BSD)..."
+              class="w-full pl-10 pr-9 py-3 border border-stone-200 rounded-xl text-sm bg-stone-50 focus:bg-white focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+              oninput="onModalAddrInput(this.value)" />
+            <div id="modalSpinner" class="absolute inset-y-0 right-3.5 flex items-center hidden">
+              <svg class="animate-spin h-4 w-4 text-brand-500" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+              </svg>
             </div>
           </div>
+        </div>
 
-          <!-- Result: nearest branch -->
-          <div id="modalResult" class="hidden mb-4 p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl">
-            <p class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider mb-1 flex items-center gap-1">
-              <i class="fa-solid fa-check-circle"></i> Lokasi Terdeteksi
-            </p>
-            <p class="text-sm font-semibold text-stone-800" id="modalDetectedAddr">—</p>
-            <p class="text-xs text-stone-500 mt-1">
-              Cabang terdekat: <span class="font-bold text-emerald-700" id="modalNearestBranch">—</span> (<span id="modalNearestKm">—</span>)
-            </p>
-          </div>
+        <!-- Result: nearest branch -->
+        <div id="modalResult" class="hidden mb-4 p-3.5 bg-emerald-50 border border-emerald-200 rounded-2xl">
+          <p class="text-[11px] font-bold text-emerald-700 uppercase tracking-wider mb-1 flex items-center gap-1">
+            <i class="fa-solid fa-check-circle"></i> Lokasi Terdeteksi
+          </p>
+          <p class="text-sm font-semibold text-stone-800" id="modalDetectedAddr">—</p>
+          <p class="text-xs text-stone-500 mt-1">
+            Cabang terdekat: <span class="font-bold text-emerald-700" id="modalNearestBranch">—</span> (<span id="modalNearestKm">—</span>)
+          </p>
+        </div>
 
-          <!-- Skip / Manual toggle -->
-          <div class="flex gap-2">
-            <button onclick="toggleManual()" id="manualToggleBtn" class="flex-1 py-3 border border-stone-200 text-stone-700 rounded-xl text-xs font-semibold hover:bg-stone-50 active:scale-[0.98] transition-all">
-              <i class="fas fa-keyboard mr-1.5 text-xs text-stone-500"></i> Ketik Alamat
-            </button>
-            <button onclick="closeModal()" class="flex-1 py-3 border border-stone-200 text-stone-400 rounded-xl text-xs font-semibold hover:bg-stone-50 active:scale-[0.98] transition-all">
-              Nanti Saja
-            </button>
-          </div>
+        <!-- Skip / Manual toggle -->
+        <div class="flex gap-2">
+          <button onclick="toggleManual()" id="manualToggleBtn" class="flex-1 py-3 border border-stone-200 text-stone-700 rounded-xl text-xs font-semibold hover:bg-stone-50 active:scale-[0.98] transition-all">
+            <i class="fas fa-keyboard mr-1.5 text-xs text-stone-500"></i> Ketik Alamat
+          </button>
+          <button onclick="closeModal()" class="flex-1 py-3 border border-stone-200 text-stone-500 rounded-xl text-xs font-semibold hover:bg-stone-50 active:scale-[0.98] transition-all">
+            Nanti Saja
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- ══════════════════════════════════════════
-         MOBILE APP TOP HEADER
-    ══════════════════════════════════════════ -->
-    <header class="hero-bg text-white sticky top-0 z-30 shadow-md">
-      <div class="px-4 py-3 flex items-center justify-between">
-        <!-- Brand / Logo -->
-        <a href="../index.html" class="flex items-center gap-2">
-          <div class="w-8 h-8 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-amber-300">
-            <i class="fas fa-mug-hot text-base"></i>
-          </div>
-          <div>
-            <span class="font-serif font-bold text-lg text-white leading-tight block">Cafe Olga</span>
-            <span class="text-[10px] text-amber-200/80 uppercase tracking-widest block font-medium">Mobile Order</span>
-          </div>
-        </a>
-
-        <!-- Header Actions: Active Order Pill & Web/HQ Switch -->
-        <div class="flex items-center gap-2">
-          <!-- Active Order Pill -->
-          <a href="tracking.html" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 border border-amber-300/40 text-amber-200 text-[11px] font-bold shadow-sm transition-all">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-400"></span>
-            </span>
-            <span>Pesanan #0042</span>
-          </a>
-
-          <!-- Cart Icon -->
-          <a href="cart.html" class="relative p-2 text-white/90 hover:text-white">
-            <i class="fa-solid fa-cart-shopping text-base"></i>
-            <span class="absolute top-0.5 right-0.5 inline-flex items-center justify-center w-4 h-4 text-[10px] font-extrabold text-brand-800 bg-amber-300 rounded-full shadow">3</span>
-          </a>
+  <!-- ══════════════════════════════════════════
+       RESPONSIVE TOP NAVIGATION BAR
+  ══════════════════════════════════════════ -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      <!-- Left: Logo & Brand -->
+      <a href="../index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-2xl bg-brand-600 text-white flex items-center justify-center shadow-md shadow-brand-600/20 group-hover:scale-105 transition-transform">
+          <i class="fas fa-mug-hot text-lg text-amber-200"></i>
         </div>
-      </div>
-
-      <!-- Quick Delivery Address Bar -->
-      <div class="px-4 pb-3 pt-1">
-        <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="w-full flex items-center justify-between bg-black/25 hover:bg-black/35 active:scale-[0.99] border border-white/15 rounded-xl px-3 py-2 text-left transition-all">
-          <div class="flex items-center gap-2 min-w-0">
-            <i class="fas fa-location-dot text-amber-300 text-xs shrink-0"></i>
-            <span class="text-[11px] text-stone-300">Antar ke:</span>
-            <span id="navLocText" class="text-xs font-semibold text-white truncate max-w-[190px]">Sudirman, Jakarta Pusat</span>
-          </div>
-          <span class="text-[11px] text-amber-300 font-bold ml-2 shrink-0 flex items-center gap-1">
-            Ubah <i class="fas fa-chevron-right text-[9px]"></i>
-          </span>
-        </button>
-      </div>
-    </header>
-
-    <!-- ══════════════════════════════════════════
-         MAIN APP CONTENT
-    ══════════════════════════════════════════ -->
-    <main class="flex-grow p-4 space-y-4">
-
-      <!-- Active Order Status Card -->
-      <div class="bg-gradient-to-r from-amber-600 via-brand-600 to-amber-700 text-white rounded-2xl p-3.5 shadow-md flex items-center justify-between gap-3">
-        <div class="flex items-center gap-3 min-w-0">
-          <div class="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0 border border-white/20">
-            <i class="fa-solid fa-motorcycle text-white text-base animate-pulse"></i>
-          </div>
-          <div class="min-w-0">
-            <div class="flex items-center gap-1.5">
-              <span class="font-bold text-xs">Pesanan #0042</span>
-              <span class="px-1.5 py-0.5 rounded bg-white text-brand-700 text-[9px] font-extrabold uppercase">Diantar</span>
-            </div>
-            <p class="text-amber-100 text-[11px] truncate">Driver Andi sedang menuju ke lokasimu (~10 mnt)</p>
-          </div>
-        </div>
-        <a href="tracking.html" class="shrink-0 px-3 py-1.5 bg-white text-brand-700 font-bold rounded-xl text-[11px] shadow hover:bg-amber-50 active:scale-95 transition-all">
-          Lacak
-        </a>
-      </div>
-
-      <!-- Personalized Location Alert Banner -->
-      <div id="locBanner" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-3 flex items-center justify-between gap-2">
-        <div class="flex items-center gap-2 min-w-0">
-          <i class="fas fa-location-dot text-emerald-600 text-sm shrink-0"></i>
-          <p class="text-xs text-emerald-950 truncate">
-            Alamat: <span id="bannerAddr" class="font-semibold text-emerald-800"></span>
-          </p>
-        </div>
-        <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="text-[11px] text-emerald-700 font-bold underline shrink-0">
-          Ganti
-        </button>
-      </div>
-
-      <!-- Section Title -->
-      <div class="flex items-center justify-between pt-1">
         <div>
-          <h1 class="font-serif font-bold text-xl text-stone-900 leading-tight">Pilih Cabang</h1>
-          <p id="heroCopy" class="text-stone-500 text-xs mt-0.5">Pilih outlet Cafe Olga terdekat untuk pengiriman tercepat.</p>
+          <span class="font-serif font-bold text-xl sm:text-2xl text-stone-900 leading-tight block">Cafe Olga</span>
+          <span class="text-[11px] text-brand-600 font-semibold uppercase tracking-widest hidden sm:block">Specialty Coffee & Kitchen</span>
         </div>
-        <button onclick="requestGPS()" class="text-xs text-brand-700 font-semibold bg-brand-50 hover:bg-brand-100 border border-brand-200 px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 active:scale-95 transition-all">
-          <i class="fas fa-location-crosshairs text-brand-600"></i> GPS
+      </a>
+
+      <!-- Center: Quick Delivery Address (Desktop & Tablet) -->
+      <div class="hidden md:flex items-center">
+        <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="flex items-center gap-2.5 bg-stone-100 hover:bg-stone-200/80 border border-stone-200 px-4 py-2 rounded-full text-xs transition-all">
+          <i class="fas fa-location-dot text-brand-600"></i>
+          <span class="text-stone-500">Kirim ke:</span>
+          <span id="navLocText" class="font-bold text-stone-900 truncate max-w-[200px]">Sudirman, Jakarta Pusat</span>
+          <span class="text-[11px] text-brand-600 font-bold ml-1">Ubah <i class="fas fa-chevron-down text-[9px]"></i></span>
         </button>
       </div>
 
-      <!-- ══════════════════════════════════════════
-           MOBILE BRANCH CARDS
-      ══════════════════════════════════════════ -->
-      <div class="space-y-4">
+      <!-- Right: Actions & Links -->
+      <div class="flex items-center gap-3">
+        <!-- Active Order Pill -->
+        <a href="tracking.html" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-900 text-xs font-bold shadow-sm transition-all">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
+          </span>
+          <span class="hidden sm:inline">Pesanan Aktif</span>
+          <span>#0042</span>
+        </a>
 
-        <!-- Branch 1: Sudirman -->
-        <a href="menu.html?branch=sudirman" id="card-sudirman"
-           class="branch-card block bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden relative active:border-brand-500">
-          <div class="bg-gradient-to-r from-brand-700 via-brand-600 to-amber-700 h-24 px-4 py-3 flex flex-col justify-between relative text-white">
-            <i class="fas fa-building text-5xl text-white/10 absolute right-3 bottom-1"></i>
+        <!-- Cart Link -->
+        <a href="cart.html" class="relative p-2.5 rounded-xl bg-stone-100 hover:bg-brand-50 text-stone-700 hover:text-brand-600 transition-colors" aria-label="Keranjang">
+          <i class="fa-solid fa-cart-shopping text-base"></i>
+          <span class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-[11px] font-extrabold text-white bg-brand-600 rounded-full shadow">3</span>
+        </a>
+
+        <!-- HQ Admin Shortcut (Desktop) -->
+        <a href="../admin/login.html" class="hidden lg:inline-flex items-center gap-1.5 text-xs font-semibold text-stone-500 hover:text-stone-900 border border-stone-200 px-3 py-2 rounded-xl hover:bg-stone-50 transition-all">
+          <i class="fa-solid fa-user-shield text-stone-400"></i>
+          <span>Portal Admin</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile Subbar: Delivery Address -->
+    <div class="md:hidden px-4 pb-2.5">
+      <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="w-full flex items-center justify-between bg-stone-100 hover:bg-stone-200 border border-stone-200 rounded-xl px-3 py-2 text-left text-xs transition-all">
+        <div class="flex items-center gap-2 min-w-0">
+          <i class="fas fa-location-dot text-brand-600 text-xs shrink-0"></i>
+          <span class="text-stone-400">Antar ke:</span>
+          <span id="navLocTextMobile" class="font-semibold text-stone-900 truncate max-w-[200px]">Sudirman, Jakarta Pusat</span>
+        </div>
+        <span class="text-brand-600 font-bold shrink-0 text-[11px]">Ubah <i class="fas fa-chevron-right text-[9px]"></i></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════════════
+       HERO BANNER (Desktop & Mobile)
+  ══════════════════════════════════════════ -->
+  <section class="hero-bg text-white py-8 sm:py-14 px-4 sm:px-6 lg:px-8 shadow-inner relative overflow-hidden">
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="max-w-2xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-amber-300 text-xs font-semibold mb-3 backdrop-blur-sm">
+          <i class="fas fa-sparkles text-[10px]"></i>
+          <span>Kopi Segar & Makanan Hangat Diseduh Langsung</span>
+        </div>
+        <h1 class="font-serif text-3xl sm:text-5xl font-bold tracking-tight text-white mb-3">
+          Pilih Cabang Cafe Olga
+        </h1>
+        <p id="heroCopy" class="text-stone-200 text-sm sm:text-base leading-relaxed mb-6">
+          Pilih outlet terdekat untuk pengiriman pesanan tercepat atau ambil langsung di lokasi favorit Anda.
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button onclick="requestGPS()" class="px-4 py-2.5 bg-brand-500 hover:bg-brand-600 active:bg-brand-700 text-white rounded-xl text-xs sm:text-sm font-bold shadow-md flex items-center gap-2 transition-all">
+            <i class="fas fa-location-crosshairs text-amber-200"></i>
+            <span>Deteksi Cabang Terdekat (GPS)</span>
+          </button>
+          <button onclick="document.getElementById('locModal').classList.remove('hidden'); showManual();" class="px-4 py-2.5 bg-white/15 hover:bg-white/25 border border-white/30 text-white rounded-xl text-xs sm:text-sm font-semibold backdrop-blur-sm transition-all">
+            <i class="fas fa-search text-stone-300 mr-1.5"></i>
+            <span>Ketik Alamat Pengiriman</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Subtle graphic background watermark -->
+    <i class="fa-solid fa-mug-saucer text-[200px] text-white/5 absolute -right-10 -bottom-10 pointer-events-none"></i>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MAIN CONTENT CONTAINER
+  ══════════════════════════════════════════ -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full space-y-6">
+
+    <!-- Active Order Status Card -->
+    <div class="bg-gradient-to-r from-amber-600 via-brand-600 to-amber-700 text-white rounded-2xl p-4 shadow-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5 min-w-0">
+        <div class="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center shrink-0 border border-white/20">
+          <i class="fa-solid fa-motorcycle text-white text-xl animate-pulse"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-sm">Pesanan Sedang Berjalan #0042</span>
+            <span class="px-2 py-0.5 rounded bg-white text-brand-700 text-[10px] font-extrabold uppercase">Diantar</span>
+          </div>
+          <p class="text-amber-100 text-xs mt-0.5 truncate">Driver Andi Pratama sedang menuju ke alamat pengantaran (~10 mnt)</p>
+        </div>
+      </div>
+      <a href="tracking.html" class="self-stretch sm:self-auto text-center px-4 py-2 bg-white text-brand-700 font-bold rounded-xl text-xs shadow hover:bg-amber-50 active:scale-95 transition-all shrink-0">
+        Lacak Pesanan Live <i class="fas fa-arrow-right ml-1 text-[10px]"></i>
+      </a>
+    </div>
+
+    <!-- Personalized Location Alert Banner -->
+    <div id="locBanner" class="hidden bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+          <i class="fas fa-location-dot text-sm"></i>
+        </div>
+        <p class="text-xs sm:text-sm text-emerald-950 truncate">
+          Alamat terdeteksi: <span id="bannerAddr" class="font-bold text-emerald-800"></span> — Ongkos kirim & jarak telah disesuaikan secara otomatis.
+        </p>
+      </div>
+      <button onclick="document.getElementById('locModal').classList.remove('hidden')" class="text-xs text-emerald-700 font-bold hover:underline shrink-0 px-2 py-1">
+        Ganti Alamat
+      </button>
+    </div>
+
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-2 border-b border-stone-200 pb-4">
+      <div>
+        <h2 class="font-serif font-bold text-2xl text-stone-900 leading-tight">Daftar Outlet Cafe Olga</h2>
+        <p class="text-stone-500 text-xs sm:text-sm mt-0.5">Pilih salah satu cabang berikut untuk melihat menu dan mulai pemesanan.</p>
+      </div>
+      <span class="text-xs font-semibold text-stone-500 bg-stone-100 px-3 py-1.5 rounded-full self-start sm:self-auto">
+        <i class="fa-solid fa-store text-brand-600 mr-1.5"></i> 3 Cabang Beroperasi
+      </span>
+    </div>
+
+    <!-- ══════════════════════════════════════════
+         BRANCH CARDS GRID (1 col on mobile, 3 cols on desktop)
+    ══════════════════════════════════════════ -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <!-- Branch 1: Sudirman -->
+      <div id="card-sudirman" class="branch-card bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between">
+        <div>
+          <!-- Card Header Banner -->
+          <div class="bg-gradient-to-r from-brand-800 via-brand-700 to-amber-700 h-32 px-5 py-4 flex flex-col justify-between relative text-white">
+            <i class="fas fa-building text-6xl text-white/10 absolute right-4 bottom-2"></i>
             <div class="flex justify-between items-start z-10">
-              <span id="nearest-sudirman" class="hidden bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                <i class="fas fa-star text-[9px]"></i> TERDEKAT
+              <span id="nearest-sudirman" class="hidden bg-emerald-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                <i class="fas fa-star text-[9px]"></i> CABANG TERDEKAT
               </span>
-              <span class="inline-flex items-center gap-1 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full ml-auto shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Buka
+              <span class="inline-flex items-center gap-1.5 bg-emerald-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full ml-auto shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Buka Sekarang
               </span>
             </div>
             <div class="z-10">
-              <h2 class="font-serif font-bold text-lg text-white leading-tight">Cafe Olga Sudirman</h2>
-              <p class="text-amber-100 text-[11px] truncate">Jakarta Pusat • Flagship Store</p>
+              <h3 class="font-serif font-bold text-xl text-white leading-tight">Cafe Olga Sudirman</h3>
+              <p class="text-amber-100 text-xs mt-0.5">Jakarta Pusat • Flagship Central Hub</p>
             </div>
           </div>
 
-          <div class="p-3.5 space-y-3">
-            <div class="flex items-start gap-2 text-xs text-stone-600">
-              <i class="fas fa-location-dot text-brand-600 text-xs mt-0.5 shrink-0"></i>
-              <p class="line-clamp-1">Jl. Jend. Sudirman No. 45, Jakarta Pusat</p>
+          <div class="p-5 space-y-4">
+            <div class="flex items-start gap-2.5 text-xs text-stone-600">
+              <i class="fas fa-location-dot text-brand-600 text-sm mt-0.5 shrink-0"></i>
+              <p class="leading-relaxed">Jl. Jend. Sudirman No. 45, Gedung Plaza Central, Jakarta Pusat</p>
             </div>
 
-            <div class="flex items-center justify-between text-xs text-stone-500 bg-stone-50 rounded-xl p-2.5 border border-stone-100">
-              <div class="flex items-center gap-1.5">
-                <i class="fa-solid fa-clock text-stone-400"></i>
-                <span>08.00–22.00</span>
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs text-stone-600 bg-stone-50 rounded-2xl p-3 border border-stone-100">
+              <div>
+                <span class="block text-[10px] text-stone-400 font-medium">Jam Buka</span>
+                <span class="font-bold text-stone-800">08.00–22.00</span>
               </div>
-              <div class="flex items-center gap-1">
-                <i class="fas fa-star text-amber-400 text-xs"></i>
-                <span class="font-bold text-stone-800">4.8</span>
-                <span class="text-stone-400 text-[11px]">(312)</span>
+              <div class="border-x border-stone-200 px-1">
+                <span class="block text-[10px] text-stone-400 font-medium">Rating</span>
+                <span class="font-bold text-stone-800 flex items-center justify-center gap-1">
+                  <i class="fas fa-star text-amber-400 text-[11px]"></i> 4.8
+                </span>
               </div>
-              <div id="eta-sudirman" class="font-semibold text-brand-700">
-                ~20–35 mnt
+              <div>
+                <span class="block text-[10px] text-stone-400 font-medium">Estimasi</span>
+                <span id="eta-sudirman" class="font-bold text-brand-700">~20–35 mnt</span>
               </div>
+            </div>
+
+            <!-- Facilities Chips -->
+            <div class="flex flex-wrap gap-1.5 text-[11px] text-stone-600">
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-wifi text-brand-600 mr-1"></i> WiFi Cepat</span>
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-snowflake text-cyan-600 mr-1"></i> Full AC</span>
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-square-parking text-indigo-600 mr-1"></i> Parkir Valet</span>
             </div>
 
             <!-- Delivery Fee Row (auto-updated by JS) -->
-            <div class="bg-brand-50/70 border border-brand-100 rounded-xl px-3 py-2" id="fee-sudirman">
+            <div class="bg-brand-50/70 border border-brand-100 rounded-2xl p-3" id="fee-sudirman">
               <div id="fee-sudirman-rows" class="text-xs">
-                <div class="flex justify-between items-center text-stone-600">
-                  <span class="flex items-center gap-1.5"><i class="fas fa-motorcycle text-brand-600"></i> Ongkir Mulai:</span>
-                  <span class="font-bold text-brand-900">Rp 8.000</span>
+                <div class="flex justify-between items-center text-stone-700">
+                  <span class="flex items-center gap-1.5"><i class="fas fa-motorcycle text-brand-600"></i> Ongkir Estimasi:</span>
+                  <span class="font-extrabold text-brand-900">Mulai Rp 8.000</span>
                 </div>
               </div>
             </div>
-
-            <button class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors">
-              <span>Pilih Cabang Sudirman</span>
-              <i class="fas fa-arrow-right text-[11px]"></i>
-            </button>
           </div>
-        </a>
+        </div>
 
-        <!-- Branch 2: Kemang -->
-        <a href="menu.html?branch=kemang" id="card-kemang"
-           class="branch-card block bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden relative active:border-emerald-500">
-          <div class="bg-gradient-to-r from-emerald-800 via-emerald-700 to-teal-700 h-24 px-4 py-3 flex flex-col justify-between relative text-white">
-            <i class="fas fa-tree text-5xl text-white/10 absolute right-3 bottom-1"></i>
-            <div class="flex justify-between items-start z-10">
-              <span id="nearest-kemang" class="hidden bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                <i class="fas fa-star text-[9px]"></i> TERDEKAT
-              </span>
-              <span class="inline-flex items-center gap-1 bg-emerald-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full ml-auto shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Buka
-              </span>
-            </div>
-            <div class="z-10">
-              <h2 class="font-serif font-bold text-lg text-white leading-tight">Cafe Olga Kemang</h2>
-              <p class="text-emerald-100 text-[11px] truncate">Jakarta Selatan • Cozy Garden</p>
-            </div>
-          </div>
-
-          <div class="p-3.5 space-y-3">
-            <div class="flex items-start gap-2 text-xs text-stone-600">
-              <i class="fas fa-location-dot text-emerald-600 text-xs mt-0.5 shrink-0"></i>
-              <p class="line-clamp-1">Jl. Kemang Raya No. 12, Kemang, Jakarta Selatan</p>
-            </div>
-
-            <div class="flex items-center justify-between text-xs text-stone-500 bg-stone-50 rounded-xl p-2.5 border border-stone-100">
-              <div class="flex items-center gap-1.5">
-                <i class="fa-solid fa-clock text-stone-400"></i>
-                <span>07.00–23.00</span>
-              </div>
-              <div class="flex items-center gap-1">
-                <i class="fas fa-star text-amber-400 text-xs"></i>
-                <span class="font-bold text-stone-800">4.9</span>
-                <span class="text-stone-400 text-[11px]">(487)</span>
-              </div>
-              <div id="eta-kemang" class="font-semibold text-emerald-700">
-                ~15–25 mnt
-              </div>
-            </div>
-
-            <div class="bg-emerald-50/70 border border-emerald-100 rounded-xl px-3 py-2" id="fee-kemang">
-              <div id="fee-kemang-rows" class="text-xs">
-                <div class="flex justify-between items-center text-stone-600">
-                  <span class="flex items-center gap-1.5"><i class="fas fa-motorcycle text-emerald-600"></i> Ongkir Mulai:</span>
-                  <span class="font-bold text-emerald-900">Rp 7.000</span>
-                </div>
-              </div>
-            </div>
-
-            <button class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors">
-              <span>Pilih Cabang Kemang</span>
-              <i class="fas fa-arrow-right text-[11px]"></i>
-            </button>
-          </div>
-        </a>
-
-        <!-- Branch 3: BSD -->
-        <a href="menu.html?branch=bsd" id="card-bsd"
-           class="branch-card block bg-white rounded-2xl border border-stone-200 shadow-sm overflow-hidden relative active:border-indigo-500">
-          <div class="bg-gradient-to-r from-indigo-800 via-indigo-700 to-purple-800 h-24 px-4 py-3 flex flex-col justify-between relative text-white">
-            <i class="fas fa-city text-5xl text-white/10 absolute right-3 bottom-1"></i>
-            <div class="flex justify-between items-start z-10">
-              <span id="nearest-bsd" class="hidden bg-emerald-500 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                <i class="fas fa-star text-[9px]"></i> TERDEKAT
-              </span>
-              <span class="inline-flex items-center gap-1 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full ml-auto shadow-sm">
-                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Ramai
-              </span>
-            </div>
-            <div class="z-10">
-              <h2 class="font-serif font-bold text-lg text-white leading-tight">Cafe Olga BSD City</h2>
-              <p class="text-indigo-100 text-[11px] truncate">Tangerang Selatan • Modern Hub</p>
-            </div>
-          </div>
-
-          <div class="p-3.5 space-y-3">
-            <div class="flex items-start gap-2 text-xs text-stone-600">
-              <i class="fas fa-location-dot text-indigo-600 text-xs mt-0.5 shrink-0"></i>
-              <p class="line-clamp-1">Jl. Pahlawan Seribu, BSD City, Tangerang Selatan</p>
-            </div>
-
-            <div class="flex items-center justify-between text-xs text-stone-500 bg-stone-50 rounded-xl p-2.5 border border-stone-100">
-              <div class="flex items-center gap-1.5">
-                <i class="fa-solid fa-clock text-stone-400"></i>
-                <span>08.00–22.00</span>
-              </div>
-              <div class="flex items-center gap-1">
-                <i class="fas fa-star text-amber-400 text-xs"></i>
-                <span class="font-bold text-stone-800">4.7</span>
-                <span class="text-stone-400 text-[11px]">(228)</span>
-              </div>
-              <div id="eta-bsd" class="font-semibold text-indigo-700">
-                ~25–40 mnt
-              </div>
-            </div>
-
-            <div class="bg-indigo-50/70 border border-indigo-100 rounded-xl px-3 py-2" id="fee-bsd">
-              <div id="fee-bsd-rows" class="text-xs">
-                <div class="flex justify-between items-center text-stone-600">
-                  <span class="flex items-center gap-1.5"><i class="fas fa-motorcycle text-indigo-600"></i> Ongkir Mulai:</span>
-                  <span class="font-bold text-indigo-900">Rp 9.000</span>
-                </div>
-              </div>
-            </div>
-
-            <button class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 shadow-sm transition-colors">
-              <span>Pilih Cabang BSD City</span>
-              <i class="fas fa-arrow-right text-[11px]"></i>
-            </button>
-          </div>
-        </a>
-
+        <div class="p-5 pt-0">
+          <a href="menu.html?branch=sudirman" class="w-full py-3 bg-brand-600 hover:bg-brand-700 active:bg-brand-800 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all group">
+            <span>Pilih Sudirman & Lihat Menu</span>
+            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </a>
+        </div>
       </div>
 
-      <!-- Quick Tips Note -->
-      <div class="bg-stone-100 rounded-2xl p-3.5 flex items-start gap-2.5 text-xs text-stone-600">
-        <i class="fas fa-shield-heart text-brand-600 mt-0.5 text-sm shrink-0"></i>
-        <p class="leading-relaxed">
-          Kopi diseduh fresh segera setelah pesanan dikonfirmasi oleh cabang pilihan Anda. Estimasi waktu & ongkir akurat sesuai jarak.
+      <!-- Branch 2: Kemang -->
+      <div id="card-kemang" class="branch-card bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between">
+        <div>
+          <!-- Card Header Banner -->
+          <div class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-800 h-32 px-5 py-4 flex flex-col justify-between relative text-white">
+            <i class="fas fa-tree text-6xl text-white/10 absolute right-4 bottom-2"></i>
+            <div class="flex justify-between items-start z-10">
+              <span id="nearest-kemang" class="hidden bg-emerald-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                <i class="fas fa-star text-[9px]"></i> CABANG TERDEKAT
+              </span>
+              <span class="inline-flex items-center gap-1.5 bg-emerald-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full ml-auto shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Buka Sekarang
+              </span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif font-bold text-xl text-white leading-tight">Cafe Olga Kemang</h3>
+              <p class="text-emerald-100 text-xs mt-0.5">Jakarta Selatan • Cozy Garden Sanctuary</p>
+            </div>
+          </div>
+
+          <div class="p-5 space-y-4">
+            <div class="flex items-start gap-2.5 text-xs text-stone-600">
+              <i class="fas fa-location-dot text-emerald-600 text-sm mt-0.5 shrink-0"></i>
+              <p class="leading-relaxed">Jl. Kemang Raya No. 12, Mampang Prapatan, Jakarta Selatan</p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs text-stone-600 bg-stone-50 rounded-2xl p-3 border border-stone-100">
+              <div>
+                <span class="block text-[10px] text-stone-400 font-medium">Jam Buka</span>
+                <span class="font-bold text-stone-800">07.00–23.00</span>
+              </div>
+              <div class="border-x border-stone-200 px-1">
+                <span class="block text-[10px] text-stone-400 font-medium">Rating</span>
+                <span class="font-bold text-stone-800 flex items-center justify-center gap-1">
+                  <i class="fas fa-star text-amber-400 text-[11px]"></i> 4.9
+                </span>
+              </div>
+              <div>
+                <span class="block text-[10px] text-stone-400 font-medium">Estimasi</span>
+                <span id="eta-kemang" class="font-bold text-emerald-700">~15–25 mnt</span>
+              </div>
+            </div>
+
+            <!-- Facilities Chips -->
+            <div class="flex flex-wrap gap-1.5 text-[11px] text-stone-600">
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-seedling text-emerald-600 mr-1"></i> Outdoor Garden</span>
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-paw text-amber-600 mr-1"></i> Pet Friendly</span>
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-plug text-blue-600 mr-1"></i> Banyak Colokan</span>
+            </div>
+
+            <!-- Delivery Fee Row (auto-updated by JS) -->
+            <div class="bg-emerald-50/70 border border-emerald-100 rounded-2xl p-3" id="fee-kemang">
+              <div id="fee-kemang-rows" class="text-xs">
+                <div class="flex justify-between items-center text-stone-700">
+                  <span class="flex items-center gap-1.5"><i class="fas fa-motorcycle text-emerald-600"></i> Ongkir Estimasi:</span>
+                  <span class="font-extrabold text-emerald-900">Mulai Rp 7.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 pt-0">
+          <a href="menu.html?branch=kemang" class="w-full py-3 bg-emerald-700 hover:bg-emerald-800 active:bg-emerald-900 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all group">
+            <span>Pilih Kemang & Lihat Menu</span>
+            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Branch 3: BSD -->
+      <div id="card-bsd" class="branch-card bg-white rounded-3xl border border-stone-200 shadow-sm overflow-hidden flex flex-col justify-between">
+        <div>
+          <!-- Card Header Banner -->
+          <div class="bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 h-32 px-5 py-4 flex flex-col justify-between relative text-white">
+            <i class="fas fa-city text-6xl text-white/10 absolute right-4 bottom-2"></i>
+            <div class="flex justify-between items-start z-10">
+              <span id="nearest-bsd" class="hidden bg-emerald-500 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full flex items-center gap-1 shadow-sm">
+                <i class="fas fa-star text-[9px]"></i> CABANG TERDEKAT
+              </span>
+              <span class="inline-flex items-center gap-1.5 bg-amber-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full ml-auto shadow-sm">
+                <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span> Ramai / Buka
+              </span>
+            </div>
+            <div class="z-10">
+              <h3 class="font-serif font-bold text-xl text-white leading-tight">Cafe Olga BSD City</h3>
+              <p class="text-indigo-100 text-xs mt-0.5">Tangerang Selatan • Modern Creative Hub</p>
+            </div>
+          </div>
+
+          <div class="p-5 space-y-4">
+            <div class="flex items-start gap-2.5 text-xs text-stone-600">
+              <i class="fas fa-location-dot text-indigo-600 text-sm mt-0.5 shrink-0"></i>
+              <p class="leading-relaxed">Jl. Pahlawan Seribu No. 8, BSD Green Office Park, BSD City</p>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-3 gap-2 text-center text-xs text-stone-600 bg-stone-50 rounded-2xl p-3 border border-stone-100">
+              <div>
+                <span class="block text-[10px] text-stone-400 font-medium">Jam Buka</span>
+                <span class="font-bold text-stone-800">08.00–22.00</span>
+              </div>
+              <div class="border-x border-stone-200 px-1">
+                <span class="block text-[10px] text-stone-400 font-medium">Rating</span>
+                <span class="font-bold text-stone-800 flex items-center justify-center gap-1">
+                  <i class="fas fa-star text-amber-400 text-[11px]"></i> 4.7
+                </span>
+              </div>
+              <div>
+                <span class="block text-[10px] text-stone-400 font-medium">Estimasi</span>
+                <span id="eta-bsd" class="font-bold text-indigo-700">~25–40 mnt</span>
+              </div>
+            </div>
+
+            <!-- Facilities Chips -->
+            <div class="flex flex-wrap gap-1.5 text-[11px] text-stone-600">
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-briefcase text-indigo-600 mr-1"></i> Meeting Room</span>
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-car text-brand-600 mr-1"></i> Luas Parkir</span>
+              <span class="px-2.5 py-1 rounded-lg bg-stone-100 border border-stone-200/80"><i class="fas fa-mug-hot text-amber-600 mr-1"></i> Manual Brew Bar</span>
+            </div>
+
+            <!-- Delivery Fee Row (auto-updated by JS) -->
+            <div class="bg-indigo-50/70 border border-indigo-100 rounded-2xl p-3" id="fee-bsd">
+              <div id="fee-bsd-rows" class="text-xs">
+                <div class="flex justify-between items-center text-stone-700">
+                  <span class="flex items-center gap-1.5"><i class="fas fa-motorcycle text-indigo-600"></i> Ongkir Estimasi:</span>
+                  <span class="font-extrabold text-indigo-900">Mulai Rp 9.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-5 pt-0">
+          <a href="menu.html?branch=bsd" class="w-full py-3 bg-indigo-700 hover:bg-indigo-800 active:bg-indigo-900 text-white rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-all group">
+            <span>Pilih BSD City & Lihat Menu</span>
+            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Assurance Note -->
+    <div class="bg-white rounded-2xl p-5 border border-stone-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center gap-4 text-xs text-stone-600 mt-6">
+      <div class="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
+        <i class="fas fa-shield-heart text-xl"></i>
+      </div>
+      <div class="flex-1">
+        <h4 class="font-bold text-stone-900 text-sm mb-0.5">Komitmen Kualitas Cafe Olga</h4>
+        <p class="leading-relaxed text-stone-500">
+          Biji kopi pilihan 100% Arabika Indonesia disangrai segar setiap minggu. Pesanan dikemas higienis dengan thermal cup & seal khusus agar suhu serta aroma tetap terjaga hingga ke tangan Anda.
         </p>
       </div>
-
-    </main>
-
-    <!-- ══════════════════════════════════════════
-         MOBILE APP BOTTOM NAVIGATION BAR
-    ══════════════════════════════════════════ -->
-    <nav class="fixed sm:absolute bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 z-40 max-w-md mx-auto">
-      <div class="grid grid-cols-4 py-2 text-center text-[10px] font-medium">
-        <a href="select-branch.html" class="flex flex-col items-center gap-1 text-brand-600">
-          <i class="fa-solid fa-store text-base"></i>
-          <span class="font-bold">Cabang</span>
-        </a>
-        <a href="menu.html?branch=sudirman" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
-          <i class="fa-solid fa-mug-hot text-base"></i>
-          <span>Menu</span>
-        </a>
-        <a href="cart.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
-          <div class="relative">
-            <i class="fa-solid fa-cart-shopping text-base"></i>
-            <span class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
-          </div>
-          <span>Keranjang</span>
-        </a>
-        <a href="tracking.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
-          <div class="relative">
-            <i class="fa-solid fa-location-crosshairs text-base"></i>
-            <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-          </div>
-          <span>Lacak</span>
-        </a>
+      <div class="flex gap-2 shrink-0">
+        <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-lg font-medium text-xs">☕ Fresh Roasted</span>
+        <span class="px-3 py-1 bg-stone-100 text-stone-700 rounded-lg font-medium text-xs">🛵 Fast Delivery</span>
       </div>
-    </nav>
+    </div>
 
-  </div>
+  </main>
+
+  <!-- ══════════════════════════════════════════
+       DESKTOP FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="bg-stone-900 text-stone-300 py-10 border-t border-stone-800 mt-12 hidden lg:block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-4 gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-3">
+            <i class="fas fa-mug-hot text-amber-400 text-xl"></i>
+            <span class="font-serif font-bold text-xl text-white">Cafe Olga</span>
+          </div>
+          <p class="text-xs text-stone-400 leading-relaxed">
+            Menyajikan kopi spesialti Indonesia dan sajian artisan sejak 2021. Pengalaman bersantap hangat di 3 cabang Jakarta & Tangerang.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Cabang Kami</h4>
+          <ul class="text-xs space-y-2 text-stone-400">
+            <li><a href="menu.html?branch=sudirman" class="hover:text-amber-300">Cafe Olga Sudirman (HQ)</a></li>
+            <li><a href="menu.html?branch=kemang" class="hover:text-amber-300">Cafe Olga Kemang</a></li>
+            <li><a href="menu.html?branch=bsd" class="hover:text-amber-300">Cafe Olga BSD City</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Layanan Pelanggan</h4>
+          <ul class="text-xs space-y-2 text-stone-400">
+            <li><a href="cart.html" class="hover:text-amber-300">Keranjang Belanja</a></li>
+            <li><a href="tracking.html" class="hover:text-amber-300">Pantau Pengiriman Live</a></li>
+            <li><a href="https://wa.me/6281234567890" target="_blank" class="hover:text-amber-300">Bantuan WhatsApp</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-white mb-3">Manajemen & Internal</h4>
+          <ul class="text-xs space-y-2 text-stone-400">
+            <li><a href="../admin/login.html" class="hover:text-amber-300"><i class="fa-solid fa-lock mr-1 text-[10px]"></i> Login Admin Cabang</a></li>
+            <li><a href="../admin/owner-dashboard.html" class="hover:text-amber-300"><i class="fa-solid fa-crown mr-1 text-[10px]"></i> Owner HQ Dashboard</a></li>
+            <li><a href="../index.html" class="hover:text-amber-300"><i class="fa-solid fa-arrow-left mr-1 text-[10px]"></i> Beranda Showcase</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-t border-stone-800 pt-6 flex justify-between items-center text-xs text-stone-500">
+        <p>© 2026 Cafe Olga. All rights reserved.</p>
+        <p>Crafted for Seamless Web & Mobile Food Ordering.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════
+       MOBILE APP BOTTOM NAVIGATION BAR (Mobile Only)
+  ══════════════════════════════════════════ -->
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-stone-200 z-40">
+    <div class="grid grid-cols-4 py-2 text-center text-[10px] font-medium max-w-md mx-auto">
+      <a href="select-branch.html" class="flex flex-col items-center gap-1 text-brand-600 font-bold">
+        <i class="fa-solid fa-store text-base"></i>
+        <span>Cabang</span>
+      </a>
+      <a href="menu.html?branch=sudirman" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800">
+        <i class="fa-solid fa-mug-hot text-base"></i>
+        <span>Menu</span>
+      </a>
+      <a href="cart.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+        <div class="relative">
+          <i class="fa-solid fa-cart-shopping text-base"></i>
+          <span class="absolute -top-1.5 -right-2.5 bg-brand-600 text-white text-[9px] font-bold rounded-full w-4 h-4 flex items-center justify-center">3</span>
+        </div>
+        <span>Keranjang</span>
+      </a>
+      <a href="tracking.html" class="flex flex-col items-center gap-1 text-stone-500 hover:text-stone-800 relative">
+        <div class="relative">
+          <i class="fa-solid fa-location-crosshairs text-base"></i>
+          <span class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+        </div>
+        <span>Lacak</span>
+      </a>
+    </div>
+  </nav>
 
   <script>
   // ─────────────────────────────────────────────────
-  // DATA
+  // DATA & DISTANCE LOGIC
   // ─────────────────────────────────────────────────
   const BRANCHES = {
     sudirman: { name:'Cafe Olga Sudirman', lat:-6.2088, lon:106.8216, fees:{near:8000,mid:12000,far:18000} },
@@ -508,9 +650,11 @@
 
     const navLocText = document.getElementById('navLocText');
     if (navLocText) navLocText.textContent = addrLabel.split(',')[0];
+    const navLocTextMobile = document.getElementById('navLocTextMobile');
+    if (navLocTextMobile) navLocTextMobile.textContent = addrLabel.split(',')[0];
 
     const heroCopy = document.getElementById('heroCopy');
-    if (heroCopy) heroCopy.textContent = 'Ongkir dipersonalisasi sesuai lokasi Anda. Outlet terdekat bertanda ⭐.';
+    if (heroCopy) heroCopy.textContent = 'Ongkir & estimasi jarak telah dipersonalisasi sesuai lokasi Anda. Outlet terdekat bertanda ⭐.';
 
     closeModal();
   }
@@ -520,7 +664,7 @@
     const icon = document.getElementById('modalGpsIcon');
     const txt  = document.getElementById('modalGpsText');
     if (icon) icon.className = 'fas fa-spinner fa-spin text-base';
-    if (txt) txt.textContent = 'Mendeteksi lokasi...';
+    if (txt) txt.textContent = 'Mendeteksi lokasi GPS...';
     if (btn) btn.disabled = true;
 
     if (!navigator.geolocation) {
@@ -557,7 +701,7 @@
   let debounce;
   function onModalAddrInput(val) {
     clearTimeout(debounce);
-    if (val.length < 4) return;
+    if (val.length < 3) return;
     const sp = document.getElementById('modalSpinner');
     if (sp) sp.classList.remove('hidden');
     debounce = setTimeout(() => {
@@ -568,7 +712,7 @@
       const label = val.split(',')[0];
       showModalResult(label, match.lat, match.lon);
       updateCards(match.lat, match.lon, val);
-    }, 600);
+    }, 500);
   }
 
   function showModalResult(label, lat, lon) {
