@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders - Cafe Olga Admin</title>
+    <title>Pesanan - Cafe Olga Admin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
@@ -47,29 +47,29 @@
         <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
             <a href="dashboard.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
                 <i class="fa-solid fa-chart-pie w-6"></i>
-                <span class="font-medium">Dashboard</span>
+                <span class="font-medium">Dasbor</span>
             </a>
             
             <a href="orders.html" class="flex items-center px-4 py-3 rounded-xl bg-stone-800 text-white border-l-4 border-brand-500 transition-colors">
                 <i class="fa-solid fa-clipboard-list w-6"></i>
-                <span class="font-medium flex-1">Orders</span>
+                <span class="font-medium flex-1">Pesanan</span>
                 <span class="bg-brand-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">5</span>
             </a>
             
             <a href="menu-management.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
                 <i class="fa-solid fa-utensils w-6"></i>
-                <span class="font-medium">Menu Management</span>
+                <span class="font-medium">Manajemen Menu</span>
             </a>
             
             <a href="settings.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
                 <i class="fa-solid fa-gear w-6"></i>
-                <span class="font-medium">Settings</span>
+                <span class="font-medium">Pengaturan</span>
             </a>
             
             <div class="pt-4 mt-4 border-t border-stone-800">
                 <a href="../customer/menu.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 hover:text-white transition-colors border-l-4 border-transparent">
                     <i class="fa-solid fa-arrow-up-right-from-square w-6"></i>
-                    <span class="font-medium">View Store</span>
+                    <span class="font-medium">Lihat Toko</span>
                 </a>
             </div>
         </nav>
@@ -77,7 +77,7 @@
         <div class="p-4 border-t border-stone-800 flex-shrink-0">
             <a href="login.html" class="flex items-center px-4 py-3 rounded-xl hover:bg-stone-800 text-red-400 hover:text-red-300 transition-colors">
                 <i class="fa-solid fa-right-from-bracket w-6"></i>
-                <span class="font-medium">Logout</span>
+                <span class="font-medium">Keluar</span>
             </a>
         </div>
     </aside>
@@ -87,11 +87,11 @@
         <!-- Header -->
         <header class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-8 flex-shrink-0 z-10">
             <div>
-                <h1 class="text-xl font-bold text-gray-900 font-serif">Orders</h1>
+                <h1 class="text-xl font-bold text-gray-900 font-serif">Pesanan</h1>
             </div>
             <div class="flex items-center space-x-4">
                 <div class="relative">
-                    <input type="text" placeholder="Search orders..." class="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-brand-500 focus:border-brand-500 w-64">
+                    <input type="text" placeholder="Cari pesanan..." class="pl-9 pr-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-brand-500 focus:border-brand-500 w-64">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
                     </div>
@@ -104,27 +104,27 @@
             
             <!-- Filters -->
             <div class="flex space-x-2 mb-8 overflow-x-auto pb-2">
-                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">All (47)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">New <span class="ml-1 bg-red-100 text-red-600 py-0.5 px-2 rounded-full text-xs">3</span></button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Preparing (5)</button>
+                <button class="px-4 py-2 bg-gray-900 text-white rounded-lg text-sm font-medium whitespace-nowrap">Semua (47)</button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Baru <span class="ml-1 bg-red-100 text-red-600 py-0.5 px-2 rounded-full text-xs">3</span></button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Menyiapkan (5)</button>
                 <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Ready (2)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">On the Way (4)</button>
-                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Delivered (33)</button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Dalam Perjalanan (4)</button>
+                <button class="px-4 py-2 bg-white text-gray-600 hover:bg-gray-50 border border-gray-200 rounded-lg text-sm font-medium whitespace-nowrap">Terkirim (33)</button>
             </div>
 
-            <!-- Action Items (New Orders) -->
+            <!-- Action Item (Baru Orders) -->
             <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif flex items-center">
-                <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span> Action Required
+                <span class="w-2 h-2 bg-red-500 rounded-full mr-2 animate-pulse"></span> Perlu Tindakan
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
-                <!-- New Order 1 -->
+                <!-- Baru Order 1 -->
                 <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <span class="text-sm font-bold text-brand-700">#OLG-0045</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-1">Anton Wijaya</h4>
                         </div>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">New</span>
+                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Americano x2, Club Sandwich, Cheesecake Slice</p>
                     <div class="flex justify-between items-center mb-6 text-sm">
@@ -132,19 +132,19 @@
                         <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 2 mins ago</span>
                     </div>
                     <div class="flex space-x-3">
-                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Accept</button>
-                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Reject</button>
+                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Terima</button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tolak</button>
                     </div>
                 </div>
 
-                <!-- New Order 2 -->
+                <!-- Baru Order 2 -->
                 <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <span class="text-sm font-bold text-brand-700">#OLG-0044</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-1">Maya Sari</h4>
                         </div>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">New</span>
+                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Matcha Latte, Banana Bread</p>
                     <div class="flex justify-between items-center mb-6 text-sm">
@@ -152,19 +152,19 @@
                         <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 5 mins ago</span>
                     </div>
                     <div class="flex space-x-3">
-                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Accept</button>
-                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Reject</button>
+                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Terima</button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tolak</button>
                     </div>
                 </div>
                 
-                <!-- New Order 3 -->
+                <!-- Baru Order 3 -->
                 <div class="bg-white rounded-2xl p-6 shadow-md border-l-4 border-red-500 cursor-pointer hover:shadow-lg transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
                             <span class="text-sm font-bold text-brand-700">#OLG-0043</span>
                             <h4 class="text-lg font-bold text-gray-900 mt-1">Doni Pratama</h4>
                         </div>
-                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">New</span>
+                        <span class="bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full uppercase tracking-wide">Baru</span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Cappuccino x4</p>
                     <div class="flex justify-between items-center mb-6 text-sm">
@@ -172,16 +172,16 @@
                         <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 8 mins ago</span>
                     </div>
                     <div class="flex space-x-3">
-                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Accept</button>
-                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Reject</button>
+                        <button class="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Terima</button>
+                        <button class="px-4 py-2 border border-gray-300 text-gray-600 hover:bg-gray-50 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tolak</button>
                     </div>
                 </div>
             </div>
 
             <!-- Active & Past Orders -->
-            <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif">In Progress & Completed</h3>
+            <h3 class="text-lg font-bold text-gray-900 mb-4 font-serif">Sedang Berjalan & Selesai</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                <!-- Preparing Order -->
+                <!-- Menyiapkan Order -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -189,7 +189,7 @@
                             <h4 class="text-lg font-bold text-gray-900 mt-1">Budi Santoso</h4>
                         </div>
                         <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <span class="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></span> Preparing
+                            <span class="w-1.5 h-1.5 bg-amber-500 rounded-full mr-1.5"></span> Menyiapkan
                         </span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Café Latte x2, Butter Croissant</p>
@@ -197,10 +197,10 @@
                         <span class="font-medium text-gray-900">Rp 86.000</span>
                         <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 15 mins ago</span>
                     </div>
-                    <button class="w-full bg-blue-50 text-blue-700 hover:bg-blue-100 py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Mark Ready</button>
+                    <button class="w-full bg-blue-50 text-blue-700 hover:bg-blue-100 py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Mark Siap</button>
                 </div>
 
-                <!-- Ready Order -->
+                <!-- Siap Order -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -208,7 +208,7 @@
                             <h4 class="text-lg font-bold text-gray-900 mt-1">Siti Rahayu</h4>
                         </div>
                         <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></span> Ready
+                            <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1.5"></span> Siap
                         </span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Beef Burger, Thai Tea</p>
@@ -216,10 +216,10 @@
                         <span class="font-medium text-gray-900">Rp 77.000</span>
                         <span class="text-gray-500"><i class="fa-regular fa-clock mr-1"></i> 20 mins ago</span>
                     </div>
-                    <button class="w-full bg-blue-600 text-white hover:bg-blue-700 py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Assign Driver</button>
+                    <button class="w-full bg-blue-600 text-white hover:bg-blue-700 py-2 rounded-lg text-sm font-bold transition-colors" onclick="event.stopPropagation();">Tugaskan Kurir</button>
                 </div>
 
-                <!-- On the Way Order -->
+                <!-- Dalam Perjalanan Order -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -227,7 +227,7 @@
                             <h4 class="text-lg font-bold text-gray-900 mt-1">Ahmad Rizky</h4>
                         </div>
                         <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></span> On the Way
+                            <span class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-1.5"></span> Dalam Perjalanan
                         </span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Chicken Pasta, Mocha</p>
@@ -237,7 +237,7 @@
                     </div>
                 </div>
                 
-                <!-- Delivered Order -->
+                <!-- Terkirim Order -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow opacity-75" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -245,7 +245,7 @@
                             <h4 class="text-lg font-bold text-gray-700 mt-1">Diana Putri</h4>
                         </div>
                         <span class="bg-gray-100 text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Delivered
+                            <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Terkirim
                         </span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Caesar Salad, Fresh Orange Juice</p>
@@ -255,7 +255,7 @@
                     </div>
                 </div>
 
-                <!-- Delivered Order -->
+                <!-- Terkirim Order -->
                 <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 cursor-pointer hover:shadow-md transition-shadow opacity-75" onclick="window.location.href='order-detail.html'">
                     <div class="flex justify-between items-start mb-4">
                         <div>
@@ -263,7 +263,7 @@
                             <h4 class="text-lg font-bold text-gray-700 mt-1">Reza Mahendra</h4>
                         </div>
                         <span class="bg-gray-100 text-gray-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center">
-                            <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Delivered
+                            <i class="fa-solid fa-check mr-1.5 text-gray-500"></i> Terkirim
                         </span>
                     </div>
                     <p class="text-sm text-gray-500 mb-4 line-clamp-2">Tiramisu, Café Latte x2</p>
