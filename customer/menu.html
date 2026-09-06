@@ -468,8 +468,24 @@
 
   <div id="toast" class="toast">Added to cart successfully!</div>
 
+  <!-- Floating Action Button (FAB) directing to Cart at bottom -->
+  <aside aria-label="Keranjang Belanja" class="fixed bottom-6 right-6 z-50">
+    <a id="fabCartLink" href="cart.html"
+       class="group flex items-center gap-3 bg-brand-600 hover:bg-brand-700 text-white px-5 py-3.5 rounded-full shadow-2xl hover:shadow-brand-500/50 hover:scale-105 active:scale-95 transition-all duration-300 border-2 border-white/30 backdrop-blur-md">
+      <div class="relative flex items-center justify-center">
+        <i class="fa-solid fa-cart-shopping text-xl transition-transform group-hover:scale-110"></i>
+        <span id="fabCartBadge" class="absolute -top-2.5 -right-3 inline-flex items-center justify-center w-5 h-5 text-xs font-extrabold text-brand-700 bg-white rounded-full shadow">3</span>
+      </div>
+      <div class="flex flex-col text-left">
+        <span class="text-[11px] font-semibold text-amber-200 uppercase tracking-wider">Lihat Keranjang</span>
+        <span class="text-sm font-bold leading-tight">Rp 134.000</span>
+      </div>
+      <i class="fa-solid fa-arrow-right text-xs text-amber-200 group-hover:translate-x-1 transition-transform ml-1"></i>
+    </a>
+  </aside>
+
   <!-- Footer -->
-  <footer class="bg-stone-900 text-stone-300 py-12 mt-12">
+  <footer class="bg-stone-900 text-stone-300 py-12 mt-12 pb-24">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
       <div>
         <div class="flex items-center space-x-2 mb-4">
@@ -497,7 +513,26 @@
       var toast = document.getElementById("toast");
       toast.className = "toast show";
       setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+
+      // Animate FAB button
+      var fab = document.getElementById("fabCartLink");
+      if (fab) {
+        fab.classList.add("scale-110");
+        setTimeout(function(){ fab.classList.remove("scale-110"); }, 250);
+      }
     }
+
+    // Preserve branch in FAB link and top cart link
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const branch = params.get('branch') || localStorage.getItem('userBranch') || 'sudirman';
+      if (branch) {
+        const fab = document.getElementById('fabCartLink');
+        if (fab) fab.href = 'cart.html?branch=' + branch;
+        const topCart = document.querySelector('nav a[href="cart.html"]');
+        if (topCart) topCart.href = 'cart.html?branch=' + branch;
+      }
+    })();
   </script>
 </body>
 </html>
